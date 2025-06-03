@@ -11,5 +11,100 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id           String       @id @default(uuid())
+  email        String       @unique
+  name         String?
+  avatarUrl    String?
+  xp           Int          @default(0)
+  level        Int          @default(1)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  authProvider AuthProvider @default(EMAIL)
+
+  @@map("users")
+}
+
+model Challenge {
+  id          String     @id @default(uuid())
+  title       String
+  description String
+  difficulty  Int        @default(1) // 1-5
+  duration    Int?       // in minutes
+  rewardXp    Int        @default(10)
+  isDaily     Boolean    @default(false)
+  isWeekly    Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@map("challenges")
+}
+
+model Badge {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  imageUrl    String
+  xpRequired  Int
+  createdAt   DateTime @default(now())
+
+  @@map("badges")
+}
+
+model ChallengeCompletion {
+  id          String    @id @default(uuid())
+  userId      String
+  challengeId String
+  status      ProgressStatus @default(PENDING)
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@map("challenge_completions")
+}
+
+model BadgeEarned {
+  id        String   @id @default(uuid())
+  userId    String
+  badgeId   String
+  earnedAt  DateTime @default(now())
+
+  @@map("badges_earned")
+}
+
+model Reward {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  costXp      Int
+  imageUrl    String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@map("rewards")
+}
+
+model RewardClaim {
+  id        String   @id @default(uuid())
+  userId    String
+  rewardId  String
+  claimedAt DateTime @default(now())
+
+  @@map("reward_claims")
+}
+
+enum AuthProvider {
+  EMAIL
+  GOOGLE
+  GITHUB
+}
+
+enum ProgressStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
 }
