@@ -4,7 +4,8 @@ import { supabase } from '../supabase/supabase.client';
 interface UserProfile {
   id: string;
   email: string;
-  name?: string;
+  firstName: string;
+  lastName: string;
   avatarUrl?: string;
   xp: number;
   level: number;
@@ -32,7 +33,8 @@ export class UserService {
   async createOrUpdateUserProfile(
     userId: string,
     email: string,
-    name?: string,
+    firstName: string,
+    lastName: string,
     avatarUrl?: string,
   ) {
     const response: SupabaseMutationResponse = await supabase
@@ -40,7 +42,8 @@ export class UserService {
       .upsert({
         id: userId,
         email,
-        name,
+        firstName,
+        lastName,
         avatarUrl,
         xp: 0,
         level: 1,

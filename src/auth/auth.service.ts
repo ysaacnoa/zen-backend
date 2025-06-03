@@ -39,13 +39,15 @@ export class AuthService {
   private async createUserProfile(
     userId: string,
     email: string,
-    name?: string,
+    firstName: string,
+    lastName: string,
     avatarUrl?: string,
   ) {
     await this.userService.createOrUpdateUserProfile(
       userId,
       email,
-      name,
+      firstName,
+      lastName,
       avatarUrl,
     );
     await this.badgeService.assignWelcomeBadge(userId);
@@ -54,7 +56,8 @@ export class AuthService {
   async register(
     email: string,
     password: string,
-    name?: string,
+    firstName: string,
+    lastName: string,
     avatarUrl?: string,
   ) {
     const { data, error } = await supabase.auth.signUp({ email, password });
@@ -64,7 +67,8 @@ export class AuthService {
       await this.createUserProfile(
         data.user.id,
         data.user.email!,
-        name,
+        firstName,
+        lastName,
         avatarUrl,
       );
     }

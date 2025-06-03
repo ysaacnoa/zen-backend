@@ -14,7 +14,22 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() userData: { email: string; password: string }) {
-    return await this.authService.register(userData.email, userData.password);
+  async register(
+    @Body()
+    userData: {
+      email: string;
+      password: string;
+      firstName: string;
+      lastName: string;
+      avatarUrl?: string;
+    },
+  ) {
+    return await this.authService.register(
+      userData.email,
+      userData.password,
+      userData.firstName,
+      userData.lastName,
+      userData.avatarUrl,
+    );
   }
 }
