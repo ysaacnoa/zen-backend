@@ -2,12 +2,14 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { supabase } from '../supabase/supabase.client';
 import { JwtService } from '@nestjs/jwt';
 import { BadgeService } from '../gamification/badge/badge.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private jwtService: JwtService,
     private badgeService: BadgeService,
+    private userService: UserService,
   ) {}
 
   private createAuthResponse(user: { id: string; email?: string | null }) {
@@ -40,19 +42,12 @@ export class AuthService {
     name?: string,
     avatarUrl?: string,
   ) {
-    // Crear/actualizar perfil de usuario
-    const { error: userError } = await supabase.from('users').upsert({
-      id: userId,
+    await this.userService.createOrUpdateUserProfile(
+      userId,
       email,
       name,
       avatarUrl,
-      xp: 0,
-      level: 1,
-      authProvider: 'EMAIL',
-    });
-    if (userError) throw new UnauthorizedException(userError.message);
-
-    // Asignar insignia de bienvenida (manejo de errores interno en BadgeService)
+    );
     await this.badgeService.assignWelcomeBadge(userId);
   }
 
