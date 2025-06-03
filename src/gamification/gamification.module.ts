@@ -5,5 +5,6 @@ import { BadgeController } from './badge/badge.controller';
 @Module({
   providers: [BadgeService],
   controllers: [BadgeController],
+  exports: [BadgeService],
 })
 export class GamificationModule {}
