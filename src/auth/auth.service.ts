@@ -3,6 +3,7 @@ import { supabase } from '../supabase/supabase.client';
 import { JwtService } from '@nestjs/jwt';
 import { BadgeService } from '../gamification/badge/badge.service';
 import { UserService } from '../user/user.service';
+import { BadgeId } from 'src/shared/types';
 
 @Injectable()
 export class AuthService {
@@ -50,7 +51,7 @@ export class AuthService {
       lastName,
       avatarUrl,
     );
-    await this.badgeService.assignWelcomeBadge(userId);
+    await this.badgeService.assignWelcomeBadge(userId, BadgeId.BEGINNER);
   }
 
   async register(

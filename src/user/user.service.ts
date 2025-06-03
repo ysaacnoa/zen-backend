@@ -48,6 +48,7 @@ export class UserService {
         xp: 0,
         level: 1,
         authProvider: 'EMAIL',
+        updatedAt: new Date().toISOString(),
       });
     this.handleSupabaseError(response.error, 'Failed to create/update profile');
   }
