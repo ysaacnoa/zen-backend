@@ -20,4 +20,23 @@ export class AuthService {
       user: payload,
     };
   }
+
+  async register(email: string, password: string) {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) throw new UnauthorizedException(error.message);
+
+    const payload = {
+      sub: data.user?.id,
+      email: data.user?.email,
+    };
+
+    return {
+      access_token: this.jwtService.sign(payload),
+      user: payload,
+    };
+  }
 }
