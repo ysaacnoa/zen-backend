@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';
 import { AuthController } from './auth.controller';
+import { GamificationModule } from '../gamification/gamification.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { AuthController } from './auth.controller';
       secret: process.env.SUPABASE_JWT_SECRET,
       signOptions: { expiresIn: '1d' },
     }),
+    GamificationModule,
   ],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
