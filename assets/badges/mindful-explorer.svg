@@ -1,0 +1,7 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="64" cy="64" r="60" fill="#3F51B5" opacity="0.8"/>
+  <circle cx="64" cy="64" r="50" fill="#E8EAF6"/>
+  <path d="M64 30l15 40 35 10-35 10-15 40-15-40-35-10 35-10z" fill="#1A237E"/>
+  <text x="64" y="70" text-anchor="middle" font-family="Arial" font-size="12" fill="#1A237E">Explorador</text>
+  <text x="64" y="90" text-anchor="middle" font-family="Arial" font-size="12" fill="#1A237E">Mindful</text>
+</svg>

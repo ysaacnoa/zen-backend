@@ -1,0 +1,8 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="64" cy="64" r="60" fill="#795548" opacity="0.8"/>
+  <circle cx="64" cy="64" r="50" fill="#EFEBE9"/>
+  <path d="M64 30l0 68M30 64l68 0" stroke="#5D4037" stroke-width="4"/>
+  <path d="M44 44l40 40M44 84l40-40" stroke="#5D4037" stroke-width="2"/>
+  <text x="64" y="70" text-anchor="middle" font-family="Arial" font-size="12" fill="#5D4037">Buscador de</text>
+  <text x="64" y="90" text-anchor="middle" font-family="Arial" font-size="12" fill="#5D4037">Equilibrio</text>
+</svg>
