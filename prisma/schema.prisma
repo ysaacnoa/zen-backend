@@ -10,7 +10,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider  = "postgresql"
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
@@ -26,20 +26,31 @@ model User {
   updatedAt    DateTime     @updatedAt
   authProvider AuthProvider @default(EMAIL)
 
+  /// Relación con badges ganados (solo almacena referencia)
+  badgesEarned BadgeEarned[] @relation("BadgesEarned")
+
+  /// Relación con desafíos completados (solo almacena referencia)
+  challengeCompletions ChallengeCompletion[] @relation("ChallengeCompletions")
+
+  /// Relación con recompensas canjeadas (solo almacena referencia)
+  rewardClaims RewardClaim[] @relation("RewardClaims")
+
   @@map("users")
 }
 
 model Challenge {
-  id          String     @id @default(uuid())
+  id          String   @id @default(uuid())
   title       String
   description String
-  difficulty  Int        @default(1) // 1-5
-  duration    Int?       // in minutes
-  rewardXp    Int        @default(10)
-  isDaily     Boolean    @default(false)
-  isWeekly    Boolean    @default(false)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  difficulty  Int      @default(1) // 1-5
+  duration    Int? // in minutes
+  rewardXp    Int      @default(10)
+  isDaily     Boolean  @default(false)
+  isWeekly    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  completions ChallengeCompletion[]
 
   @@map("challenges")
 }
@@ -48,29 +59,36 @@ model Badge {
   id          String   @id @default(uuid())
   name        String
   description String
-  imageUrl    String
+  imagePath   String   @default("/assets/badges/default.svg")
   xpRequired  Int
   createdAt   DateTime @default(now())
+  isActive    Boolean  @default(true)
+
+  badgesEarned BadgeEarned[]
 
   @@map("badges")
 }
 
 model ChallengeCompletion {
-  id          String    @id @default(uuid())
+  id          String         @id @default(uuid())
   userId      String
   challengeId String
+  user        User           @relation(fields: [userId], references: [id], name: "ChallengeCompletions")
+  challenge   Challenge      @relation(fields: [challengeId], references: [id])
   status      ProgressStatus @default(PENDING)
   completedAt DateTime?
-  createdAt   DateTime  @default(now())
+  createdAt   DateTime       @default(now())
 
   @@map("challenge_completions")
 }
 
 model BadgeEarned {
-  id        String   @id @default(uuid())
-  userId    String
-  badgeId   String
-  earnedAt  DateTime @default(now())
+  id       String   @id @default(uuid())
+  userId   String
+  badgeId  String
+  badge    Badge    @relation(fields: [badgeId], references: [id])
+  user     User     @relation(fields: [userId], references: [id], name: "BadgesEarned")
+  earnedAt DateTime @default(now())
 
   @@map("badges_earned")
 }
@@ -84,6 +102,8 @@ model Reward {
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
 
+  claims RewardClaim[]
+
   @@map("rewards")
 }
 
@@ -91,6 +111,8 @@ model RewardClaim {
   id        String   @id @default(uuid())
   userId    String
   rewardId  String
+  user      User     @relation(fields: [userId], references: [id], name: "RewardClaims")
+  reward    Reward   @relation(fields: [rewardId], references: [id])
   claimedAt DateTime @default(now())
 
   @@map("reward_claims")
