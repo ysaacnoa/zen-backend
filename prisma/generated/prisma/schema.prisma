@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id                   String                @id @default(uuid())
+  email                String                @unique
+  avatarUrl            String?
+  xp                   Int                   @default(0)
+  level                Int                   @default(1)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  authProvider         AuthProvider          @default(EMAIL)
+  firstName            String
+  lastName             String
+  badgesEarned         BadgeEarned[]         @relation("BadgesEarned")
+  challengeCompletions ChallengeCompletion[] @relation("ChallengeCompletions")
+  rewardClaims         RewardClaim[]         @relation("RewardClaims")
+
+  @@map("users")
+}
+
+model Challenge {
+  id                  String        @id @default(uuid())
+  title               String
+  rewardXp            Int           @default(10)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  instructions        String
+  requiredCompletions Int           @default(1)
+  type                ChallengeType
+  completionCount     Int           @default(0)
+
+  @@map("challenges")
+}
+
+model Badge {
+  id           String        @id @default(uuid())
+  name         String
+  description  String
+  xpRequired   Int
+  createdAt    DateTime      @default(now())
+  imagePath    String        @default("/assets/badges/default.svg")
+  isActive     Boolean       @default(true)
+  badgesEarned BadgeEarned[]
+
+  @@map("badges")
+}
+
+model ChallengeCompletion {
+  id                 String         @id @default(uuid())
+  userId             String
+  challengeId        String
+  status             ProgressStatus @default(PENDING)
+  completedAt        DateTime?
+  createdAt          DateTime       @default(now())
+  currentCompletions Int            @default(0)
+  user               User           @relation("ChallengeCompletions", fields: [userId], references: [id])
+
+  @@map("challenge_completions")
+}
+
+model BadgeEarned {
+  id       String   @id @default(uuid())
+  userId   String
+  badgeId  String
+  earnedAt DateTime @default(now())
+  badge    Badge    @relation(fields: [badgeId], references: [id])
+  user     User     @relation("BadgesEarned", fields: [userId], references: [id])
+
+  @@map("badges_earned")
+}
+
+model Reward {
+  id          String        @id @default(uuid())
+  name        String
+  description String
+  costXp      Int
+  imageUrl    String
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  claims      RewardClaim[]
+
+  @@map("rewards")
+}
+
+model RewardClaim {
+  id        String   @id @default(uuid())
+  userId    String
+  rewardId  String
+  claimedAt DateTime @default(now())
+  reward    Reward   @relation(fields: [rewardId], references: [id])
+  user      User     @relation("RewardClaims", fields: [userId], references: [id])
+
+  @@map("reward_claims")
+}
+
+enum AuthProvider {
+  EMAIL
+  GOOGLE
+  GITHUB
+}
+
+enum ProgressStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+enum ChallengeType {
+  CLICK
+  FORM
+  AUDIO
+  TIMER
+  TEXT
+}
