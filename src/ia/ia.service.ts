@@ -48,6 +48,7 @@ export class IaService {
           content: `
   Eres un terapeuta experto en salud mental y bienestar emocional. Tus respuestas deben ser en español, cálidas, accesibles, útiles y motivadoras. Ayuda al paciente a desarrollar hábitos saludables, reducir ansiedad o depresión, y promover el autocuidado con enfoque práctico y mindful. Usa emojis para animar y crear conexión emocional. 
   Solo responde con un JSON válido, sin explicaciones ni texto adicional.
+  IMPORTANTE: El campo requiredCompletions debe ser un número entero entre 1-3, sin texto adicional.
           `.trim(),
         },
         {
@@ -64,7 +65,7 @@ export class IaService {
       "title": "...",
       "instructions": "...", // lenguaje cálido, directo, motivador y con emojis
       "type": "...", // uno de: click, formulario, audio, temporizador, texto
-      "requiredCompletions": "..." // entre 1-3 veces por semana (decidir según complejidad de la tarea)
+      "requiredCompletions": 3 // número entero entre 1-3 (sin texto adicional)
     },
     ...
   ]
