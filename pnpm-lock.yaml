@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@huggingface/inference':
+        specifier: ^4.0.0
+        version: 4.0.0
+      '@nestjs/axios':
+        specifier: ^4.0.0
+        version: 4.0.0(@nestjs/common@11.1.2(reflect-metadata@0.2.2)(rxjs@7.8.2))(axios@1.9.0)(rxjs@7.8.2)
       '@nestjs/common':
         specifier: ^11.0.1
         version: 11.1.2(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -32,6 +38,9 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.49.9
         version: 2.49.9
+      axios:
+        specifier: ^1.9.0
+        version: 1.9.0
       dotenv:
         specifier: ^16.5.0
         version: 16.5.0
@@ -379,6 +388,17 @@ packages:
   '@eslint/plugin-kit@0.3.1':
     resolution: {integrity: sha512-0J+zgWxHN+xXONWIyPWKFMgVuJoZuGiIFu8yxk7RJjxkzpGmyja5wRFqZIVtjDVOQpV+Rw0iOAjYPE2eQyjr0w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@huggingface/inference@4.0.0':
+    resolution: {integrity: sha512-NJD5qnYcOyG48qmqxIgmGZrgeR3+e/Sl+vGHTMvqgTK7vRXntLHzkgzSsHaP+qe7/etvVrr9yVy7vzSdA32dpg==}
+    engines: {node: '>=18'}
+
+  '@huggingface/jinja@0.5.0':
+    resolution: {integrity: sha512-Ptc03/jGRiYRoi0bUYKZ14MkDslsBRT24oxmsvUlfYrvQMldrxCevhPnT+hfX8awKTT8/f/0ZBBWldoeAcMHdQ==}
+    engines: {node: '>=18'}
+
+  '@huggingface/tasks@0.19.11':
+    resolution: {integrity: sha512-oBhSgVlg7Pp643MsH8BiI3OAXIMJNxdSiMtv4mApRZV8dmAz8oasKhg6CVKIplO7vAO7F6dkmMn4bYM64I2A9w==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -735,6 +755,13 @@ packages:
   '@napi-rs/nice@1.0.1':
     resolution: {integrity: sha512-zM0mVWSXE0a0h9aKACLwKmD6nHcRiKrPpCfvaKqG1CqDEyjEawId0ocXxVzPMCAm6kkWr2P025msfxXEnt8UGQ==}
     engines: {node: '>= 10'}
+
+  '@nestjs/axios@4.0.0':
+    resolution: {integrity: sha512-1cB+Jyltu/uUPNQrpUimRHEQHrnQrpLzVj6dU3dgn6iDDDdahr10TgHFGTmw5VuJ9GzKZsCLDL78VSwJAs/9JQ==}
+    peerDependencies:
+      '@nestjs/common': ^10.0.0 || ^11.0.0
+      axios: ^1.3.1
+      rxjs: ^7.0.0
 
   '@nestjs/cli@11.0.7':
     resolution: {integrity: sha512-svrP8j1R0/lQVJ8ZI3BlDtuZxmkvVJokUJSB04sr6uibunk2wHeVDDVLZvYBUorCdGU/RHJl1IufhqUBM91vAQ==}
@@ -1407,6 +1434,9 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
+  axios@1.9.0:
+    resolution: {integrity: sha512-re4CqKTJaURpzbLHtIi6XpDv20/CnpXOtjRY5/CU32L8gU8ek9UIivcfvSWvmKEngmVbrUtPpdDwWDWL7DNHvg==}
+
   b4a@1.6.7:
     resolution: {integrity: sha512-OnAYlL5b7LEkALw87fUVafQw5rVR9RjwGd4KUwNQ6DrrNmaVaUCgLipfVlzrPQ4tWOR9P0IXGNOx50jYCCdSJg==}
 
@@ -2031,6 +2061,15 @@ packages:
 
   flatted@3.3.3:
     resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
+
+  follow-redirects@1.15.9:
+    resolution: {integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
 
   foreground-child@3.3.1:
     resolution: {integrity: sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==}
@@ -2941,6 +2980,9 @@ packages:
   proxy-addr@2.0.7:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
     engines: {node: '>= 0.10'}
+
+  proxy-from-env@1.1.0:
+    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
 
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
@@ -3882,6 +3924,15 @@ snapshots:
       '@eslint/core': 0.14.0
       levn: 0.4.1
 
+  '@huggingface/inference@4.0.0':
+    dependencies:
+      '@huggingface/jinja': 0.5.0
+      '@huggingface/tasks': 0.19.11
+
+  '@huggingface/jinja@0.5.0': {}
+
+  '@huggingface/tasks@0.19.11': {}
+
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.6':
@@ -4303,6 +4354,12 @@ snapshots:
       '@napi-rs/nice-win32-ia32-msvc': 1.0.1
       '@napi-rs/nice-win32-x64-msvc': 1.0.1
     optional: true
+
+  '@nestjs/axios@4.0.0(@nestjs/common@11.1.2(reflect-metadata@0.2.2)(rxjs@7.8.2))(axios@1.9.0)(rxjs@7.8.2)':
+    dependencies:
+      '@nestjs/common': 11.1.2(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      axios: 1.9.0
+      rxjs: 7.8.2
 
   '@nestjs/cli@11.0.7(@swc/cli@0.6.0(@swc/core@1.11.29)(chokidar@4.0.3))(@swc/core@1.11.29)(@types/node@22.15.29)':
     dependencies:
@@ -5093,6 +5150,14 @@ snapshots:
 
   asynckit@0.4.0: {}
 
+  axios@1.9.0:
+    dependencies:
+      follow-redirects: 1.15.9
+      form-data: 4.0.2
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+
   b4a@1.6.7: {}
 
   babel-jest@29.7.0(@babel/core@7.27.4):
@@ -5773,6 +5838,8 @@ snapshots:
       keyv: 4.5.4
 
   flatted@3.3.3: {}
+
+  follow-redirects@1.15.9: {}
 
   foreground-child@3.3.1:
     dependencies:
@@ -6792,6 +6859,8 @@ snapshots:
     dependencies:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
+
+  proxy-from-env@1.1.0: {}
 
   punycode@2.3.1: {}
 
