@@ -1,4 +1,4 @@
-import { PrismaClient } from '../generated/prisma';
+import { PrismaClient } from '../prisma/generated/prisma';
 
 // Lista básica de badges a crear
 const badgesToCreate = [
