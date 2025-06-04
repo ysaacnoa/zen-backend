@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -16,69 +10,60 @@ datasource db {
 }
 
 model User {
-  id           String       @id @default(uuid())
-  email        String       @unique
-  firstName    String
-  lastName     String
-  avatarUrl    String?
-  xp           Int          @default(0)
-  level        Int          @default(1)
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  authProvider AuthProvider @default(EMAIL)
-
-  /// Relación con badges ganados (solo almacena referencia)
-  badgesEarned BadgeEarned[] @relation("BadgesEarned")
-
-  /// Relación con desafíos completados (solo almacena referencia)
+  id                   String                @id @default(uuid())
+  email                String                @unique
+  avatarUrl            String?
+  xp                   Int                   @default(0)
+  level                Int                   @default(1)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  authProvider         AuthProvider          @default(EMAIL)
+  firstName            String
+  lastName             String
+  badgesEarned         BadgeEarned[]         @relation("BadgesEarned")
   challengeCompletions ChallengeCompletion[] @relation("ChallengeCompletions")
-
-  /// Relación con recompensas canjeadas (solo almacena referencia)
-  rewardClaims RewardClaim[] @relation("RewardClaims")
+  rewardClaims         RewardClaim[]         @relation("RewardClaims")
 
   @@map("users")
 }
 
 model Challenge {
-  id          String   @id @default(uuid())
-  title       String
-  description String
-  difficulty  Int      @default(1) // 1-5
-  duration    Int? // in minutes
-  rewardXp    Int      @default(10)
-  isDaily     Boolean  @default(false)
-  isWeekly    Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  completions ChallengeCompletion[]
+  id                  String                @id @default(uuid())
+  title               String
+  rewardXp            Int                   @default(10)
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  instructions        String
+  requiredCompletions Int                   @default(1)
+  type                ChallengeType
+  completions         ChallengeCompletion[]
 
   @@map("challenges")
 }
 
 model Badge {
-  id          String   @id @default(uuid())
-  name        String
-  description String
-  imagePath   String   @default("/assets/badges/default.svg")
-  xpRequired  Int
-  createdAt   DateTime @default(now())
-  isActive    Boolean  @default(true)
-
+  id           String        @id @default(uuid())
+  name         String
+  description  String
+  xpRequired   Int
+  createdAt    DateTime      @default(now())
+  imagePath    String        @default("/assets/badges/default.svg")
+  isActive     Boolean       @default(true)
   badgesEarned BadgeEarned[]
 
   @@map("badges")
 }
 
 model ChallengeCompletion {
-  id          String         @id @default(uuid())
-  userId      String
-  challengeId String
-  user        User           @relation(fields: [userId], references: [id], name: "ChallengeCompletions")
-  challenge   Challenge      @relation(fields: [challengeId], references: [id])
-  status      ProgressStatus @default(PENDING)
-  completedAt DateTime?
-  createdAt   DateTime       @default(now())
+  id                 String         @id @default(uuid())
+  userId             String
+  challengeId        String
+  status             ProgressStatus @default(PENDING)
+  completedAt        DateTime?
+  createdAt          DateTime       @default(now())
+  currentCompletions Int            @default(0)
+  challenge          Challenge      @relation(fields: [challengeId], references: [id])
+  user               User           @relation("ChallengeCompletions", fields: [userId], references: [id])
 
   @@map("challenge_completions")
 }
@@ -87,23 +72,22 @@ model BadgeEarned {
   id       String   @id @default(uuid())
   userId   String
   badgeId  String
-  badge    Badge    @relation(fields: [badgeId], references: [id])
-  user     User     @relation(fields: [userId], references: [id], name: "BadgesEarned")
   earnedAt DateTime @default(now())
+  badge    Badge    @relation(fields: [badgeId], references: [id])
+  user     User     @relation("BadgesEarned", fields: [userId], references: [id])
 
   @@map("badges_earned")
 }
 
 model Reward {
-  id          String   @id @default(uuid())
+  id          String        @id @default(uuid())
   name        String
   description String
   costXp      Int
   imageUrl    String
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-
-  claims RewardClaim[]
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  claims      RewardClaim[]
 
   @@map("rewards")
 }
@@ -112,9 +96,9 @@ model RewardClaim {
   id        String   @id @default(uuid())
   userId    String
   rewardId  String
-  user      User     @relation(fields: [userId], references: [id], name: "RewardClaims")
-  reward    Reward   @relation(fields: [rewardId], references: [id])
   claimedAt DateTime @default(now())
+  reward    Reward   @relation(fields: [rewardId], references: [id])
+  user      User     @relation("RewardClaims", fields: [userId], references: [id])
 
   @@map("reward_claims")
 }
@@ -130,4 +114,12 @@ enum ProgressStatus {
   IN_PROGRESS
   COMPLETED
   FAILED
+}
+
+enum ChallengeType {
+  CLICK
+  FORM
+  AUDIO
+  TIMER
+  TEXT
 }
