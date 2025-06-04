@@ -61,10 +61,10 @@ export class IaService {
   Cada tarea debe tener el siguiente formato JSON:
   [
     {
-      "titulo": "...",
-      "duracion": ..., // en minutos
-      "instrucciones": "...", // lenguaje cálido, directo, motivador y con emojis
-      "tipo": "..." // uno de: click, formulario, audio, temporizador, texto
+      "title": "...",
+      "instructions": "...", // lenguaje cálido, directo, motivador y con emojis
+      "type": "...", // uno de: click, formulario, audio, temporizador, texto
+      "requiredCompletions": "..." // entre 1-3 veces por semana (decidir según complejidad de la tarea)
     },
     ...
   ]
