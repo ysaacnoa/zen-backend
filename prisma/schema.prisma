@@ -36,7 +36,7 @@ model Challenge {
   instructions        String
   requiredCompletions Int                   @default(1)
   type                ChallengeType
-  completions         ChallengeCompletion[]
+  completionCount     Int                   @default(0)
 
   @@map("challenges")
 }
@@ -62,7 +62,6 @@ model ChallengeCompletion {
   completedAt        DateTime?
   createdAt          DateTime       @default(now())
   currentCompletions Int            @default(0)
-  challenge          Challenge      @relation(fields: [challengeId], references: [id])
   user               User           @relation("ChallengeCompletions", fields: [userId], references: [id])
 
   @@map("challenge_completions")
