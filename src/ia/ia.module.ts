@@ -7,5 +7,6 @@ import { IaController } from './ia.controller';
   imports: [HttpModule],
   controllers: [IaController],
   providers: [IaService],
+  exports: [IaService],
 })
 export class IaModule {}
