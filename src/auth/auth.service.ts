@@ -31,30 +31,29 @@ export class AuthService {
     return this.createAuthResponse(data.user);
   }
 
-  async validateToken(supabaseToken: string) {
-    console.log('Validating Supabase JWT...');
-    try {
-      // Decodificar el token sin verificar (ya que viene de Supabase)
-      const decoded = this.jwtService.decode<{ sub: string; email?: string }>(
-        supabaseToken,
-      );
-      if (!decoded?.sub) {
-        throw new UnauthorizedException('Invalid token');
-      }
+  private decodeToken(token: string) {
+    const decoded = this.jwtService.decode<{ sub: string; email?: string }>(
+      token,
+    );
+    if (!decoded?.sub) {
+      throw new UnauthorizedException('Token payload is invalid');
+    }
+    return decoded;
+  }
 
-      // Obtener el usuario desde la base de datos
-      const user = await this.userService.getUserById(decoded.sub);
-      if (!user) {
-        throw new UnauthorizedException('User not found');
-      }
+  async validateToken(supabaseToken: string) {
+    console.log('[Auth] Validating token...');
+    try {
+      const decoded = this.decodeToken(supabaseToken);
+      await this.userService.getUserById(decoded.sub); // Validates user exists
 
       return this.createAuthResponse({
         id: decoded.sub,
         email: decoded.email,
       });
-    } catch (err) {
-      console.error('Token validation error:', err);
-      throw new UnauthorizedException('Invalid token');
+    } catch (error) {
+      console.error('[Auth] Token validation failed:', error);
+      throw new UnauthorizedException('Authentication failed');
     }
   }
 
