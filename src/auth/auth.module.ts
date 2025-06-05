@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -15,9 +15,10 @@ import { UserModule } from '../user/user.module';
       signOptions: { expiresIn: '1d' },
     }),
     GamificationModule,
-    UserModule,
+    forwardRef(() => UserModule),
   ],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
+  exports: [AuthService],
 })
 export class AuthModule {}
