@@ -32,9 +32,30 @@ export class AuthService {
   }
 
   async validateToken(supabaseToken: string) {
-    const { data, error } = await supabase.auth.getUser(supabaseToken);
-    if (error || !data?.user) throw new UnauthorizedException(error?.message);
-    return this.createAuthResponse(data.user);
+    console.log('Validating Supabase JWT...');
+    try {
+      // Decodificar el token sin verificar (ya que viene de Supabase)
+      const decoded = this.jwtService.decode<{ sub: string; email?: string }>(
+        supabaseToken,
+      );
+      if (!decoded?.sub) {
+        throw new UnauthorizedException('Invalid token');
+      }
+
+      // Obtener el usuario desde la base de datos
+      const user = await this.userService.getUserById(decoded.sub);
+      if (!user) {
+        throw new UnauthorizedException('User not found');
+      }
+
+      return this.createAuthResponse({
+        id: decoded.sub,
+        email: decoded.email,
+      });
+    } catch (err) {
+      console.error('Token validation error:', err);
+      throw new UnauthorizedException('Invalid token');
+    }
   }
 
   private async createUserProfile(

@@ -12,11 +12,6 @@ export interface UserProfile {
   authProvider: string;
 }
 
-interface SupabaseUserResponse {
-  data: UserProfile | null;
-  error: { message: string } | null;
-}
-
 interface SupabaseMutationResponse {
   error: { message: string } | null;
 }
@@ -54,13 +49,28 @@ export class UserService {
   }
 
   async getUserById(userId: string): Promise<UserProfile> {
-    const response: SupabaseUserResponse = await supabase
+    const { data, error } = await supabase
       .from('users')
-      .select('*')
+      .select('id,email,firstName,lastName,avatarUrl,xp,level,authProvider')
       .eq('id', userId)
-      .single();
-    this.handleSupabaseError(response.error, 'Failed to get user');
-    if (!response.data) throw new Error('User not found');
-    return response.data;
+      .maybeSingle();
+
+    if (error) {
+      throw new Error(`Failed to get user: ${error.message}`);
+    }
+    if (!data) {
+      throw new Error(`User with ID ${userId} not found`);
+    }
+    const userProfile: UserProfile = {
+      id: data.id as string,
+      email: data.email as string,
+      firstName: data.firstName as string,
+      lastName: data.lastName as string,
+      avatarUrl: data.avatarUrl as string | undefined,
+      xp: data.xp as number,
+      level: data.level as number,
+      authProvider: data.authProvider as string,
+    };
+    return userProfile;
   }
 }

@@ -24,7 +24,14 @@ export class UserController {
     }
 
     const token = authHeader.replace('Bearer ', '');
-    const { user } = await this.authService.validateToken(token);
-    return this.userService.getUserById(user.sub);
+    console.log('Received token:', token); // Log del token recibido
+    try {
+      const { user } = await this.authService.validateToken(token);
+      console.log('Validated user:', user); // Log del usuario validado
+      return this.userService.getUserById(user.sub);
+    } catch (error) {
+      console.error('Token validation error:', error);
+      throw error;
+    }
   }
 }
