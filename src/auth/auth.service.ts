@@ -3,7 +3,7 @@ import { supabase } from '../supabase/supabase.client';
 import { JwtService } from '@nestjs/jwt';
 import { BadgeService } from '../gamification/badge/badge.service';
 import { UserService } from '../user/user.service';
-import { BadgeId } from 'src/shared/types';
+import { BadgeId } from '../shared/types';
 
 @Injectable()
 export class AuthService {

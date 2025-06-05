@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { supabase } from '../supabase/supabase.client';
 
-interface UserProfile {
+export interface UserProfile {
   id: string;
   email: string;
   firstName: string;
