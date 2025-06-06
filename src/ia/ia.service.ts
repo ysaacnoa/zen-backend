@@ -3,12 +3,16 @@ import { HttpService } from '@nestjs/axios';
 import { GenerateRecommendationDto } from './dto/generate-recomendation.dto';
 import { GenerateChallengeDto } from './dto/generate-challenge.dto';
 import { InferenceClient } from '@huggingface/inference';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class IaService {
   readonly hf = new InferenceClient(process.env.HUGGINGFACE_API_KEY);
 
-  constructor(private readonly httpService: HttpService) {}
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly prisma: PrismaService,
+  ) {}
 
   async generateRecommendation(
     input: GenerateRecommendationDto,
@@ -20,22 +24,89 @@ export class IaService {
         {
           role: 'system',
           content: `
-  Eres un terapeuta experto en bienestar mental. Debes crear recomendaciones terapéuticas personalizadas en español, en **formato Markdown**, usando un lenguaje cálido, accesible y motivador.  
-  Incluye emojis positivos para apoyar y animar al usuario a lo largo del texto.  
-  Tu enfoque debe combinar mindfulness, hábitos saludables, técnicas prácticas para manejar ansiedad y depresión, especialmente considerando que la persona trabaja de forma remota.  
-  Evita lenguaje clínico complejo y ofrece estrategias sencillas, realistas y aplicables en la rutina diaria.  
-  Reconoce el esfuerzo del usuario y usa un tono esperanzador y validante.  
-  Finalmente, sugiere siempre acompañamiento profesional cuando sea necesario.
+  Eres un coach de bienestar emocional especializado en técnicas de autoayuda. 🌟 Crea un **informe semanal personalizado** en español usando formato Markdown con estructura de blog, incluyendo:
+
+  # Título principal (usa emoji relacionado al estado emocional)
+  ## Subtítulos descriptivos para cada sección
+  - Lenguaje cálido, cercano y motivador 💬
+  - Emojis relevantes en cada sección 😊
+  - Enfoque en mindfulness y reducción de estrés 🧘‍♀️
+  - Plan semanal detallado con actividades diarias 📅
+  - Hábitos saludables específicos 🍏
+  - Tips para productividad remota 💻
+  - CERO sugerencias médicas o farmacológicas 🚫💊
+
+  Estructura requerida:
+  # [Emoji] Título Principal Motivador
+  
+  ## 🔍 Resumen de tu estado
+  Breve análisis compasivo de los resultados PHQ-9 y GAD-7
+  
+  ## 🗓 Plan Semanal de Bienestar
+  Día por día con actividades concretas:
+  - **Lunes**: [Actividad 1] + [Actividad 2]
+  - **Martes**: [Actividad 1] + [Actividad 2]
+  ...
+  
+  ## 🛠 Kit de Herramientas Diarias
+  Técnicas específicas para manejar momentos difíciles
+  
+  ## 💡 Tips Remotos
+  Estrategias adaptadas al trabajo desde casa
+  
+  ## 🌈 Mensaje Final
+  Cierre motivacional con foco en el progreso
           `.trim(),
         },
         {
           role: 'user',
           content: `Paciente con PHQ-9=${input.phq9}, GAD-7=${input.gad7}. Comentario: "${input.comment}".  
-  Proporciona recomendaciones terapéuticas personalizadas en formato Markdown, con emojis motivadores y un enfoque en mindfulness, hábitos saludables, estrategias prácticas para trabajo remoto y un lenguaje cálido y accesible.`,
+  Genera un plan de bienestar personalizado en formato Markdown con:
+  - Emojis motivadores en cada sección 🌟
+  - Técnicas de mindfulness y reducción de estrés 🧘
+  - Hábitos saludables para energía y enfoque 🍏
+  - Estrategias para manejar ansiedad/depresión en casa 🏡
+  - Tips para productividad remota sin burnout 💻
+  - Lenguaje cálido y validante, sin jerga clínica 💖
+  - CERO sugerencias de medicamentos o tratamientos médicos 🚫`,
         },
       ],
     });
-    return chatCompletion.choices[0].message.content ?? 'Sin respuesta.';
+    let markdownContent =
+      chatCompletion.choices[0].message.content ?? 'Sin respuesta.';
+
+    markdownContent = this.cleanAndValidateContent(markdownContent);
+
+    await this.storeRecommendation(input.userId, markdownContent);
+    return markdownContent;
+  }
+
+  private cleanAndValidateContent(content: string): string {
+    let cleanedContent = content.replace(/<think>[\s\S]*?<\/think>/g, '');
+
+    cleanedContent = cleanedContent.replace(/\n{3,}/g, '\n\n');
+
+    if (/(medic|farmac|psiquiat|ISRS|SNRI)/i.test(cleanedContent)) {
+      cleanedContent = 'Contenido no disponible. Por favor intenta nuevamente.';
+    }
+
+    return cleanedContent;
+  }
+
+  private async storeRecommendation(userId: string, content: string) {
+    await this.prisma.recommendation.create({
+      data: {
+        userId,
+        content,
+      },
+    });
+  }
+
+  async getRecommendationsByUser(userId: string) {
+    return this.prisma.recommendation.findMany({
+      where: { userId },
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
   async generateChallenge(input: GenerateChallengeDto): Promise<string> {
