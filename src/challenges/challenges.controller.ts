@@ -1,6 +1,7 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { ChallengesService } from './challenges.service';
 import { CreateChallengeDto } from './dto/create-challenge.dto';
+import { GenerateChallengeDto } from '../ia/dto/generate-challenge.dto';
 
 @Controller('challenges')
 export class ChallengesController {
@@ -8,12 +9,21 @@ export class ChallengesController {
 
   @Post()
   create(@Body() createChallengeDto: CreateChallengeDto) {
-    // return this.challengesService.create(createChallengeDto);
-    console.log(createChallengeDto);
+    return this.challengesService.create(createChallengeDto);
   }
 
   @Post('generate')
-  generateAndStoreTasks(@Body() input: { phq9: number; gad7: number }) {
-    return this.challengesService.generateAndStoreTasks(input);
+  async generateChallenges(@Body() input: GenerateChallengeDto) {
+    return this.challengesService.generateAndStoreChallenges({
+      ...input,
+    });
+  }
+
+  @Get()
+  getChallenges(@Query('userId') userId: string) {
+    if (!userId) {
+      throw new Error('userId query parameter is required');
+    }
+    return this.challengesService.findByUserId(userId);
   }
 }

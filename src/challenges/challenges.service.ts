@@ -2,10 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateChallengeDto } from './dto/create-challenge.dto';
 import { IaService } from '../ia/ia.service';
-import { GenerateTaskDto } from '../ia/dto/generate-task.dto';
+import { GenerateChallengeDto } from '../ia/dto/generate-challenge.dto';
 import { ChallengeType } from '../shared/types/challenge-type.enum';
 import { randomUUID } from 'crypto';
-interface GeneratedTask {
+
+interface GeneratedChallenge {
   title: string;
   instructions: string;
   type: string;
@@ -25,42 +26,44 @@ export class ChallengesService {
     });
   }
 
-  async generateAndStoreTasks(input: GenerateTaskDto) {
-    console.log('[ChallengesService] Generating tasks with input:', input);
-    const tasksJson = await this.iaService.generateTask(input);
-    console.log('[ChallengesService] Received tasks JSON:', tasksJson);
+  async findByUserId(userId: string) {
+    return await this.prisma.challenge.findMany({
+      where: { userId },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  async generateAndStoreChallenges(input: GenerateChallengeDto) {
+    console.log('[ChallengesService] Generating challenges with input:', input);
+    const challengesJson = await this.iaService.generateChallenge(input);
+    console.log('[ChallengesService] Received:', challengesJson);
 
     // Extract JSON from response
-    const jsonMatch = tasksJson.match(/```json\n([\s\S]*?)\n```/);
+    const jsonMatch = challengesJson.match(/```json\n([\s\S]*?)\n```/);
     if (!jsonMatch || !jsonMatch[1]) {
       throw new Error('Could not extract JSON from response');
     }
 
-    const tasks = JSON.parse(jsonMatch[1]) as GeneratedTask[];
-    console.log('[ChallengesService] Parsed tasks:', tasks);
+    const challenges = JSON.parse(jsonMatch[1]) as GeneratedChallenge[];
+    console.log('[ChallengesService] Parsed challenges:', challenges);
 
-    console.log(
-      '[ChallengesService] Starting transaction to create challenges',
-    );
     const result = await this.prisma.$transaction(
-      tasks.map((task) => {
-        console.log('[ChallengesService] Creating challenge:', task.title);
+      challenges.map((challenge) => {
+        console.log('[ChallengesService] Creating challenge:', challenge.title);
         return this.prisma.challenge.create({
           data: {
             id: randomUUID(),
-            title: task.title,
-            instructions: task.instructions,
-            type: this.mapTaskType(task.type),
-            requiredCompletions: task.requiredCompletions,
-            rewardXp: 10 * task.requiredCompletions,
+            title: challenge.title,
+            instructions: challenge.instructions,
+            type: this.mapChallengeType(challenge.type),
+            requiredCompletions: challenge.requiredCompletions,
+            rewardXp: 10 * challenge.requiredCompletions,
+            userId: input.userId,
           },
         });
       }),
     );
-    console.log(
-      '[ChallengesService] Successfully created challenges:',
-      result.length,
-    );
+    console.log('[ChallengesService] Successfully created:', result.length);
     return result;
   }
 
@@ -72,10 +75,9 @@ export class ChallengesService {
     texto: ChallengeType.TEXT,
   };
 
-  private mapTaskType(type: string): ChallengeType {
+  private mapChallengeType(type: string): ChallengeType {
     const mappedType =
       this.typeMapper[type.toLowerCase()] || ChallengeType.TEXT;
-
     console.log(`[ChallengesService] Mapping type ${type} to ${mappedType}`);
     return mappedType;
   }
