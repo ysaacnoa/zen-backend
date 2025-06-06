@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { GenerateRecommendationDto } from './dto/generate-recomendation.dto';
-import { GenerateTaskDto } from './dto/generate-task.dto';
+import { GenerateChallengeDto } from './dto/generate-challenge.dto';
 import { InferenceClient } from '@huggingface/inference';
 
 @Injectable()
@@ -38,22 +38,28 @@ export class IaService {
     return chatCompletion.choices[0].message.content ?? 'Sin respuesta.';
   }
 
-  async generateTask(input: GenerateTaskDto): Promise<string> {
-    const chatCompletion = await this.hf.chatCompletion({
-      provider: 'novita',
-      model: 'deepseek-ai/DeepSeek-R1-0528',
-      messages: [
-        {
-          role: 'system',
-          content: `
+  async generateChallenge(input: GenerateChallengeDto): Promise<string> {
+    const maxRetries = 3;
+    let lastError: Error | null = null;
+
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        console.log(`[IaService] Attempt ${attempt} to generate challenges`);
+        const chatCompletion = await this.hf.chatCompletion({
+          provider: 'novita',
+          model: 'deepseek-ai/DeepSeek-R1-0528',
+          messages: [
+            {
+              role: 'system',
+              content: `
   Eres un terapeuta experto en salud mental y bienestar emocional. Tus respuestas deben ser en español, cálidas, accesibles, útiles y motivadoras. Ayuda al paciente a desarrollar hábitos saludables, reducir ansiedad o depresión, y promover el autocuidado con enfoque práctico y mindful. Usa emojis para animar y crear conexión emocional. 
   Solo responde con un JSON válido, sin explicaciones ni texto adicional.
   IMPORTANTE: El campo requiredCompletions debe ser un número entero entre 1-3, sin texto adicional.
-          `.trim(),
-        },
-        {
-          role: 'user',
-          content: `
+              `.trim(),
+            },
+            {
+              role: 'user',
+              content: `
   Un paciente con los siguientes resultados:
   PHQ-9: ${input.phq9}, GAD-7: ${input.gad7}
   
@@ -69,10 +75,23 @@ export class IaService {
     },
     ...
   ]
-          `.trim(),
-        },
-      ],
-    });
-    return chatCompletion.choices[0].message.content ?? 'Sin respuesta.';
+              `.trim(),
+            },
+          ],
+        });
+        return chatCompletion.choices[0].message.content ?? 'Sin respuesta.';
+      } catch (error) {
+        lastError = error as Error;
+        console.error(`[IaService] Attempt ${attempt} failed:`, error);
+        if (attempt < maxRetries) {
+          await new Promise((resolve) => setTimeout(resolve, 1000 * attempt));
+        }
+      }
+    }
+
+    console.error('[IaService] All attempts failed');
+    throw new Error(
+      `Failed to generate challenges after ${maxRetries} attempts: ${lastError?.message}`,
+    );
   }
 }
