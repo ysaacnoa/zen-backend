@@ -3,7 +3,7 @@ import { supabase } from '../supabase/supabase.client';
 import { JwtService } from '@nestjs/jwt';
 import { BadgeService } from '../gamification/badge/badge.service';
 import { UserService } from '../user/user.service';
-import { BadgeId } from 'src/shared/types';
+import { BadgeId } from '../shared/types';
 
 @Injectable()
 export class AuthService {
@@ -31,10 +31,30 @@ export class AuthService {
     return this.createAuthResponse(data.user);
   }
 
+  private decodeToken(token: string) {
+    const decoded = this.jwtService.decode<{ sub: string; email?: string }>(
+      token,
+    );
+    if (!decoded?.sub) {
+      throw new UnauthorizedException('Token payload is invalid');
+    }
+    return decoded;
+  }
+
   async validateToken(supabaseToken: string) {
-    const { data, error } = await supabase.auth.getUser(supabaseToken);
-    if (error || !data?.user) throw new UnauthorizedException(error?.message);
-    return this.createAuthResponse(data.user);
+    console.log('[Auth] Validating token...');
+    try {
+      const decoded = this.decodeToken(supabaseToken);
+      await this.userService.getUserById(decoded.sub); // Validates user exists
+
+      return this.createAuthResponse({
+        id: decoded.sub,
+        email: decoded.email,
+      });
+    } catch (error) {
+      console.error('[Auth] Token validation failed:', error);
+      throw new UnauthorizedException('Authentication failed');
+    }
   }
 
   private async createUserProfile(

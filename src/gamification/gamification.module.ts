@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
-import { BadgeService } from './badge/badge.service';
-import { BadgeController } from './badge/badge.controller';
+import { ChallengesModule } from '../challenges/challenges.module';
+import { BadgeModule } from './badge/badge.module';
 
 @Module({
-  providers: [BadgeService],
-  controllers: [BadgeController],
-  exports: [BadgeService],
+  imports: [BadgeModule, ChallengesModule],
+  exports: [BadgeModule, ChallengesModule],
 })
 export class GamificationModule {}

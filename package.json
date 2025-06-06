@@ -20,6 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@huggingface/inference": "^4.0.0",
+    "@nestjs/axios": "^4.0.0",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
@@ -28,6 +30,7 @@
     "@nestjs/platform-express": "^11.0.1",
     "@prisma/client": "^6.8.2",
     "@supabase/supabase-js": "^2.49.9",
+    "axios": "^1.9.0",
     "dotenv": "^16.5.0",
     "jsonwebtoken": "^9.0.2",
     "passport": "^0.7.0",
