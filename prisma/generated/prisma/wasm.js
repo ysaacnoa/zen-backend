@@ -190,6 +190,14 @@ exports.Prisma.RewardClaimScalarFieldEnum = {
   claimedAt: 'claimedAt'
 };
 
+exports.Prisma.RecommendationScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -232,7 +240,8 @@ exports.Prisma.ModelName = {
   ChallengeCompletion: 'ChallengeCompletion',
   BadgeEarned: 'BadgeEarned',
   Reward: 'Reward',
-  RewardClaim: 'RewardClaim'
+  RewardClaim: 'RewardClaim',
+  Recommendation: 'Recommendation'
 };
 
 /**

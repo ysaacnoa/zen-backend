@@ -48,6 +48,11 @@ export type Reward = $Result.DefaultSelection<Prisma.$RewardPayload>
  * 
  */
 export type RewardClaim = $Result.DefaultSelection<Prisma.$RewardClaimPayload>
+/**
+ * Model Recommendation
+ * 
+ */
+export type Recommendation = $Result.DefaultSelection<Prisma.$RecommendationPayload>
 
 /**
  * Enums
@@ -290,6 +295,16 @@ export class PrismaClient<
     * ```
     */
   get rewardClaim(): Prisma.RewardClaimDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.recommendation`: Exposes CRUD operations for the **Recommendation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Recommendations
+    * const recommendations = await prisma.recommendation.findMany()
+    * ```
+    */
+  get recommendation(): Prisma.RecommendationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -736,7 +751,8 @@ export namespace Prisma {
     ChallengeCompletion: 'ChallengeCompletion',
     BadgeEarned: 'BadgeEarned',
     Reward: 'Reward',
-    RewardClaim: 'RewardClaim'
+    RewardClaim: 'RewardClaim',
+    Recommendation: 'Recommendation'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -755,7 +771,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "challenge" | "badge" | "challengeCompletion" | "badgeEarned" | "reward" | "rewardClaim"
+      modelProps: "user" | "challenge" | "badge" | "challengeCompletion" | "badgeEarned" | "reward" | "rewardClaim" | "recommendation"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1277,6 +1293,80 @@ export namespace Prisma {
           }
         }
       }
+      Recommendation: {
+        payload: Prisma.$RecommendationPayload<ExtArgs>
+        fields: Prisma.RecommendationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RecommendationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecommendationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RecommendationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecommendationPayload>
+          }
+          findFirst: {
+            args: Prisma.RecommendationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecommendationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RecommendationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecommendationPayload>
+          }
+          findMany: {
+            args: Prisma.RecommendationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecommendationPayload>[]
+          }
+          create: {
+            args: Prisma.RecommendationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecommendationPayload>
+          }
+          createMany: {
+            args: Prisma.RecommendationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RecommendationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecommendationPayload>[]
+          }
+          delete: {
+            args: Prisma.RecommendationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecommendationPayload>
+          }
+          update: {
+            args: Prisma.RecommendationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecommendationPayload>
+          }
+          deleteMany: {
+            args: Prisma.RecommendationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RecommendationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RecommendationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecommendationPayload>[]
+          }
+          upsert: {
+            args: Prisma.RecommendationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecommendationPayload>
+          }
+          aggregate: {
+            args: Prisma.RecommendationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRecommendation>
+          }
+          groupBy: {
+            args: Prisma.RecommendationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RecommendationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RecommendationCountArgs<ExtArgs>
+            result: $Utils.Optional<RecommendationCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1368,6 +1458,7 @@ export namespace Prisma {
     badgeEarned?: BadgeEarnedOmit
     reward?: RewardOmit
     rewardClaim?: RewardClaimOmit
+    recommendation?: RecommendationOmit
   }
 
   /* Types for Logging */
@@ -1466,6 +1557,7 @@ export namespace Prisma {
     challengeCompletions: number
     rewardClaims: number
     challenges: number
+    recommendations: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1473,6 +1565,7 @@ export namespace Prisma {
     challengeCompletions?: boolean | UserCountOutputTypeCountChallengeCompletionsArgs
     rewardClaims?: boolean | UserCountOutputTypeCountRewardClaimsArgs
     challenges?: boolean | UserCountOutputTypeCountChallengesArgs
+    recommendations?: boolean | UserCountOutputTypeCountRecommendationsArgs
   }
 
   // Custom InputTypes
@@ -1512,6 +1605,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountChallengesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ChallengeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRecommendationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecommendationWhereInput
   }
 
 
@@ -1827,6 +1927,7 @@ export namespace Prisma {
     challengeCompletions?: boolean | User$challengeCompletionsArgs<ExtArgs>
     rewardClaims?: boolean | User$rewardClaimsArgs<ExtArgs>
     challenges?: boolean | User$challengesArgs<ExtArgs>
+    recommendations?: boolean | User$recommendationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1875,6 +1976,7 @@ export namespace Prisma {
     challengeCompletions?: boolean | User$challengeCompletionsArgs<ExtArgs>
     rewardClaims?: boolean | User$rewardClaimsArgs<ExtArgs>
     challenges?: boolean | User$challengesArgs<ExtArgs>
+    recommendations?: boolean | User$recommendationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1887,6 +1989,7 @@ export namespace Prisma {
       challengeCompletions: Prisma.$ChallengeCompletionPayload<ExtArgs>[]
       rewardClaims: Prisma.$RewardClaimPayload<ExtArgs>[]
       challenges: Prisma.$ChallengePayload<ExtArgs>[]
+      recommendations: Prisma.$RecommendationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2297,6 +2400,7 @@ export namespace Prisma {
     challengeCompletions<T extends User$challengeCompletionsArgs<ExtArgs> = {}>(args?: Subset<T, User$challengeCompletionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengeCompletionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     rewardClaims<T extends User$rewardClaimsArgs<ExtArgs> = {}>(args?: Subset<T, User$rewardClaimsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RewardClaimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     challenges<T extends User$challengesArgs<ExtArgs> = {}>(args?: Subset<T, User$challengesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recommendations<T extends User$recommendationsArgs<ExtArgs> = {}>(args?: Subset<T, User$recommendationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2817,6 +2921,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ChallengeScalarFieldEnum | ChallengeScalarFieldEnum[]
+  }
+
+  /**
+   * User.recommendations
+   */
+  export type User$recommendationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationInclude<ExtArgs> | null
+    where?: RecommendationWhereInput
+    orderBy?: RecommendationOrderByWithRelationInput | RecommendationOrderByWithRelationInput[]
+    cursor?: RecommendationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RecommendationScalarFieldEnum | RecommendationScalarFieldEnum[]
   }
 
   /**
@@ -9488,6 +9616,1064 @@ export namespace Prisma {
 
 
   /**
+   * Model Recommendation
+   */
+
+  export type AggregateRecommendation = {
+    _count: RecommendationCountAggregateOutputType | null
+    _min: RecommendationMinAggregateOutputType | null
+    _max: RecommendationMaxAggregateOutputType | null
+  }
+
+  export type RecommendationMinAggregateOutputType = {
+    id: string | null
+    content: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RecommendationMaxAggregateOutputType = {
+    id: string | null
+    content: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RecommendationCountAggregateOutputType = {
+    id: number
+    content: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RecommendationMinAggregateInputType = {
+    id?: true
+    content?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RecommendationMaxAggregateInputType = {
+    id?: true
+    content?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RecommendationCountAggregateInputType = {
+    id?: true
+    content?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RecommendationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Recommendation to aggregate.
+     */
+    where?: RecommendationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Recommendations to fetch.
+     */
+    orderBy?: RecommendationOrderByWithRelationInput | RecommendationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RecommendationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Recommendations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Recommendations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Recommendations
+    **/
+    _count?: true | RecommendationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RecommendationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RecommendationMaxAggregateInputType
+  }
+
+  export type GetRecommendationAggregateType<T extends RecommendationAggregateArgs> = {
+        [P in keyof T & keyof AggregateRecommendation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRecommendation[P]>
+      : GetScalarType<T[P], AggregateRecommendation[P]>
+  }
+
+
+
+
+  export type RecommendationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecommendationWhereInput
+    orderBy?: RecommendationOrderByWithAggregationInput | RecommendationOrderByWithAggregationInput[]
+    by: RecommendationScalarFieldEnum[] | RecommendationScalarFieldEnum
+    having?: RecommendationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RecommendationCountAggregateInputType | true
+    _min?: RecommendationMinAggregateInputType
+    _max?: RecommendationMaxAggregateInputType
+  }
+
+  export type RecommendationGroupByOutputType = {
+    id: string
+    content: string
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: RecommendationCountAggregateOutputType | null
+    _min: RecommendationMinAggregateOutputType | null
+    _max: RecommendationMaxAggregateOutputType | null
+  }
+
+  type GetRecommendationGroupByPayload<T extends RecommendationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RecommendationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RecommendationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RecommendationGroupByOutputType[P]>
+            : GetScalarType<T[P], RecommendationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RecommendationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["recommendation"]>
+
+  export type RecommendationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["recommendation"]>
+
+  export type RecommendationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["recommendation"]>
+
+  export type RecommendationSelectScalar = {
+    id?: boolean
+    content?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RecommendationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["recommendation"]>
+  export type RecommendationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RecommendationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RecommendationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $RecommendationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Recommendation"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      content: string
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["recommendation"]>
+    composites: {}
+  }
+
+  type RecommendationGetPayload<S extends boolean | null | undefined | RecommendationDefaultArgs> = $Result.GetResult<Prisma.$RecommendationPayload, S>
+
+  type RecommendationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RecommendationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RecommendationCountAggregateInputType | true
+    }
+
+  export interface RecommendationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Recommendation'], meta: { name: 'Recommendation' } }
+    /**
+     * Find zero or one Recommendation that matches the filter.
+     * @param {RecommendationFindUniqueArgs} args - Arguments to find a Recommendation
+     * @example
+     * // Get one Recommendation
+     * const recommendation = await prisma.recommendation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RecommendationFindUniqueArgs>(args: SelectSubset<T, RecommendationFindUniqueArgs<ExtArgs>>): Prisma__RecommendationClient<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Recommendation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RecommendationFindUniqueOrThrowArgs} args - Arguments to find a Recommendation
+     * @example
+     * // Get one Recommendation
+     * const recommendation = await prisma.recommendation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RecommendationFindUniqueOrThrowArgs>(args: SelectSubset<T, RecommendationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RecommendationClient<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Recommendation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecommendationFindFirstArgs} args - Arguments to find a Recommendation
+     * @example
+     * // Get one Recommendation
+     * const recommendation = await prisma.recommendation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RecommendationFindFirstArgs>(args?: SelectSubset<T, RecommendationFindFirstArgs<ExtArgs>>): Prisma__RecommendationClient<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Recommendation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecommendationFindFirstOrThrowArgs} args - Arguments to find a Recommendation
+     * @example
+     * // Get one Recommendation
+     * const recommendation = await prisma.recommendation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RecommendationFindFirstOrThrowArgs>(args?: SelectSubset<T, RecommendationFindFirstOrThrowArgs<ExtArgs>>): Prisma__RecommendationClient<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Recommendations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecommendationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Recommendations
+     * const recommendations = await prisma.recommendation.findMany()
+     * 
+     * // Get first 10 Recommendations
+     * const recommendations = await prisma.recommendation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const recommendationWithIdOnly = await prisma.recommendation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RecommendationFindManyArgs>(args?: SelectSubset<T, RecommendationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Recommendation.
+     * @param {RecommendationCreateArgs} args - Arguments to create a Recommendation.
+     * @example
+     * // Create one Recommendation
+     * const Recommendation = await prisma.recommendation.create({
+     *   data: {
+     *     // ... data to create a Recommendation
+     *   }
+     * })
+     * 
+     */
+    create<T extends RecommendationCreateArgs>(args: SelectSubset<T, RecommendationCreateArgs<ExtArgs>>): Prisma__RecommendationClient<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Recommendations.
+     * @param {RecommendationCreateManyArgs} args - Arguments to create many Recommendations.
+     * @example
+     * // Create many Recommendations
+     * const recommendation = await prisma.recommendation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RecommendationCreateManyArgs>(args?: SelectSubset<T, RecommendationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Recommendations and returns the data saved in the database.
+     * @param {RecommendationCreateManyAndReturnArgs} args - Arguments to create many Recommendations.
+     * @example
+     * // Create many Recommendations
+     * const recommendation = await prisma.recommendation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Recommendations and only return the `id`
+     * const recommendationWithIdOnly = await prisma.recommendation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RecommendationCreateManyAndReturnArgs>(args?: SelectSubset<T, RecommendationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Recommendation.
+     * @param {RecommendationDeleteArgs} args - Arguments to delete one Recommendation.
+     * @example
+     * // Delete one Recommendation
+     * const Recommendation = await prisma.recommendation.delete({
+     *   where: {
+     *     // ... filter to delete one Recommendation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RecommendationDeleteArgs>(args: SelectSubset<T, RecommendationDeleteArgs<ExtArgs>>): Prisma__RecommendationClient<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Recommendation.
+     * @param {RecommendationUpdateArgs} args - Arguments to update one Recommendation.
+     * @example
+     * // Update one Recommendation
+     * const recommendation = await prisma.recommendation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RecommendationUpdateArgs>(args: SelectSubset<T, RecommendationUpdateArgs<ExtArgs>>): Prisma__RecommendationClient<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Recommendations.
+     * @param {RecommendationDeleteManyArgs} args - Arguments to filter Recommendations to delete.
+     * @example
+     * // Delete a few Recommendations
+     * const { count } = await prisma.recommendation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RecommendationDeleteManyArgs>(args?: SelectSubset<T, RecommendationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Recommendations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecommendationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Recommendations
+     * const recommendation = await prisma.recommendation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RecommendationUpdateManyArgs>(args: SelectSubset<T, RecommendationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Recommendations and returns the data updated in the database.
+     * @param {RecommendationUpdateManyAndReturnArgs} args - Arguments to update many Recommendations.
+     * @example
+     * // Update many Recommendations
+     * const recommendation = await prisma.recommendation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Recommendations and only return the `id`
+     * const recommendationWithIdOnly = await prisma.recommendation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RecommendationUpdateManyAndReturnArgs>(args: SelectSubset<T, RecommendationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Recommendation.
+     * @param {RecommendationUpsertArgs} args - Arguments to update or create a Recommendation.
+     * @example
+     * // Update or create a Recommendation
+     * const recommendation = await prisma.recommendation.upsert({
+     *   create: {
+     *     // ... data to create a Recommendation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Recommendation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RecommendationUpsertArgs>(args: SelectSubset<T, RecommendationUpsertArgs<ExtArgs>>): Prisma__RecommendationClient<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Recommendations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecommendationCountArgs} args - Arguments to filter Recommendations to count.
+     * @example
+     * // Count the number of Recommendations
+     * const count = await prisma.recommendation.count({
+     *   where: {
+     *     // ... the filter for the Recommendations we want to count
+     *   }
+     * })
+    **/
+    count<T extends RecommendationCountArgs>(
+      args?: Subset<T, RecommendationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RecommendationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Recommendation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecommendationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RecommendationAggregateArgs>(args: Subset<T, RecommendationAggregateArgs>): Prisma.PrismaPromise<GetRecommendationAggregateType<T>>
+
+    /**
+     * Group by Recommendation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecommendationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RecommendationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RecommendationGroupByArgs['orderBy'] }
+        : { orderBy?: RecommendationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RecommendationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRecommendationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Recommendation model
+   */
+  readonly fields: RecommendationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Recommendation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RecommendationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Recommendation model
+   */
+  interface RecommendationFieldRefs {
+    readonly id: FieldRef<"Recommendation", 'String'>
+    readonly content: FieldRef<"Recommendation", 'String'>
+    readonly userId: FieldRef<"Recommendation", 'String'>
+    readonly createdAt: FieldRef<"Recommendation", 'DateTime'>
+    readonly updatedAt: FieldRef<"Recommendation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Recommendation findUnique
+   */
+  export type RecommendationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationInclude<ExtArgs> | null
+    /**
+     * Filter, which Recommendation to fetch.
+     */
+    where: RecommendationWhereUniqueInput
+  }
+
+  /**
+   * Recommendation findUniqueOrThrow
+   */
+  export type RecommendationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationInclude<ExtArgs> | null
+    /**
+     * Filter, which Recommendation to fetch.
+     */
+    where: RecommendationWhereUniqueInput
+  }
+
+  /**
+   * Recommendation findFirst
+   */
+  export type RecommendationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationInclude<ExtArgs> | null
+    /**
+     * Filter, which Recommendation to fetch.
+     */
+    where?: RecommendationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Recommendations to fetch.
+     */
+    orderBy?: RecommendationOrderByWithRelationInput | RecommendationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Recommendations.
+     */
+    cursor?: RecommendationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Recommendations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Recommendations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Recommendations.
+     */
+    distinct?: RecommendationScalarFieldEnum | RecommendationScalarFieldEnum[]
+  }
+
+  /**
+   * Recommendation findFirstOrThrow
+   */
+  export type RecommendationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationInclude<ExtArgs> | null
+    /**
+     * Filter, which Recommendation to fetch.
+     */
+    where?: RecommendationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Recommendations to fetch.
+     */
+    orderBy?: RecommendationOrderByWithRelationInput | RecommendationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Recommendations.
+     */
+    cursor?: RecommendationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Recommendations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Recommendations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Recommendations.
+     */
+    distinct?: RecommendationScalarFieldEnum | RecommendationScalarFieldEnum[]
+  }
+
+  /**
+   * Recommendation findMany
+   */
+  export type RecommendationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationInclude<ExtArgs> | null
+    /**
+     * Filter, which Recommendations to fetch.
+     */
+    where?: RecommendationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Recommendations to fetch.
+     */
+    orderBy?: RecommendationOrderByWithRelationInput | RecommendationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Recommendations.
+     */
+    cursor?: RecommendationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Recommendations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Recommendations.
+     */
+    skip?: number
+    distinct?: RecommendationScalarFieldEnum | RecommendationScalarFieldEnum[]
+  }
+
+  /**
+   * Recommendation create
+   */
+  export type RecommendationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Recommendation.
+     */
+    data: XOR<RecommendationCreateInput, RecommendationUncheckedCreateInput>
+  }
+
+  /**
+   * Recommendation createMany
+   */
+  export type RecommendationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Recommendations.
+     */
+    data: RecommendationCreateManyInput | RecommendationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Recommendation createManyAndReturn
+   */
+  export type RecommendationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Recommendations.
+     */
+    data: RecommendationCreateManyInput | RecommendationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Recommendation update
+   */
+  export type RecommendationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Recommendation.
+     */
+    data: XOR<RecommendationUpdateInput, RecommendationUncheckedUpdateInput>
+    /**
+     * Choose, which Recommendation to update.
+     */
+    where: RecommendationWhereUniqueInput
+  }
+
+  /**
+   * Recommendation updateMany
+   */
+  export type RecommendationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Recommendations.
+     */
+    data: XOR<RecommendationUpdateManyMutationInput, RecommendationUncheckedUpdateManyInput>
+    /**
+     * Filter which Recommendations to update
+     */
+    where?: RecommendationWhereInput
+    /**
+     * Limit how many Recommendations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Recommendation updateManyAndReturn
+   */
+  export type RecommendationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * The data used to update Recommendations.
+     */
+    data: XOR<RecommendationUpdateManyMutationInput, RecommendationUncheckedUpdateManyInput>
+    /**
+     * Filter which Recommendations to update
+     */
+    where?: RecommendationWhereInput
+    /**
+     * Limit how many Recommendations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Recommendation upsert
+   */
+  export type RecommendationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Recommendation to update in case it exists.
+     */
+    where: RecommendationWhereUniqueInput
+    /**
+     * In case the Recommendation found by the `where` argument doesn't exist, create a new Recommendation with this data.
+     */
+    create: XOR<RecommendationCreateInput, RecommendationUncheckedCreateInput>
+    /**
+     * In case the Recommendation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RecommendationUpdateInput, RecommendationUncheckedUpdateInput>
+  }
+
+  /**
+   * Recommendation delete
+   */
+  export type RecommendationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationInclude<ExtArgs> | null
+    /**
+     * Filter which Recommendation to delete.
+     */
+    where: RecommendationWhereUniqueInput
+  }
+
+  /**
+   * Recommendation deleteMany
+   */
+  export type RecommendationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Recommendations to delete
+     */
+    where?: RecommendationWhereInput
+    /**
+     * Limit how many Recommendations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Recommendation without action
+   */
+  export type RecommendationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recommendation
+     */
+    select?: RecommendationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recommendation
+     */
+    omit?: RecommendationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecommendationInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9590,6 +10776,17 @@ export namespace Prisma {
   };
 
   export type RewardClaimScalarFieldEnum = (typeof RewardClaimScalarFieldEnum)[keyof typeof RewardClaimScalarFieldEnum]
+
+
+  export const RecommendationScalarFieldEnum: {
+    id: 'id',
+    content: 'content',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RecommendationScalarFieldEnum = (typeof RecommendationScalarFieldEnum)[keyof typeof RecommendationScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9747,6 +10944,7 @@ export namespace Prisma {
     challengeCompletions?: ChallengeCompletionListRelationFilter
     rewardClaims?: RewardClaimListRelationFilter
     challenges?: ChallengeListRelationFilter
+    recommendations?: RecommendationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -9764,6 +10962,7 @@ export namespace Prisma {
     challengeCompletions?: ChallengeCompletionOrderByRelationAggregateInput
     rewardClaims?: RewardClaimOrderByRelationAggregateInput
     challenges?: ChallengeOrderByRelationAggregateInput
+    recommendations?: RecommendationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -9784,6 +10983,7 @@ export namespace Prisma {
     challengeCompletions?: ChallengeCompletionListRelationFilter
     rewardClaims?: RewardClaimListRelationFilter
     challenges?: ChallengeListRelationFilter
+    recommendations?: RecommendationListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -10209,6 +11409,61 @@ export namespace Prisma {
     claimedAt?: DateTimeWithAggregatesFilter<"RewardClaim"> | Date | string
   }
 
+  export type RecommendationWhereInput = {
+    AND?: RecommendationWhereInput | RecommendationWhereInput[]
+    OR?: RecommendationWhereInput[]
+    NOT?: RecommendationWhereInput | RecommendationWhereInput[]
+    id?: StringFilter<"Recommendation"> | string
+    content?: StringFilter<"Recommendation"> | string
+    userId?: StringFilter<"Recommendation"> | string
+    createdAt?: DateTimeFilter<"Recommendation"> | Date | string
+    updatedAt?: DateTimeFilter<"Recommendation"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type RecommendationOrderByWithRelationInput = {
+    id?: SortOrder
+    content?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type RecommendationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RecommendationWhereInput | RecommendationWhereInput[]
+    OR?: RecommendationWhereInput[]
+    NOT?: RecommendationWhereInput | RecommendationWhereInput[]
+    content?: StringFilter<"Recommendation"> | string
+    userId?: StringFilter<"Recommendation"> | string
+    createdAt?: DateTimeFilter<"Recommendation"> | Date | string
+    updatedAt?: DateTimeFilter<"Recommendation"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type RecommendationOrderByWithAggregationInput = {
+    id?: SortOrder
+    content?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RecommendationCountOrderByAggregateInput
+    _max?: RecommendationMaxOrderByAggregateInput
+    _min?: RecommendationMinOrderByAggregateInput
+  }
+
+  export type RecommendationScalarWhereWithAggregatesInput = {
+    AND?: RecommendationScalarWhereWithAggregatesInput | RecommendationScalarWhereWithAggregatesInput[]
+    OR?: RecommendationScalarWhereWithAggregatesInput[]
+    NOT?: RecommendationScalarWhereWithAggregatesInput | RecommendationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Recommendation"> | string
+    content?: StringWithAggregatesFilter<"Recommendation"> | string
+    userId?: StringWithAggregatesFilter<"Recommendation"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Recommendation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Recommendation"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -10224,6 +11479,7 @@ export namespace Prisma {
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutUserInput
+    recommendations?: RecommendationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -10241,6 +11497,7 @@ export namespace Prisma {
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
+    recommendations?: RecommendationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -10258,6 +11515,7 @@ export namespace Prisma {
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutUserNestedInput
+    recommendations?: RecommendationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -10275,6 +11533,7 @@ export namespace Prisma {
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
+    recommendations?: RecommendationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -10717,6 +11976,61 @@ export namespace Prisma {
     claimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type RecommendationCreateInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutRecommendationsInput
+  }
+
+  export type RecommendationUncheckedCreateInput = {
+    id?: string
+    content: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecommendationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRecommendationsNestedInput
+  }
+
+  export type RecommendationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecommendationCreateManyInput = {
+    id?: string
+    content: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecommendationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecommendationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -10800,6 +12114,12 @@ export namespace Prisma {
     none?: ChallengeWhereInput
   }
 
+  export type RecommendationListRelationFilter = {
+    every?: RecommendationWhereInput
+    some?: RecommendationWhereInput
+    none?: RecommendationWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -10818,6 +12138,10 @@ export namespace Prisma {
   }
 
   export type ChallengeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RecommendationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11240,6 +12564,30 @@ export namespace Prisma {
     claimedAt?: SortOrder
   }
 
+  export type RecommendationCountOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RecommendationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RecommendationMinOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type BadgeEarnedCreateNestedManyWithoutUserInput = {
     create?: XOR<BadgeEarnedCreateWithoutUserInput, BadgeEarnedUncheckedCreateWithoutUserInput> | BadgeEarnedCreateWithoutUserInput[] | BadgeEarnedUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BadgeEarnedCreateOrConnectWithoutUserInput | BadgeEarnedCreateOrConnectWithoutUserInput[]
@@ -11268,6 +12616,13 @@ export namespace Prisma {
     connect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
   }
 
+  export type RecommendationCreateNestedManyWithoutUserInput = {
+    create?: XOR<RecommendationCreateWithoutUserInput, RecommendationUncheckedCreateWithoutUserInput> | RecommendationCreateWithoutUserInput[] | RecommendationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RecommendationCreateOrConnectWithoutUserInput | RecommendationCreateOrConnectWithoutUserInput[]
+    createMany?: RecommendationCreateManyUserInputEnvelope
+    connect?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
+  }
+
   export type BadgeEarnedUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<BadgeEarnedCreateWithoutUserInput, BadgeEarnedUncheckedCreateWithoutUserInput> | BadgeEarnedCreateWithoutUserInput[] | BadgeEarnedUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BadgeEarnedCreateOrConnectWithoutUserInput | BadgeEarnedCreateOrConnectWithoutUserInput[]
@@ -11294,6 +12649,13 @@ export namespace Prisma {
     connectOrCreate?: ChallengeCreateOrConnectWithoutUserInput | ChallengeCreateOrConnectWithoutUserInput[]
     createMany?: ChallengeCreateManyUserInputEnvelope
     connect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+  }
+
+  export type RecommendationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RecommendationCreateWithoutUserInput, RecommendationUncheckedCreateWithoutUserInput> | RecommendationCreateWithoutUserInput[] | RecommendationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RecommendationCreateOrConnectWithoutUserInput | RecommendationCreateOrConnectWithoutUserInput[]
+    createMany?: RecommendationCreateManyUserInputEnvelope
+    connect?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -11376,6 +12738,20 @@ export namespace Prisma {
     deleteMany?: ChallengeScalarWhereInput | ChallengeScalarWhereInput[]
   }
 
+  export type RecommendationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RecommendationCreateWithoutUserInput, RecommendationUncheckedCreateWithoutUserInput> | RecommendationCreateWithoutUserInput[] | RecommendationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RecommendationCreateOrConnectWithoutUserInput | RecommendationCreateOrConnectWithoutUserInput[]
+    upsert?: RecommendationUpsertWithWhereUniqueWithoutUserInput | RecommendationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RecommendationCreateManyUserInputEnvelope
+    set?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
+    disconnect?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
+    delete?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
+    connect?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
+    update?: RecommendationUpdateWithWhereUniqueWithoutUserInput | RecommendationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RecommendationUpdateManyWithWhereWithoutUserInput | RecommendationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RecommendationScalarWhereInput | RecommendationScalarWhereInput[]
+  }
+
   export type BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<BadgeEarnedCreateWithoutUserInput, BadgeEarnedUncheckedCreateWithoutUserInput> | BadgeEarnedCreateWithoutUserInput[] | BadgeEarnedUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BadgeEarnedCreateOrConnectWithoutUserInput | BadgeEarnedCreateOrConnectWithoutUserInput[]
@@ -11430,6 +12806,20 @@ export namespace Prisma {
     update?: ChallengeUpdateWithWhereUniqueWithoutUserInput | ChallengeUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ChallengeUpdateManyWithWhereWithoutUserInput | ChallengeUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ChallengeScalarWhereInput | ChallengeScalarWhereInput[]
+  }
+
+  export type RecommendationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RecommendationCreateWithoutUserInput, RecommendationUncheckedCreateWithoutUserInput> | RecommendationCreateWithoutUserInput[] | RecommendationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RecommendationCreateOrConnectWithoutUserInput | RecommendationCreateOrConnectWithoutUserInput[]
+    upsert?: RecommendationUpsertWithWhereUniqueWithoutUserInput | RecommendationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RecommendationCreateManyUserInputEnvelope
+    set?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
+    disconnect?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
+    delete?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
+    connect?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
+    update?: RecommendationUpdateWithWhereUniqueWithoutUserInput | RecommendationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RecommendationUpdateManyWithWhereWithoutUserInput | RecommendationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RecommendationScalarWhereInput | RecommendationScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutChallengesInput = {
@@ -11614,6 +13004,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutRewardClaimsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRewardClaimsInput, UserUpdateWithoutRewardClaimsInput>, UserUncheckedUpdateWithoutRewardClaimsInput>
+  }
+
+  export type UserCreateNestedOneWithoutRecommendationsInput = {
+    create?: XOR<UserCreateWithoutRecommendationsInput, UserUncheckedCreateWithoutRecommendationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRecommendationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutRecommendationsNestedInput = {
+    create?: XOR<UserCreateWithoutRecommendationsInput, UserUncheckedCreateWithoutRecommendationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRecommendationsInput
+    upsert?: UserUpsertWithoutRecommendationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRecommendationsInput, UserUpdateWithoutRecommendationsInput>, UserUncheckedUpdateWithoutRecommendationsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -11947,6 +13351,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RecommendationCreateWithoutUserInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecommendationUncheckedCreateWithoutUserInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecommendationCreateOrConnectWithoutUserInput = {
+    where: RecommendationWhereUniqueInput
+    create: XOR<RecommendationCreateWithoutUserInput, RecommendationUncheckedCreateWithoutUserInput>
+  }
+
+  export type RecommendationCreateManyUserInputEnvelope = {
+    data: RecommendationCreateManyUserInput | RecommendationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type BadgeEarnedUpsertWithWhereUniqueWithoutUserInput = {
     where: BadgeEarnedWhereUniqueInput
     update: XOR<BadgeEarnedUpdateWithoutUserInput, BadgeEarnedUncheckedUpdateWithoutUserInput>
@@ -12060,6 +13488,33 @@ export namespace Prisma {
     userId?: StringFilter<"Challenge"> | string
   }
 
+  export type RecommendationUpsertWithWhereUniqueWithoutUserInput = {
+    where: RecommendationWhereUniqueInput
+    update: XOR<RecommendationUpdateWithoutUserInput, RecommendationUncheckedUpdateWithoutUserInput>
+    create: XOR<RecommendationCreateWithoutUserInput, RecommendationUncheckedCreateWithoutUserInput>
+  }
+
+  export type RecommendationUpdateWithWhereUniqueWithoutUserInput = {
+    where: RecommendationWhereUniqueInput
+    data: XOR<RecommendationUpdateWithoutUserInput, RecommendationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RecommendationUpdateManyWithWhereWithoutUserInput = {
+    where: RecommendationScalarWhereInput
+    data: XOR<RecommendationUpdateManyMutationInput, RecommendationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RecommendationScalarWhereInput = {
+    AND?: RecommendationScalarWhereInput | RecommendationScalarWhereInput[]
+    OR?: RecommendationScalarWhereInput[]
+    NOT?: RecommendationScalarWhereInput | RecommendationScalarWhereInput[]
+    id?: StringFilter<"Recommendation"> | string
+    content?: StringFilter<"Recommendation"> | string
+    userId?: StringFilter<"Recommendation"> | string
+    createdAt?: DateTimeFilter<"Recommendation"> | Date | string
+    updatedAt?: DateTimeFilter<"Recommendation"> | Date | string
+  }
+
   export type UserCreateWithoutChallengesInput = {
     id?: string
     email: string
@@ -12074,6 +13529,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
+    recommendations?: RecommendationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChallengesInput = {
@@ -12090,6 +13546,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
+    recommendations?: RecommendationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChallengesInput = {
@@ -12122,6 +13579,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
+    recommendations?: RecommendationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChallengesInput = {
@@ -12138,6 +13596,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
+    recommendations?: RecommendationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BadgeEarnedCreateWithoutBadgeInput = {
@@ -12192,6 +13651,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutUserInput
+    recommendations?: RecommendationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChallengeCompletionsInput = {
@@ -12208,6 +13668,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
+    recommendations?: RecommendationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChallengeCompletionsInput = {
@@ -12240,6 +13701,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutUserNestedInput
+    recommendations?: RecommendationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChallengeCompletionsInput = {
@@ -12256,6 +13718,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
+    recommendations?: RecommendationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BadgeCreateWithoutBadgesEarnedInput = {
@@ -12297,6 +13760,7 @@ export namespace Prisma {
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutUserInput
+    recommendations?: RecommendationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBadgesEarnedInput = {
@@ -12313,6 +13777,7 @@ export namespace Prisma {
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
+    recommendations?: RecommendationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBadgesEarnedInput = {
@@ -12376,6 +13841,7 @@ export namespace Prisma {
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutUserNestedInput
+    recommendations?: RecommendationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBadgesEarnedInput = {
@@ -12392,6 +13858,7 @@ export namespace Prisma {
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
+    recommendations?: RecommendationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RewardClaimCreateWithoutRewardInput = {
@@ -12471,6 +13938,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutUserInput
+    recommendations?: RecommendationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRewardClaimsInput = {
@@ -12487,6 +13955,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
+    recommendations?: RecommendationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRewardClaimsInput = {
@@ -12550,6 +14019,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutUserNestedInput
+    recommendations?: RecommendationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRewardClaimsInput = {
@@ -12565,6 +14035,91 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
+    recommendations?: RecommendationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutRecommendationsInput = {
+    id?: string
+    email: string
+    avatarUrl?: string | null
+    xp?: number
+    level?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    firstName: string
+    lastName: string
+    badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
+    challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutRecommendationsInput = {
+    id?: string
+    email: string
+    avatarUrl?: string | null
+    xp?: number
+    level?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    firstName: string
+    lastName: string
+    badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
+    challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutRecommendationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRecommendationsInput, UserUncheckedCreateWithoutRecommendationsInput>
+  }
+
+  export type UserUpsertWithoutRecommendationsInput = {
+    update: XOR<UserUpdateWithoutRecommendationsInput, UserUncheckedUpdateWithoutRecommendationsInput>
+    create: XOR<UserCreateWithoutRecommendationsInput, UserUncheckedCreateWithoutRecommendationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRecommendationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRecommendationsInput, UserUncheckedUpdateWithoutRecommendationsInput>
+  }
+
+  export type UserUpdateWithoutRecommendationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    xp?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
+    challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRecommendationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    xp?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
+    challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -12599,6 +14154,13 @@ export namespace Prisma {
     requiredCompletions?: number
     type: $Enums.ChallengeType
     completionCount?: number
+  }
+
+  export type RecommendationCreateManyUserInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BadgeEarnedUpdateWithoutUserInput = {
@@ -12698,6 +14260,27 @@ export namespace Prisma {
     requiredCompletions?: IntFieldUpdateOperationsInput | number
     type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
     completionCount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RecommendationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecommendationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecommendationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BadgeEarnedCreateManyBadgeInput = {

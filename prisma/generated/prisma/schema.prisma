@@ -24,6 +24,7 @@ model User {
   challengeCompletions ChallengeCompletion[] @relation("ChallengeCompletions")
   rewardClaims         RewardClaim[]         @relation("RewardClaims")
   challenges           Challenge[]           @relation("ChallengeOwner")
+  recommendations      Recommendation[]      @relation("Recommendations")
 
   @@map("users")
 }
@@ -103,6 +104,17 @@ model RewardClaim {
   user      User     @relation("RewardClaims", fields: [userId], references: [id])
 
   @@map("reward_claims")
+}
+
+model Recommendation {
+  id        String   @id @default(uuid())
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], name: "Recommendations")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("recommendations")
 }
 
 enum AuthProvider {
