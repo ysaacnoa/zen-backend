@@ -142,7 +142,8 @@ exports.Prisma.ChallengeScalarFieldEnum = {
   instructions: 'instructions',
   requiredCompletions: 'requiredCompletions',
   type: 'type',
-  completionCount: 'completionCount'
+  completionCount: 'completionCount',
+  userId: 'userId'
 };
 
 exports.Prisma.BadgeScalarFieldEnum = {

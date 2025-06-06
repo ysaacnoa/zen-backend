@@ -23,6 +23,7 @@ model User {
   badgesEarned         BadgeEarned[]         @relation("BadgesEarned")
   challengeCompletions ChallengeCompletion[] @relation("ChallengeCompletions")
   rewardClaims         RewardClaim[]         @relation("RewardClaims")
+  challenges           Challenge[]           @relation("ChallengeOwner")
 
   @@map("users")
 }
@@ -37,6 +38,8 @@ model Challenge {
   requiredCompletions Int           @default(1)
   type                ChallengeType
   completionCount     Int           @default(0)
+  userId              String
+  user                User          @relation("ChallengeOwner", fields: [userId], references: [id])
 
   @@map("challenges")
 }

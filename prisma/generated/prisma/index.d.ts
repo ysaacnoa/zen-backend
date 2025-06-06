@@ -1465,12 +1465,14 @@ export namespace Prisma {
     badgesEarned: number
     challengeCompletions: number
     rewardClaims: number
+    challenges: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     badgesEarned?: boolean | UserCountOutputTypeCountBadgesEarnedArgs
     challengeCompletions?: boolean | UserCountOutputTypeCountChallengeCompletionsArgs
     rewardClaims?: boolean | UserCountOutputTypeCountRewardClaimsArgs
+    challenges?: boolean | UserCountOutputTypeCountChallengesArgs
   }
 
   // Custom InputTypes
@@ -1503,6 +1505,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountRewardClaimsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RewardClaimWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountChallengesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChallengeWhereInput
   }
 
 
@@ -1817,6 +1826,7 @@ export namespace Prisma {
     badgesEarned?: boolean | User$badgesEarnedArgs<ExtArgs>
     challengeCompletions?: boolean | User$challengeCompletionsArgs<ExtArgs>
     rewardClaims?: boolean | User$rewardClaimsArgs<ExtArgs>
+    challenges?: boolean | User$challengesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1864,6 +1874,7 @@ export namespace Prisma {
     badgesEarned?: boolean | User$badgesEarnedArgs<ExtArgs>
     challengeCompletions?: boolean | User$challengeCompletionsArgs<ExtArgs>
     rewardClaims?: boolean | User$rewardClaimsArgs<ExtArgs>
+    challenges?: boolean | User$challengesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1875,6 +1886,7 @@ export namespace Prisma {
       badgesEarned: Prisma.$BadgeEarnedPayload<ExtArgs>[]
       challengeCompletions: Prisma.$ChallengeCompletionPayload<ExtArgs>[]
       rewardClaims: Prisma.$RewardClaimPayload<ExtArgs>[]
+      challenges: Prisma.$ChallengePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2284,6 +2296,7 @@ export namespace Prisma {
     badgesEarned<T extends User$badgesEarnedArgs<ExtArgs> = {}>(args?: Subset<T, User$badgesEarnedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BadgeEarnedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     challengeCompletions<T extends User$challengeCompletionsArgs<ExtArgs> = {}>(args?: Subset<T, User$challengeCompletionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengeCompletionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     rewardClaims<T extends User$rewardClaimsArgs<ExtArgs> = {}>(args?: Subset<T, User$rewardClaimsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RewardClaimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    challenges<T extends User$challengesArgs<ExtArgs> = {}>(args?: Subset<T, User$challengesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2783,6 +2796,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.challenges
+   */
+  export type User$challengesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Challenge
+     */
+    select?: ChallengeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Challenge
+     */
+    omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    where?: ChallengeWhereInput
+    orderBy?: ChallengeOrderByWithRelationInput | ChallengeOrderByWithRelationInput[]
+    cursor?: ChallengeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChallengeScalarFieldEnum | ChallengeScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2835,6 +2872,7 @@ export namespace Prisma {
     requiredCompletions: number | null
     type: $Enums.ChallengeType | null
     completionCount: number | null
+    userId: string | null
   }
 
   export type ChallengeMaxAggregateOutputType = {
@@ -2847,6 +2885,7 @@ export namespace Prisma {
     requiredCompletions: number | null
     type: $Enums.ChallengeType | null
     completionCount: number | null
+    userId: string | null
   }
 
   export type ChallengeCountAggregateOutputType = {
@@ -2859,6 +2898,7 @@ export namespace Prisma {
     requiredCompletions: number
     type: number
     completionCount: number
+    userId: number
     _all: number
   }
 
@@ -2885,6 +2925,7 @@ export namespace Prisma {
     requiredCompletions?: true
     type?: true
     completionCount?: true
+    userId?: true
   }
 
   export type ChallengeMaxAggregateInputType = {
@@ -2897,6 +2938,7 @@ export namespace Prisma {
     requiredCompletions?: true
     type?: true
     completionCount?: true
+    userId?: true
   }
 
   export type ChallengeCountAggregateInputType = {
@@ -2909,6 +2951,7 @@ export namespace Prisma {
     requiredCompletions?: true
     type?: true
     completionCount?: true
+    userId?: true
     _all?: true
   }
 
@@ -3008,6 +3051,7 @@ export namespace Prisma {
     requiredCompletions: number
     type: $Enums.ChallengeType
     completionCount: number
+    userId: string
     _count: ChallengeCountAggregateOutputType | null
     _avg: ChallengeAvgAggregateOutputType | null
     _sum: ChallengeSumAggregateOutputType | null
@@ -3039,6 +3083,8 @@ export namespace Prisma {
     requiredCompletions?: boolean
     type?: boolean
     completionCount?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["challenge"]>
 
   export type ChallengeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3051,6 +3097,8 @@ export namespace Prisma {
     requiredCompletions?: boolean
     type?: boolean
     completionCount?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["challenge"]>
 
   export type ChallengeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3063,6 +3111,8 @@ export namespace Prisma {
     requiredCompletions?: boolean
     type?: boolean
     completionCount?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["challenge"]>
 
   export type ChallengeSelectScalar = {
@@ -3075,13 +3125,25 @@ export namespace Prisma {
     requiredCompletions?: boolean
     type?: boolean
     completionCount?: boolean
+    userId?: boolean
   }
 
-  export type ChallengeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "rewardXp" | "createdAt" | "updatedAt" | "instructions" | "requiredCompletions" | "type" | "completionCount", ExtArgs["result"]["challenge"]>
+  export type ChallengeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "rewardXp" | "createdAt" | "updatedAt" | "instructions" | "requiredCompletions" | "type" | "completionCount" | "userId", ExtArgs["result"]["challenge"]>
+  export type ChallengeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ChallengeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ChallengeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $ChallengePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Challenge"
-    objects: {}
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
@@ -3092,6 +3154,7 @@ export namespace Prisma {
       requiredCompletions: number
       type: $Enums.ChallengeType
       completionCount: number
+      userId: string
     }, ExtArgs["result"]["challenge"]>
     composites: {}
   }
@@ -3486,6 +3549,7 @@ export namespace Prisma {
    */
   export interface Prisma__ChallengeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3524,6 +3588,7 @@ export namespace Prisma {
     readonly requiredCompletions: FieldRef<"Challenge", 'Int'>
     readonly type: FieldRef<"Challenge", 'ChallengeType'>
     readonly completionCount: FieldRef<"Challenge", 'Int'>
+    readonly userId: FieldRef<"Challenge", 'String'>
   }
     
 
@@ -3540,6 +3605,10 @@ export namespace Prisma {
      * Omit specific fields from the Challenge
      */
     omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
     /**
      * Filter, which Challenge to fetch.
      */
@@ -3559,6 +3628,10 @@ export namespace Prisma {
      */
     omit?: ChallengeOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
      * Filter, which Challenge to fetch.
      */
     where: ChallengeWhereUniqueInput
@@ -3576,6 +3649,10 @@ export namespace Prisma {
      * Omit specific fields from the Challenge
      */
     omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
     /**
      * Filter, which Challenge to fetch.
      */
@@ -3625,6 +3702,10 @@ export namespace Prisma {
      */
     omit?: ChallengeOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
      * Filter, which Challenge to fetch.
      */
     where?: ChallengeWhereInput
@@ -3673,6 +3754,10 @@ export namespace Prisma {
      */
     omit?: ChallengeOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
      * Filter, which Challenges to fetch.
      */
     where?: ChallengeWhereInput
@@ -3716,6 +3801,10 @@ export namespace Prisma {
      */
     omit?: ChallengeOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
+    /**
      * The data needed to create a Challenge.
      */
     data: XOR<ChallengeCreateInput, ChallengeUncheckedCreateInput>
@@ -3749,6 +3838,10 @@ export namespace Prisma {
      */
     data: ChallengeCreateManyInput | ChallengeCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3763,6 +3856,10 @@ export namespace Prisma {
      * Omit specific fields from the Challenge
      */
     omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
     /**
      * The data needed to update a Challenge.
      */
@@ -3815,6 +3912,10 @@ export namespace Prisma {
      * Limit how many Challenges to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3829,6 +3930,10 @@ export namespace Prisma {
      * Omit specific fields from the Challenge
      */
     omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
     /**
      * The filter to search for the Challenge to update in case it exists.
      */
@@ -3855,6 +3960,10 @@ export namespace Prisma {
      * Omit specific fields from the Challenge
      */
     omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
     /**
      * Filter which Challenge to delete.
      */
@@ -3887,6 +3996,10 @@ export namespace Prisma {
      * Omit specific fields from the Challenge
      */
     omit?: ChallengeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeInclude<ExtArgs> | null
   }
 
 
@@ -9413,7 +9526,8 @@ export namespace Prisma {
     instructions: 'instructions',
     requiredCompletions: 'requiredCompletions',
     type: 'type',
-    completionCount: 'completionCount'
+    completionCount: 'completionCount',
+    userId: 'userId'
   };
 
   export type ChallengeScalarFieldEnum = (typeof ChallengeScalarFieldEnum)[keyof typeof ChallengeScalarFieldEnum]
@@ -9632,6 +9746,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedListRelationFilter
     challengeCompletions?: ChallengeCompletionListRelationFilter
     rewardClaims?: RewardClaimListRelationFilter
+    challenges?: ChallengeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -9648,6 +9763,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedOrderByRelationAggregateInput
     challengeCompletions?: ChallengeCompletionOrderByRelationAggregateInput
     rewardClaims?: RewardClaimOrderByRelationAggregateInput
+    challenges?: ChallengeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -9667,6 +9783,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedListRelationFilter
     challengeCompletions?: ChallengeCompletionListRelationFilter
     rewardClaims?: RewardClaimListRelationFilter
+    challenges?: ChallengeListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -9716,6 +9833,8 @@ export namespace Prisma {
     requiredCompletions?: IntFilter<"Challenge"> | number
     type?: EnumChallengeTypeFilter<"Challenge"> | $Enums.ChallengeType
     completionCount?: IntFilter<"Challenge"> | number
+    userId?: StringFilter<"Challenge"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type ChallengeOrderByWithRelationInput = {
@@ -9728,6 +9847,8 @@ export namespace Prisma {
     requiredCompletions?: SortOrder
     type?: SortOrder
     completionCount?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
   export type ChallengeWhereUniqueInput = Prisma.AtLeast<{
@@ -9743,6 +9864,8 @@ export namespace Prisma {
     requiredCompletions?: IntFilter<"Challenge"> | number
     type?: EnumChallengeTypeFilter<"Challenge"> | $Enums.ChallengeType
     completionCount?: IntFilter<"Challenge"> | number
+    userId?: StringFilter<"Challenge"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type ChallengeOrderByWithAggregationInput = {
@@ -9755,6 +9878,7 @@ export namespace Prisma {
     requiredCompletions?: SortOrder
     type?: SortOrder
     completionCount?: SortOrder
+    userId?: SortOrder
     _count?: ChallengeCountOrderByAggregateInput
     _avg?: ChallengeAvgOrderByAggregateInput
     _max?: ChallengeMaxOrderByAggregateInput
@@ -9775,6 +9899,7 @@ export namespace Prisma {
     requiredCompletions?: IntWithAggregatesFilter<"Challenge"> | number
     type?: EnumChallengeTypeWithAggregatesFilter<"Challenge"> | $Enums.ChallengeType
     completionCount?: IntWithAggregatesFilter<"Challenge"> | number
+    userId?: StringWithAggregatesFilter<"Challenge"> | string
   }
 
   export type BadgeWhereInput = {
@@ -10098,6 +10223,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -10114,6 +10240,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -10130,6 +10257,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -10146,6 +10274,7 @@ export namespace Prisma {
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -10197,6 +10326,7 @@ export namespace Prisma {
     requiredCompletions?: number
     type: $Enums.ChallengeType
     completionCount?: number
+    user: UserCreateNestedOneWithoutChallengesInput
   }
 
   export type ChallengeUncheckedCreateInput = {
@@ -10209,6 +10339,7 @@ export namespace Prisma {
     requiredCompletions?: number
     type: $Enums.ChallengeType
     completionCount?: number
+    userId: string
   }
 
   export type ChallengeUpdateInput = {
@@ -10221,6 +10352,7 @@ export namespace Prisma {
     requiredCompletions?: IntFieldUpdateOperationsInput | number
     type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
     completionCount?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutChallengesNestedInput
   }
 
   export type ChallengeUncheckedUpdateInput = {
@@ -10233,6 +10365,7 @@ export namespace Prisma {
     requiredCompletions?: IntFieldUpdateOperationsInput | number
     type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
     completionCount?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ChallengeCreateManyInput = {
@@ -10245,6 +10378,7 @@ export namespace Prisma {
     requiredCompletions?: number
     type: $Enums.ChallengeType
     completionCount?: number
+    userId: string
   }
 
   export type ChallengeUpdateManyMutationInput = {
@@ -10269,6 +10403,7 @@ export namespace Prisma {
     requiredCompletions?: IntFieldUpdateOperationsInput | number
     type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
     completionCount?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type BadgeCreateInput = {
@@ -10659,6 +10794,12 @@ export namespace Prisma {
     none?: RewardClaimWhereInput
   }
 
+  export type ChallengeListRelationFilter = {
+    every?: ChallengeWhereInput
+    some?: ChallengeWhereInput
+    none?: ChallengeWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -10673,6 +10814,10 @@ export namespace Prisma {
   }
 
   export type RewardClaimOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ChallengeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -10808,6 +10953,11 @@ export namespace Prisma {
     not?: NestedEnumChallengeTypeFilter<$PrismaModel> | $Enums.ChallengeType
   }
 
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
   export type ChallengeCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -10818,6 +10968,7 @@ export namespace Prisma {
     requiredCompletions?: SortOrder
     type?: SortOrder
     completionCount?: SortOrder
+    userId?: SortOrder
   }
 
   export type ChallengeAvgOrderByAggregateInput = {
@@ -10836,6 +10987,7 @@ export namespace Prisma {
     requiredCompletions?: SortOrder
     type?: SortOrder
     completionCount?: SortOrder
+    userId?: SortOrder
   }
 
   export type ChallengeMinOrderByAggregateInput = {
@@ -10848,6 +11000,7 @@ export namespace Prisma {
     requiredCompletions?: SortOrder
     type?: SortOrder
     completionCount?: SortOrder
+    userId?: SortOrder
   }
 
   export type ChallengeSumOrderByAggregateInput = {
@@ -10933,11 +11086,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
   }
 
   export type ChallengeCompletionCountOrderByAggregateInput = {
@@ -11113,6 +11261,13 @@ export namespace Prisma {
     connect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
   }
 
+  export type ChallengeCreateNestedManyWithoutUserInput = {
+    create?: XOR<ChallengeCreateWithoutUserInput, ChallengeUncheckedCreateWithoutUserInput> | ChallengeCreateWithoutUserInput[] | ChallengeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChallengeCreateOrConnectWithoutUserInput | ChallengeCreateOrConnectWithoutUserInput[]
+    createMany?: ChallengeCreateManyUserInputEnvelope
+    connect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+  }
+
   export type BadgeEarnedUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<BadgeEarnedCreateWithoutUserInput, BadgeEarnedUncheckedCreateWithoutUserInput> | BadgeEarnedCreateWithoutUserInput[] | BadgeEarnedUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BadgeEarnedCreateOrConnectWithoutUserInput | BadgeEarnedCreateOrConnectWithoutUserInput[]
@@ -11132,6 +11287,13 @@ export namespace Prisma {
     connectOrCreate?: RewardClaimCreateOrConnectWithoutUserInput | RewardClaimCreateOrConnectWithoutUserInput[]
     createMany?: RewardClaimCreateManyUserInputEnvelope
     connect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
+  }
+
+  export type ChallengeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ChallengeCreateWithoutUserInput, ChallengeUncheckedCreateWithoutUserInput> | ChallengeCreateWithoutUserInput[] | ChallengeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChallengeCreateOrConnectWithoutUserInput | ChallengeCreateOrConnectWithoutUserInput[]
+    createMany?: ChallengeCreateManyUserInputEnvelope
+    connect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -11200,6 +11362,20 @@ export namespace Prisma {
     deleteMany?: RewardClaimScalarWhereInput | RewardClaimScalarWhereInput[]
   }
 
+  export type ChallengeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ChallengeCreateWithoutUserInput, ChallengeUncheckedCreateWithoutUserInput> | ChallengeCreateWithoutUserInput[] | ChallengeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChallengeCreateOrConnectWithoutUserInput | ChallengeCreateOrConnectWithoutUserInput[]
+    upsert?: ChallengeUpsertWithWhereUniqueWithoutUserInput | ChallengeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ChallengeCreateManyUserInputEnvelope
+    set?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    disconnect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    delete?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    connect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    update?: ChallengeUpdateWithWhereUniqueWithoutUserInput | ChallengeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ChallengeUpdateManyWithWhereWithoutUserInput | ChallengeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ChallengeScalarWhereInput | ChallengeScalarWhereInput[]
+  }
+
   export type BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<BadgeEarnedCreateWithoutUserInput, BadgeEarnedUncheckedCreateWithoutUserInput> | BadgeEarnedCreateWithoutUserInput[] | BadgeEarnedUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BadgeEarnedCreateOrConnectWithoutUserInput | BadgeEarnedCreateOrConnectWithoutUserInput[]
@@ -11242,8 +11418,36 @@ export namespace Prisma {
     deleteMany?: RewardClaimScalarWhereInput | RewardClaimScalarWhereInput[]
   }
 
+  export type ChallengeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ChallengeCreateWithoutUserInput, ChallengeUncheckedCreateWithoutUserInput> | ChallengeCreateWithoutUserInput[] | ChallengeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChallengeCreateOrConnectWithoutUserInput | ChallengeCreateOrConnectWithoutUserInput[]
+    upsert?: ChallengeUpsertWithWhereUniqueWithoutUserInput | ChallengeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ChallengeCreateManyUserInputEnvelope
+    set?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    disconnect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    delete?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    connect?: ChallengeWhereUniqueInput | ChallengeWhereUniqueInput[]
+    update?: ChallengeUpdateWithWhereUniqueWithoutUserInput | ChallengeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ChallengeUpdateManyWithWhereWithoutUserInput | ChallengeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ChallengeScalarWhereInput | ChallengeScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutChallengesInput = {
+    create?: XOR<UserCreateWithoutChallengesInput, UserUncheckedCreateWithoutChallengesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutChallengesInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type EnumChallengeTypeFieldUpdateOperationsInput = {
     set?: $Enums.ChallengeType
+  }
+
+  export type UserUpdateOneRequiredWithoutChallengesNestedInput = {
+    create?: XOR<UserCreateWithoutChallengesInput, UserUncheckedCreateWithoutChallengesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutChallengesInput
+    upsert?: UserUpsertWithoutChallengesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutChallengesInput, UserUpdateWithoutChallengesInput>, UserUncheckedUpdateWithoutChallengesInput>
   }
 
   export type BadgeEarnedCreateNestedManyWithoutBadgeInput = {
@@ -11709,6 +11913,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ChallengeCreateWithoutUserInput = {
+    id?: string
+    title: string
+    rewardXp?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    instructions: string
+    requiredCompletions?: number
+    type: $Enums.ChallengeType
+    completionCount?: number
+  }
+
+  export type ChallengeUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    rewardXp?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    instructions: string
+    requiredCompletions?: number
+    type: $Enums.ChallengeType
+    completionCount?: number
+  }
+
+  export type ChallengeCreateOrConnectWithoutUserInput = {
+    where: ChallengeWhereUniqueInput
+    create: XOR<ChallengeCreateWithoutUserInput, ChallengeUncheckedCreateWithoutUserInput>
+  }
+
+  export type ChallengeCreateManyUserInputEnvelope = {
+    data: ChallengeCreateManyUserInput | ChallengeCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type BadgeEarnedUpsertWithWhereUniqueWithoutUserInput = {
     where: BadgeEarnedWhereUniqueInput
     update: XOR<BadgeEarnedUpdateWithoutUserInput, BadgeEarnedUncheckedUpdateWithoutUserInput>
@@ -11790,6 +12028,118 @@ export namespace Prisma {
     claimedAt?: DateTimeFilter<"RewardClaim"> | Date | string
   }
 
+  export type ChallengeUpsertWithWhereUniqueWithoutUserInput = {
+    where: ChallengeWhereUniqueInput
+    update: XOR<ChallengeUpdateWithoutUserInput, ChallengeUncheckedUpdateWithoutUserInput>
+    create: XOR<ChallengeCreateWithoutUserInput, ChallengeUncheckedCreateWithoutUserInput>
+  }
+
+  export type ChallengeUpdateWithWhereUniqueWithoutUserInput = {
+    where: ChallengeWhereUniqueInput
+    data: XOR<ChallengeUpdateWithoutUserInput, ChallengeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ChallengeUpdateManyWithWhereWithoutUserInput = {
+    where: ChallengeScalarWhereInput
+    data: XOR<ChallengeUpdateManyMutationInput, ChallengeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ChallengeScalarWhereInput = {
+    AND?: ChallengeScalarWhereInput | ChallengeScalarWhereInput[]
+    OR?: ChallengeScalarWhereInput[]
+    NOT?: ChallengeScalarWhereInput | ChallengeScalarWhereInput[]
+    id?: StringFilter<"Challenge"> | string
+    title?: StringFilter<"Challenge"> | string
+    rewardXp?: IntFilter<"Challenge"> | number
+    createdAt?: DateTimeFilter<"Challenge"> | Date | string
+    updatedAt?: DateTimeFilter<"Challenge"> | Date | string
+    instructions?: StringFilter<"Challenge"> | string
+    requiredCompletions?: IntFilter<"Challenge"> | number
+    type?: EnumChallengeTypeFilter<"Challenge"> | $Enums.ChallengeType
+    completionCount?: IntFilter<"Challenge"> | number
+    userId?: StringFilter<"Challenge"> | string
+  }
+
+  export type UserCreateWithoutChallengesInput = {
+    id?: string
+    email: string
+    avatarUrl?: string | null
+    xp?: number
+    level?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    firstName: string
+    lastName: string
+    badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
+    challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutChallengesInput = {
+    id?: string
+    email: string
+    avatarUrl?: string | null
+    xp?: number
+    level?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    firstName: string
+    lastName: string
+    badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
+    challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutChallengesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutChallengesInput, UserUncheckedCreateWithoutChallengesInput>
+  }
+
+  export type UserUpsertWithoutChallengesInput = {
+    update: XOR<UserUpdateWithoutChallengesInput, UserUncheckedUpdateWithoutChallengesInput>
+    create: XOR<UserCreateWithoutChallengesInput, UserUncheckedCreateWithoutChallengesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutChallengesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutChallengesInput, UserUncheckedUpdateWithoutChallengesInput>
+  }
+
+  export type UserUpdateWithoutChallengesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    xp?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
+    challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutChallengesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    xp?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
+    challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type BadgeEarnedCreateWithoutBadgeInput = {
     id?: string
     earnedAt?: Date | string
@@ -11841,6 +12191,7 @@ export namespace Prisma {
     lastName: string
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChallengeCompletionsInput = {
@@ -11856,6 +12207,7 @@ export namespace Prisma {
     lastName: string
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChallengeCompletionsInput = {
@@ -11887,6 +12239,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChallengeCompletionsInput = {
@@ -11902,6 +12255,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BadgeCreateWithoutBadgesEarnedInput = {
@@ -11942,6 +12296,7 @@ export namespace Prisma {
     lastName: string
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBadgesEarnedInput = {
@@ -11957,6 +12312,7 @@ export namespace Prisma {
     lastName: string
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBadgesEarnedInput = {
@@ -12019,6 +12375,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBadgesEarnedInput = {
@@ -12034,6 +12391,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RewardClaimCreateWithoutRewardInput = {
@@ -12112,6 +12470,7 @@ export namespace Prisma {
     lastName: string
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
+    challenges?: ChallengeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRewardClaimsInput = {
@@ -12127,6 +12486,7 @@ export namespace Prisma {
     lastName: string
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
+    challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRewardClaimsInput = {
@@ -12189,6 +12549,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRewardClaimsInput = {
@@ -12204,6 +12565,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
+    challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BadgeEarnedCreateManyUserInput = {
@@ -12225,6 +12587,18 @@ export namespace Prisma {
     id?: string
     rewardId: string
     claimedAt?: Date | string
+  }
+
+  export type ChallengeCreateManyUserInput = {
+    id?: string
+    title: string
+    rewardXp?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    instructions: string
+    requiredCompletions?: number
+    type: $Enums.ChallengeType
+    completionCount?: number
   }
 
   export type BadgeEarnedUpdateWithoutUserInput = {
@@ -12288,6 +12662,42 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rewardId?: StringFieldUpdateOperationsInput | string
     claimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChallengeUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    rewardXp?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    instructions?: StringFieldUpdateOperationsInput | string
+    requiredCompletions?: IntFieldUpdateOperationsInput | number
+    type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
+    completionCount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ChallengeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    rewardXp?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    instructions?: StringFieldUpdateOperationsInput | string
+    requiredCompletions?: IntFieldUpdateOperationsInput | number
+    type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
+    completionCount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ChallengeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    rewardXp?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    instructions?: StringFieldUpdateOperationsInput | string
+    requiredCompletions?: IntFieldUpdateOperationsInput | number
+    type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
+    completionCount?: IntFieldUpdateOperationsInput | number
   }
 
   export type BadgeEarnedCreateManyBadgeInput = {
