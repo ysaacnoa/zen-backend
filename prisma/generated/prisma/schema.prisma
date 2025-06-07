@@ -20,6 +20,11 @@ model User {
   authProvider         AuthProvider          @default(EMAIL)
   firstName            String
   lastName             String
+  bio                  String?
+  location             String?
+  birthDate            DateTime?
+  phoneNumber          String?
+  socialMediaLinks     Json?
   badgesEarned         BadgeEarned[]         @relation("BadgesEarned")
   challengeCompletions ChallengeCompletion[] @relation("ChallengeCompletions")
   rewardClaims         RewardClaim[]         @relation("RewardClaims")
@@ -40,6 +45,7 @@ model Challenge {
   type                ChallengeType
   completionCount     Int           @default(0)
   userId              String
+  metadata            Json?
   user                User          @relation("ChallengeOwner", fields: [userId], references: [id])
 
   @@map("challenges")

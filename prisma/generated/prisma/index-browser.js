@@ -130,7 +130,12 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt',
   authProvider: 'authProvider',
   firstName: 'firstName',
-  lastName: 'lastName'
+  lastName: 'lastName',
+  bio: 'bio',
+  location: 'location',
+  birthDate: 'birthDate',
+  phoneNumber: 'phoneNumber',
+  socialMediaLinks: 'socialMediaLinks'
 };
 
 exports.Prisma.ChallengeScalarFieldEnum = {
@@ -143,7 +148,8 @@ exports.Prisma.ChallengeScalarFieldEnum = {
   requiredCompletions: 'requiredCompletions',
   type: 'type',
   completionCount: 'completionCount',
-  userId: 'userId'
+  userId: 'userId',
+  metadata: 'metadata'
 };
 
 exports.Prisma.BadgeScalarFieldEnum = {
@@ -203,9 +209,20 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 
 exports.Prisma.NullsOrder = {

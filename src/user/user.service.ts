@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { supabase } from '../supabase/supabase.client';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 export interface UserProfile {
   id: string;
@@ -7,6 +8,11 @@ export interface UserProfile {
   firstName: string;
   lastName: string;
   avatarUrl?: string;
+  bio?: string;
+  location?: string;
+  birthDate?: string;
+  phoneNumber?: string;
+  socialMediaLinks?: Record<string, string>;
   xp: number;
   level: number;
   authProvider: string;
@@ -48,10 +54,43 @@ export class UserService {
     this.handleSupabaseError(response.error, 'Failed to create/update profile');
   }
 
+  async updateUser(
+    userId: string,
+    updateData: UpdateUserDto,
+  ): Promise<UserProfile> {
+    const { error: updateError } = await supabase
+      .from('users')
+      .update({
+        ...updateData,
+        updatedAt: new Date().toISOString(),
+      })
+      .eq('id', userId)
+      .select();
+
+    this.handleSupabaseError(updateError, 'Failed to update user');
+    return this.getUserById(userId);
+  }
+
   async getUserById(userId: string): Promise<UserProfile> {
     const { data, error } = await supabase
       .from('users')
-      .select('id,email,firstName,lastName,avatarUrl,xp,level,authProvider')
+      .select(
+        `
+        id,
+        email,
+        firstName,
+        lastName,
+        avatarUrl,
+        bio,
+        location,
+        birthDate,
+        phoneNumber,
+        socialMediaLinks,
+        xp,
+        level,
+        authProvider
+      `,
+      )
       .eq('id', userId)
       .maybeSingle();
 

@@ -16,6 +16,19 @@ export interface BadgeEarned {
   badge: Badge;
 }
 
+export interface UserBadge {
+  id: string;
+  userId: string;
+  badgeId: string;
+  earnedAt: Date;
+  name: string;
+  description: string;
+  xpRequired: number;
+  imagePath: string;
+  isActive: boolean;
+  createdAt: Date;
+}
+
 export interface SupabaseMutationResponse {
   error: { message: string } | null;
 }

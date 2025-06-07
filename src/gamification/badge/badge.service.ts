@@ -1,48 +1,44 @@
 import { Injectable } from '@nestjs/common';
-import { supabase } from '../../supabase/supabase.client';
+import { PrismaService } from '../../prisma/prisma.service';
 import { BadgeId } from '../../shared/types';
-import { randomUUID } from 'crypto';
-import { Badge, BadgeEarned, SupabaseMutationResponse } from './dto/badge.dto';
+import { Badge, UserBadge } from './dto/badge.dto';
 @Injectable()
 export class BadgeService {
-  private handleSupabaseError(
-    error: { message: string } | null,
-    context: string,
-  ) {
-    if (error) throw new Error(`${context}: ${error.message}`);
-  }
-
+  constructor(private readonly prisma: PrismaService) {}
   async getAllBadges(): Promise<Badge[]> {
-    const { data, error } = await supabase
-      .from('badges')
-      .select('*')
-      .order('createdAt', { ascending: false });
-
-    this.handleSupabaseError(error, 'Failed to get badges');
-    return data as Badge[];
+    return this.prisma.badge.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
-  async getUserBadges(userId: string): Promise<BadgeEarned[]> {
-    const { data, error } = await supabase
-      .from('badges_earned')
-      .select('*, badge:badges(*)')
-      .eq('userId', userId)
-      .order('earnedAt', { ascending: false });
+  async getUserBadges(userId: string): Promise<UserBadge[]> {
+    const badgesEarned = await this.prisma.badgeEarned.findMany({
+      where: { userId },
+      include: { badge: true },
+      orderBy: { earnedAt: 'desc' },
+    });
 
-    this.handleSupabaseError(error, 'Failed to get user badges');
-    return data as BadgeEarned[];
+    return badgesEarned.map((badgeEarned) => ({
+      id: badgeEarned.id,
+      userId: badgeEarned.userId,
+      badgeId: badgeEarned.badgeId,
+      earnedAt: badgeEarned.earnedAt,
+      name: badgeEarned.badge.name,
+      description: badgeEarned.badge.description,
+      xpRequired: badgeEarned.badge.xpRequired,
+      imagePath: badgeEarned.badge.imagePath,
+      isActive: badgeEarned.badge.isActive,
+      createdAt: badgeEarned.badge.createdAt,
+    }));
   }
 
   async assignWelcomeBadge(userId: string, badgeId: BadgeId): Promise<void> {
-    const response: SupabaseMutationResponse = await supabase
-      .from('badges_earned')
-      .insert({
-        id: randomUUID(),
+    await this.prisma.badgeEarned.create({
+      data: {
         userId,
         badgeId,
-        earnedAt: new Date().toISOString(),
-      });
-
-    this.handleSupabaseError(response.error, 'Failed to assign badge');
+        earnedAt: new Date(),
+      },
+    });
   }
 }
