@@ -11,6 +11,7 @@ interface GeneratedChallenge {
   instructions: string;
   type: string;
   requiredCompletions: number;
+  metadata?: Record<string, any>;
 }
 
 @Injectable()
@@ -38,13 +39,30 @@ export class ChallengesService {
     const challengesJson = await this.iaService.generateChallenge(input);
     console.log('[ChallengesService] Received:', challengesJson);
 
-    // Extract JSON from response
-    const jsonMatch = challengesJson.match(/```json\n([\s\S]*?)\n```/);
-    if (!jsonMatch || !jsonMatch[1]) {
-      throw new Error('Could not extract JSON from response');
+    // Extract JSON from response - remove <think> blocks first
+    const cleanJson = challengesJson
+      .replace(/<think>[\s\S]*?<\/think>/g, '')
+      .trim();
+
+    // Try multiple ways to extract JSON
+    let jsonString = cleanJson;
+    const jsonMatch = cleanJson.match(/```json\n([\s\S]*?)\n```/);
+    if (jsonMatch && jsonMatch[1]) {
+      jsonString = jsonMatch[1];
+    } else if (cleanJson.startsWith('[') || cleanJson.startsWith('{')) {
+      jsonString = cleanJson;
+    } else {
+      throw new Error(
+        'Invalid response format - expected JSON array of challenges',
+      );
     }
 
-    const challenges = JSON.parse(jsonMatch[1]) as GeneratedChallenge[];
+    let challenges: GeneratedChallenge[];
+    try {
+      challenges = JSON.parse(jsonString) as GeneratedChallenge[];
+    } catch (error) {
+      throw new Error(`Failed to parse challenges: ${error}`);
+    }
     console.log('[ChallengesService] Parsed challenges:', challenges);
 
     const result = await this.prisma.$transaction(
@@ -59,6 +77,7 @@ export class ChallengesService {
             requiredCompletions: challenge.requiredCompletions,
             rewardXp: 10 * challenge.requiredCompletions,
             userId: input.userId,
+            metadata: challenge.metadata,
           },
         });
       }),
