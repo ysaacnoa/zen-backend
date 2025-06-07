@@ -109,6 +109,13 @@ export class UserService {
       xp: data.xp as number,
       level: data.level as number,
       authProvider: data.authProvider as string,
+      bio: data.bio as string,
+      birthDate: data.birthDate as string | undefined,
+      location: data.location as string | undefined,
+      phoneNumber: data.phoneNumber as string | undefined,
+      socialMediaLinks: data.socialMediaLinks as
+        | Record<string, string>
+        | undefined,
     };
     return userProfile;
   }
