@@ -20,6 +20,11 @@ model User {
   authProvider         AuthProvider          @default(EMAIL)
   firstName            String
   lastName             String
+  bio                  String?
+  location             String?
+  birthDate            DateTime?
+  phoneNumber          String?
+  socialMediaLinks     Json?
   badgesEarned         BadgeEarned[]         @relation("BadgesEarned")
   challengeCompletions ChallengeCompletion[] @relation("ChallengeCompletions")
   rewardClaims         RewardClaim[]         @relation("RewardClaims")

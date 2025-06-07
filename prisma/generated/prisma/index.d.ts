@@ -1714,6 +1714,10 @@ export namespace Prisma {
     authProvider: $Enums.AuthProvider | null
     firstName: string | null
     lastName: string | null
+    bio: string | null
+    location: string | null
+    birthDate: Date | null
+    phoneNumber: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1727,6 +1731,10 @@ export namespace Prisma {
     authProvider: $Enums.AuthProvider | null
     firstName: string | null
     lastName: string | null
+    bio: string | null
+    location: string | null
+    birthDate: Date | null
+    phoneNumber: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1740,6 +1748,11 @@ export namespace Prisma {
     authProvider: number
     firstName: number
     lastName: number
+    bio: number
+    location: number
+    birthDate: number
+    phoneNumber: number
+    socialMediaLinks: number
     _all: number
   }
 
@@ -1765,6 +1778,10 @@ export namespace Prisma {
     authProvider?: true
     firstName?: true
     lastName?: true
+    bio?: true
+    location?: true
+    birthDate?: true
+    phoneNumber?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1778,6 +1795,10 @@ export namespace Prisma {
     authProvider?: true
     firstName?: true
     lastName?: true
+    bio?: true
+    location?: true
+    birthDate?: true
+    phoneNumber?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1791,6 +1812,11 @@ export namespace Prisma {
     authProvider?: true
     firstName?: true
     lastName?: true
+    bio?: true
+    location?: true
+    birthDate?: true
+    phoneNumber?: true
+    socialMediaLinks?: true
     _all?: true
   }
 
@@ -1891,6 +1917,11 @@ export namespace Prisma {
     authProvider: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio: string | null
+    location: string | null
+    birthDate: Date | null
+    phoneNumber: string | null
+    socialMediaLinks: JsonValue | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1923,6 +1954,11 @@ export namespace Prisma {
     authProvider?: boolean
     firstName?: boolean
     lastName?: boolean
+    bio?: boolean
+    location?: boolean
+    birthDate?: boolean
+    phoneNumber?: boolean
+    socialMediaLinks?: boolean
     badgesEarned?: boolean | User$badgesEarnedArgs<ExtArgs>
     challengeCompletions?: boolean | User$challengeCompletionsArgs<ExtArgs>
     rewardClaims?: boolean | User$rewardClaimsArgs<ExtArgs>
@@ -1942,6 +1978,11 @@ export namespace Prisma {
     authProvider?: boolean
     firstName?: boolean
     lastName?: boolean
+    bio?: boolean
+    location?: boolean
+    birthDate?: boolean
+    phoneNumber?: boolean
+    socialMediaLinks?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1955,6 +1996,11 @@ export namespace Prisma {
     authProvider?: boolean
     firstName?: boolean
     lastName?: boolean
+    bio?: boolean
+    location?: boolean
+    birthDate?: boolean
+    phoneNumber?: boolean
+    socialMediaLinks?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1968,9 +2014,14 @@ export namespace Prisma {
     authProvider?: boolean
     firstName?: boolean
     lastName?: boolean
+    bio?: boolean
+    location?: boolean
+    birthDate?: boolean
+    phoneNumber?: boolean
+    socialMediaLinks?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "avatarUrl" | "xp" | "level" | "createdAt" | "updatedAt" | "authProvider" | "firstName" | "lastName", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "avatarUrl" | "xp" | "level" | "createdAt" | "updatedAt" | "authProvider" | "firstName" | "lastName" | "bio" | "location" | "birthDate" | "phoneNumber" | "socialMediaLinks", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     badgesEarned?: boolean | User$badgesEarnedArgs<ExtArgs>
     challengeCompletions?: boolean | User$challengeCompletionsArgs<ExtArgs>
@@ -2002,6 +2053,11 @@ export namespace Prisma {
       authProvider: $Enums.AuthProvider
       firstName: string
       lastName: string
+      bio: string | null
+      location: string | null
+      birthDate: Date | null
+      phoneNumber: string | null
+      socialMediaLinks: Prisma.JsonValue | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2440,6 +2496,11 @@ export namespace Prisma {
     readonly authProvider: FieldRef<"User", 'AuthProvider'>
     readonly firstName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
+    readonly bio: FieldRef<"User", 'String'>
+    readonly location: FieldRef<"User", 'String'>
+    readonly birthDate: FieldRef<"User", 'DateTime'>
+    readonly phoneNumber: FieldRef<"User", 'String'>
+    readonly socialMediaLinks: FieldRef<"User", 'Json'>
   }
     
 
@@ -10706,7 +10767,12 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     authProvider: 'authProvider',
     firstName: 'firstName',
-    lastName: 'lastName'
+    lastName: 'lastName',
+    bio: 'bio',
+    location: 'location',
+    birthDate: 'birthDate',
+    phoneNumber: 'phoneNumber',
+    socialMediaLinks: 'socialMediaLinks'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -10823,14 +10889,6 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
   export const JsonNullValueFilter: {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
@@ -10838,6 +10896,14 @@ export namespace Prisma {
   };
 
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -10902,20 +10968,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'ChallengeType'
-   */
-  export type EnumChallengeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChallengeType'>
-    
-
-
-  /**
-   * Reference to a field of type 'ChallengeType[]'
-   */
-  export type ListEnumChallengeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChallengeType[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -10926,6 +10978,20 @@ export namespace Prisma {
    * Reference to a field of type 'QueryMode'
    */
   export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'ChallengeType'
+   */
+  export type EnumChallengeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChallengeType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ChallengeType[]'
+   */
+  export type ListEnumChallengeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChallengeType[]'>
     
 
 
@@ -10981,6 +11047,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFilter<"User"> | $Enums.AuthProvider
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
+    bio?: StringNullableFilter<"User"> | string | null
+    location?: StringNullableFilter<"User"> | string | null
+    birthDate?: DateTimeNullableFilter<"User"> | Date | string | null
+    phoneNumber?: StringNullableFilter<"User"> | string | null
+    socialMediaLinks?: JsonNullableFilter<"User">
     badgesEarned?: BadgeEarnedListRelationFilter
     challengeCompletions?: ChallengeCompletionListRelationFilter
     rewardClaims?: RewardClaimListRelationFilter
@@ -10999,6 +11070,11 @@ export namespace Prisma {
     authProvider?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    bio?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
+    birthDate?: SortOrderInput | SortOrder
+    phoneNumber?: SortOrderInput | SortOrder
+    socialMediaLinks?: SortOrderInput | SortOrder
     badgesEarned?: BadgeEarnedOrderByRelationAggregateInput
     challengeCompletions?: ChallengeCompletionOrderByRelationAggregateInput
     rewardClaims?: RewardClaimOrderByRelationAggregateInput
@@ -11020,6 +11096,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFilter<"User"> | $Enums.AuthProvider
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
+    bio?: StringNullableFilter<"User"> | string | null
+    location?: StringNullableFilter<"User"> | string | null
+    birthDate?: DateTimeNullableFilter<"User"> | Date | string | null
+    phoneNumber?: StringNullableFilter<"User"> | string | null
+    socialMediaLinks?: JsonNullableFilter<"User">
     badgesEarned?: BadgeEarnedListRelationFilter
     challengeCompletions?: ChallengeCompletionListRelationFilter
     rewardClaims?: RewardClaimListRelationFilter
@@ -11038,6 +11119,11 @@ export namespace Prisma {
     authProvider?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    bio?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
+    birthDate?: SortOrderInput | SortOrder
+    phoneNumber?: SortOrderInput | SortOrder
+    socialMediaLinks?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -11059,6 +11145,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderWithAggregatesFilter<"User"> | $Enums.AuthProvider
     firstName?: StringWithAggregatesFilter<"User"> | string
     lastName?: StringWithAggregatesFilter<"User"> | string
+    bio?: StringNullableWithAggregatesFilter<"User"> | string | null
+    location?: StringNullableWithAggregatesFilter<"User"> | string | null
+    birthDate?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    phoneNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
+    socialMediaLinks?: JsonNullableWithAggregatesFilter<"User">
   }
 
   export type ChallengeWhereInput = {
@@ -11521,6 +11612,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
@@ -11539,6 +11635,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
@@ -11557,6 +11658,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
@@ -11575,6 +11681,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
@@ -11593,6 +11704,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type UserUpdateManyMutationInput = {
@@ -11606,6 +11722,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -11619,6 +11740,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ChallengeCreateInput = {
@@ -12143,6 +12269,40 @@ export namespace Prisma {
     not?: NestedEnumAuthProviderFilter<$PrismaModel> | $Enums.AuthProvider
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type BadgeEarnedListRelationFilter = {
     every?: BadgeEarnedWhereInput
     some?: BadgeEarnedWhereInput
@@ -12209,6 +12369,11 @@ export namespace Prisma {
     authProvider?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    bio?: SortOrder
+    location?: SortOrder
+    birthDate?: SortOrder
+    phoneNumber?: SortOrder
+    socialMediaLinks?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -12227,6 +12392,10 @@ export namespace Prisma {
     authProvider?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    bio?: SortOrder
+    location?: SortOrder
+    birthDate?: SortOrder
+    phoneNumber?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -12240,6 +12409,10 @@ export namespace Prisma {
     authProvider?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    bio?: SortOrder
+    location?: SortOrder
+    birthDate?: SortOrder
+    phoneNumber?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -12323,20 +12496,27 @@ export namespace Prisma {
     _max?: NestedEnumAuthProviderFilter<$PrismaModel>
   }
 
-  export type EnumChallengeTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.ChallengeType | EnumChallengeTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumChallengeTypeFilter<$PrismaModel> | $Enums.ChallengeType
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
-  export type JsonNullableFilter<$PrismaModel = never> =
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
-        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableFilterBase<$PrismaModel>>
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
 
-  export type JsonNullableFilterBase<$PrismaModel = never> = {
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
     path?: string[]
     mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
@@ -12351,6 +12531,16 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type EnumChallengeTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ChallengeType | EnumChallengeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumChallengeTypeFilter<$PrismaModel> | $Enums.ChallengeType
   }
 
   export type UserScalarRelationFilter = {
@@ -12419,32 +12609,6 @@ export namespace Prisma {
     _min?: NestedEnumChallengeTypeFilter<$PrismaModel>
     _max?: NestedEnumChallengeTypeFilter<$PrismaModel>
   }
-  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedJsonNullableFilter<$PrismaModel>
-    _max?: NestedJsonNullableFilter<$PrismaModel>
-  }
 
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
@@ -12504,17 +12668,6 @@ export namespace Prisma {
     not?: NestedEnumProgressStatusFilter<$PrismaModel> | $Enums.ProgressStatus
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type ChallengeCompletionCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -12561,20 +12714,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumProgressStatusFilter<$PrismaModel>
     _max?: NestedEnumProgressStatusFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type BadgeScalarRelationFilter = {
@@ -12783,6 +12922,10 @@ export namespace Prisma {
 
   export type EnumAuthProviderFieldUpdateOperationsInput = {
     set?: $Enums.AuthProvider
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type BadgeEarnedUpdateManyWithoutUserNestedInput = {
@@ -12999,10 +13142,6 @@ export namespace Prisma {
     set?: $Enums.ProgressStatus
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type UserUpdateOneRequiredWithoutChallengeCompletionsNestedInput = {
     create?: XOR<UserCreateWithoutChallengeCompletionsInput, UserUncheckedCreateWithoutChallengeCompletionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutChallengeCompletionsInput
@@ -13180,6 +13319,17 @@ export namespace Prisma {
     not?: NestedEnumAuthProviderFilter<$PrismaModel> | $Enums.AuthProvider
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -13276,21 +13426,18 @@ export namespace Prisma {
     _max?: NestedEnumAuthProviderFilter<$PrismaModel>
   }
 
-  export type NestedEnumChallengeTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.ChallengeType | EnumChallengeTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumChallengeTypeFilter<$PrismaModel> | $Enums.ChallengeType
-  }
-
-  export type NestedEnumChallengeTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ChallengeType | EnumChallengeTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumChallengeTypeWithAggregatesFilter<$PrismaModel> | $Enums.ChallengeType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumChallengeTypeFilter<$PrismaModel>
-    _max?: NestedEnumChallengeTypeFilter<$PrismaModel>
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -13316,6 +13463,23 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedEnumChallengeTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ChallengeType | EnumChallengeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumChallengeTypeFilter<$PrismaModel> | $Enums.ChallengeType
+  }
+
+  export type NestedEnumChallengeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ChallengeType | EnumChallengeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumChallengeTypeWithAggregatesFilter<$PrismaModel> | $Enums.ChallengeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumChallengeTypeFilter<$PrismaModel>
+    _max?: NestedEnumChallengeTypeFilter<$PrismaModel>
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -13336,17 +13500,6 @@ export namespace Prisma {
     not?: NestedEnumProgressStatusFilter<$PrismaModel> | $Enums.ProgressStatus
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedEnumProgressStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ProgressStatus | EnumProgressStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ProgressStatus[] | ListEnumProgressStatusFieldRefInput<$PrismaModel>
@@ -13355,20 +13508,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumProgressStatusFilter<$PrismaModel>
     _max?: NestedEnumProgressStatusFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type BadgeEarnedCreateWithoutUserInput = {
@@ -13655,6 +13794,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
@@ -13672,6 +13816,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
@@ -13705,6 +13854,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
@@ -13722,6 +13876,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
@@ -13777,6 +13936,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutUserInput
@@ -13794,6 +13958,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
@@ -13827,6 +13996,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutUserNestedInput
@@ -13844,6 +14018,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
@@ -13886,6 +14065,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutUserInput
@@ -13903,6 +14087,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
@@ -13967,6 +14156,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutUserNestedInput
@@ -13984,6 +14178,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
@@ -14064,6 +14263,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutUserInput
@@ -14081,6 +14285,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
@@ -14145,6 +14354,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutUserNestedInput
@@ -14162,6 +14376,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
@@ -14179,6 +14398,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
@@ -14196,6 +14420,11 @@ export namespace Prisma {
     authProvider?: $Enums.AuthProvider
     firstName: string
     lastName: string
+    bio?: string | null
+    location?: string | null
+    birthDate?: Date | string | null
+    phoneNumber?: string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
     rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
@@ -14229,6 +14458,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
@@ -14246,6 +14480,11 @@ export namespace Prisma {
     authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
     rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput

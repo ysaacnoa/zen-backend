@@ -130,7 +130,12 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt',
   authProvider: 'authProvider',
   firstName: 'firstName',
-  lastName: 'lastName'
+  lastName: 'lastName',
+  bio: 'bio',
+  location: 'location',
+  birthDate: 'birthDate',
+  phoneNumber: 'phoneNumber',
+  socialMediaLinks: 'socialMediaLinks'
 };
 
 exports.Prisma.ChallengeScalarFieldEnum = {
@@ -214,15 +219,15 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 exports.AuthProvider = exports.$Enums.AuthProvider = {
   EMAIL: 'EMAIL',
