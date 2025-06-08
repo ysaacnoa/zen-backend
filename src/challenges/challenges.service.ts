@@ -16,14 +16,126 @@ interface GeneratedChallenge {
 
 @Injectable()
 export class ChallengesService {
+  private readonly HOURS_TO_REACTIVATE = 24;
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly iaService: IaService,
   ) {}
 
+  async completeChallenge(
+    userId: string,
+    challengeId: string,
+    metadata?: Record<string, any>[],
+  ) {
+    const challenge = await this.prisma.challenge.findUnique({
+      where: { id: challengeId },
+    });
+
+    if (!challenge) {
+      throw new Error('Challenge not found');
+    }
+
+    if (!challenge.isActive) {
+      throw new Error('Challenge is not active');
+    }
+
+    if (challenge.isCompleted) {
+      throw new Error('Challenge already completed');
+    }
+
+    // Update completion count
+    const updatedChallenge = await this.prisma.challenge.update({
+      where: { id: challengeId },
+      data: {
+        completionCount: { increment: 1 },
+        lastCompletionDate: new Date(),
+        metadata: {
+          set: metadata || [],
+        },
+      },
+    });
+
+    // Check if required completions reached
+    if (
+      updatedChallenge.completionCount >= updatedChallenge.requiredCompletions
+    ) {
+      await this.prisma.challenge.update({
+        where: { id: challengeId },
+        data: {
+          isCompleted: true,
+          isActive: false,
+        },
+      });
+    } else {
+      // Not enough completions yet, deactivate temporarily
+      await this.prisma.challenge.update({
+        where: { id: challengeId },
+        data: {
+          isActive: false,
+        },
+      });
+    }
+
+    // Create completion record
+    const completion = await this.prisma.challengeCompletion.create({
+      data: {
+        userId,
+        challengeId,
+        status: 'COMPLETED',
+        completedAt: new Date(),
+        completionDate: new Date(),
+        currentCompletions: updatedChallenge.completionCount,
+        metadata: metadata || [],
+      },
+    });
+
+    return {
+      challenge: updatedChallenge,
+      completion,
+    };
+  }
+
+  async checkAndReactivateChallenges(userId: string) {
+    const now = new Date();
+    const inactiveChallenges = await this.prisma.challenge.findMany({
+      where: {
+        userId,
+        isActive: false,
+        isCompleted: false,
+        lastCompletionDate: {
+          not: null,
+        },
+      },
+    });
+
+    const promises = inactiveChallenges.map(async (challenge) => {
+      if (challenge.lastCompletionDate) {
+        const hoursSinceCompletion =
+          (now.getTime() - challenge.lastCompletionDate.getTime()) /
+          (1000 * 60 * 60);
+
+        if (hoursSinceCompletion >= this.HOURS_TO_REACTIVATE) {
+          return this.prisma.challenge.update({
+            where: { id: challenge.id },
+            data: { isActive: true },
+          });
+        }
+      }
+      return null;
+    });
+
+    const results = await Promise.all(promises);
+    return results.filter((r) => r !== null);
+  }
+
   async create(createChallengeDto: CreateChallengeDto) {
+    const data = {
+      ...createChallengeDto,
+      metadata: createChallengeDto.metadata || [],
+    };
     return await this.prisma.challenge.create({
-      data: createChallengeDto,
+      data,
     });
   }
 
@@ -77,7 +189,9 @@ export class ChallengesService {
             requiredCompletions: challenge.requiredCompletions,
             rewardXp: 10 * challenge.requiredCompletions,
             userId: input.userId,
-            metadata: challenge.metadata,
+            metadata: Array.isArray(challenge.metadata)
+              ? challenge.metadata
+              : [challenge.metadata || {}],
           },
         });
       }),
