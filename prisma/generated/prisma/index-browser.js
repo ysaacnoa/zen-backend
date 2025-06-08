@@ -149,7 +149,10 @@ exports.Prisma.ChallengeScalarFieldEnum = {
   type: 'type',
   completionCount: 'completionCount',
   userId: 'userId',
-  metadata: 'metadata'
+  metadata: 'metadata',
+  isActive: 'isActive',
+  lastCompletionDate: 'lastCompletionDate',
+  isCompleted: 'isCompleted'
 };
 
 exports.Prisma.BadgeScalarFieldEnum = {
@@ -169,7 +172,9 @@ exports.Prisma.ChallengeCompletionScalarFieldEnum = {
   status: 'status',
   completedAt: 'completedAt',
   createdAt: 'createdAt',
-  currentCompletions: 'currentCompletions'
+  currentCompletions: 'currentCompletions',
+  metadata: 'metadata',
+  completionDate: 'completionDate'
 };
 
 exports.Prisma.BadgeEarnedScalarFieldEnum = {

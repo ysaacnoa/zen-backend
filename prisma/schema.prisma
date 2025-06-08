@@ -45,7 +45,10 @@ model Challenge {
   type                ChallengeType
   completionCount     Int                   @default(0)
   userId              String
-  metadata            Json?
+  metadata            Json[]                @default([])
+  isActive            Boolean               @default(true)
+  lastCompletionDate  DateTime?
+  isCompleted         Boolean               @default(false)
   user                User                  @relation("ChallengeOwner", fields: [userId], references: [id])
 
   @@map("challenges")
@@ -72,6 +75,8 @@ model ChallengeCompletion {
   completedAt        DateTime?
   createdAt          DateTime       @default(now())
   currentCompletions Int            @default(0)
+  metadata           Json[]         @default([])
+  completionDate     DateTime?
   user               User           @relation("ChallengeCompletions", fields: [userId], references: [id])
 
   @@map("challenge_completions")
