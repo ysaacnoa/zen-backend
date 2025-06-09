@@ -134,7 +134,7 @@ export class IaService {
   Un paciente con los siguientes resultados:
   PHQ-9: ${input.phq9}, GAD-7: ${input.gad7}
   
-  Diseña una lista de 7 tareas terapéuticas semanales para mejorar su bienestar emocional. Las tareas deben estar pensadas para alguien que trabaja en casa (remoto), incorporar hábitos saludables y mindfulness, y deben ser digitalmente comprobables (click, formulario, audio, temporizador o texto).
+  Diseña una lista de 10 tareas terapéuticas semanales para mejorar su bienestar emocional. Las tareas deben est  ar pensadas para alguien que trabaja en casa (remoto), incorporar hábitos saludables y mindfulness, y deben ser digitalmente comprobables (click, formulario, audio, temporizador o texto).
   NOTA: cada type que definas AUDIO, FORM, TEXT, TIMER debe tener sentido con lo que debe hacer el usuario, es decir si es audio, debe enviar un audio, si es form debe responder varias preguntas, si es text, debe escribir una frase corta y si es timer debe cronometrar segun lo propuesto
   por ejemplo si dices Graba un audio repitiendo: 'Estoy a salvo ahora. Esto pasará'. ¡Guárdalo en favoritos! Textéame 'Listo' cuando lo tengas. Tu futuro yo te lo agradecerá 🌈 -> esto es de type "AUDIO" porque debe enviar un audio, borra el textear listo, esto es hackeable ya que puede no evniar audio y al final solo escribir listo, considera ese tipoo de cosas
 
@@ -148,7 +148,7 @@ export class IaService {
       "metadata": { // estructura varía según el tipo:
         // tipo TEXT: { "prompt": "texto de la pregunta/petición" } // deben ser peticiones mindfulness (decir cosas positivas de uno, fortalezas, etc)
         // tipo FORM: { "questions": ["pregunta1", "pregunta2", "pregunta3", "pregunta4"] } // debes abordas otro tipo de preguntas terapeuticas para aliviar estres, ansiedad o instrospeccion etc, parecido pero a la vez disinto al mindfullness ya sabes por algo estamos separandolo en 2 tipos
-        // tipo TIMER: { "seconds": 180 } // tiempo en segundos o el total de segundos que toma el reto propuesto
+        // tipo TIMER: { "seconds": 180, times: [{ keyword: inhala, time: 2 }, {keyword: exhala 4}] } // tiempo en segundos o el total de segundos que toma el reto propuesto, ademas ese campo times, por ejemplo si el ejercicio es inhala exahal se debe indicar la palabra clave y el tiempo de tipo number que se debe hacer, si el reto es ir a caminar un rato, pasar keyword para cierto tiempo como prepara un snack, tiempo 120 segundos, sirvete un te 120 segundos, recuerda que debe ser de tipo number no incluyas la palabra clave segundos, o pued ser mira las ventanas 180 segundos y asi dependiendo de cuanto tiempo se haya pedido dejar la pc.
         // tipo AUDIO: { "prompt": "texto opcional para guiar el audio" } // puedes poner lo que es usuario tenga que repetir en caso pidas que repita algo
         // tipo CLICK: no necesita metadata
       }

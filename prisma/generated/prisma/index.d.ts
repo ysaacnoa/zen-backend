@@ -1555,17 +1555,17 @@ export namespace Prisma {
   export type UserCountOutputType = {
     badgesEarned: number
     challengeCompletions: number
-    rewardClaims: number
     challenges: number
     recommendations: number
+    rewardClaims: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     badgesEarned?: boolean | UserCountOutputTypeCountBadgesEarnedArgs
     challengeCompletions?: boolean | UserCountOutputTypeCountChallengeCompletionsArgs
-    rewardClaims?: boolean | UserCountOutputTypeCountRewardClaimsArgs
     challenges?: boolean | UserCountOutputTypeCountChallengesArgs
     recommendations?: boolean | UserCountOutputTypeCountRecommendationsArgs
+    rewardClaims?: boolean | UserCountOutputTypeCountRewardClaimsArgs
   }
 
   // Custom InputTypes
@@ -1596,13 +1596,6 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountRewardClaimsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RewardClaimWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountChallengesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ChallengeWhereInput
   }
@@ -1612,6 +1605,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountRecommendationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RecommendationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRewardClaimsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RewardClaimWhereInput
   }
 
 
@@ -1715,8 +1715,8 @@ export namespace Prisma {
     firstName: string | null
     lastName: string | null
     bio: string | null
-    location: string | null
     birthDate: Date | null
+    location: string | null
     phoneNumber: string | null
   }
 
@@ -1732,8 +1732,8 @@ export namespace Prisma {
     firstName: string | null
     lastName: string | null
     bio: string | null
-    location: string | null
     birthDate: Date | null
+    location: string | null
     phoneNumber: string | null
   }
 
@@ -1749,8 +1749,8 @@ export namespace Prisma {
     firstName: number
     lastName: number
     bio: number
-    location: number
     birthDate: number
+    location: number
     phoneNumber: number
     socialMediaLinks: number
     _all: number
@@ -1779,8 +1779,8 @@ export namespace Prisma {
     firstName?: true
     lastName?: true
     bio?: true
-    location?: true
     birthDate?: true
+    location?: true
     phoneNumber?: true
   }
 
@@ -1796,8 +1796,8 @@ export namespace Prisma {
     firstName?: true
     lastName?: true
     bio?: true
-    location?: true
     birthDate?: true
+    location?: true
     phoneNumber?: true
   }
 
@@ -1813,8 +1813,8 @@ export namespace Prisma {
     firstName?: true
     lastName?: true
     bio?: true
-    location?: true
     birthDate?: true
+    location?: true
     phoneNumber?: true
     socialMediaLinks?: true
     _all?: true
@@ -1918,8 +1918,8 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio: string | null
-    location: string | null
     birthDate: Date | null
+    location: string | null
     phoneNumber: string | null
     socialMediaLinks: JsonValue | null
     _count: UserCountAggregateOutputType | null
@@ -1955,15 +1955,15 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     bio?: boolean
-    location?: boolean
     birthDate?: boolean
+    location?: boolean
     phoneNumber?: boolean
     socialMediaLinks?: boolean
     badgesEarned?: boolean | User$badgesEarnedArgs<ExtArgs>
     challengeCompletions?: boolean | User$challengeCompletionsArgs<ExtArgs>
-    rewardClaims?: boolean | User$rewardClaimsArgs<ExtArgs>
     challenges?: boolean | User$challengesArgs<ExtArgs>
     recommendations?: boolean | User$recommendationsArgs<ExtArgs>
+    rewardClaims?: boolean | User$rewardClaimsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1979,8 +1979,8 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     bio?: boolean
-    location?: boolean
     birthDate?: boolean
+    location?: boolean
     phoneNumber?: boolean
     socialMediaLinks?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1997,8 +1997,8 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     bio?: boolean
-    location?: boolean
     birthDate?: boolean
+    location?: boolean
     phoneNumber?: boolean
     socialMediaLinks?: boolean
   }, ExtArgs["result"]["user"]>
@@ -2015,19 +2015,19 @@ export namespace Prisma {
     firstName?: boolean
     lastName?: boolean
     bio?: boolean
-    location?: boolean
     birthDate?: boolean
+    location?: boolean
     phoneNumber?: boolean
     socialMediaLinks?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "avatarUrl" | "xp" | "level" | "createdAt" | "updatedAt" | "authProvider" | "firstName" | "lastName" | "bio" | "location" | "birthDate" | "phoneNumber" | "socialMediaLinks", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "avatarUrl" | "xp" | "level" | "createdAt" | "updatedAt" | "authProvider" | "firstName" | "lastName" | "bio" | "birthDate" | "location" | "phoneNumber" | "socialMediaLinks", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     badgesEarned?: boolean | User$badgesEarnedArgs<ExtArgs>
     challengeCompletions?: boolean | User$challengeCompletionsArgs<ExtArgs>
-    rewardClaims?: boolean | User$rewardClaimsArgs<ExtArgs>
     challenges?: boolean | User$challengesArgs<ExtArgs>
     recommendations?: boolean | User$recommendationsArgs<ExtArgs>
+    rewardClaims?: boolean | User$rewardClaimsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2038,9 +2038,9 @@ export namespace Prisma {
     objects: {
       badgesEarned: Prisma.$BadgeEarnedPayload<ExtArgs>[]
       challengeCompletions: Prisma.$ChallengeCompletionPayload<ExtArgs>[]
-      rewardClaims: Prisma.$RewardClaimPayload<ExtArgs>[]
       challenges: Prisma.$ChallengePayload<ExtArgs>[]
       recommendations: Prisma.$RecommendationPayload<ExtArgs>[]
+      rewardClaims: Prisma.$RewardClaimPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2054,8 +2054,8 @@ export namespace Prisma {
       firstName: string
       lastName: string
       bio: string | null
-      location: string | null
       birthDate: Date | null
+      location: string | null
       phoneNumber: string | null
       socialMediaLinks: Prisma.JsonValue | null
     }, ExtArgs["result"]["user"]>
@@ -2454,9 +2454,9 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     badgesEarned<T extends User$badgesEarnedArgs<ExtArgs> = {}>(args?: Subset<T, User$badgesEarnedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BadgeEarnedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     challengeCompletions<T extends User$challengeCompletionsArgs<ExtArgs> = {}>(args?: Subset<T, User$challengeCompletionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengeCompletionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    rewardClaims<T extends User$rewardClaimsArgs<ExtArgs> = {}>(args?: Subset<T, User$rewardClaimsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RewardClaimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     challenges<T extends User$challengesArgs<ExtArgs> = {}>(args?: Subset<T, User$challengesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     recommendations<T extends User$recommendationsArgs<ExtArgs> = {}>(args?: Subset<T, User$recommendationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    rewardClaims<T extends User$rewardClaimsArgs<ExtArgs> = {}>(args?: Subset<T, User$rewardClaimsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RewardClaimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2497,8 +2497,8 @@ export namespace Prisma {
     readonly firstName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
     readonly bio: FieldRef<"User", 'String'>
-    readonly location: FieldRef<"User", 'String'>
     readonly birthDate: FieldRef<"User", 'DateTime'>
+    readonly location: FieldRef<"User", 'String'>
     readonly phoneNumber: FieldRef<"User", 'String'>
     readonly socialMediaLinks: FieldRef<"User", 'Json'>
   }
@@ -2937,30 +2937,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.rewardClaims
-   */
-  export type User$rewardClaimsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RewardClaim
-     */
-    select?: RewardClaimSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the RewardClaim
-     */
-    omit?: RewardClaimOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: RewardClaimInclude<ExtArgs> | null
-    where?: RewardClaimWhereInput
-    orderBy?: RewardClaimOrderByWithRelationInput | RewardClaimOrderByWithRelationInput[]
-    cursor?: RewardClaimWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: RewardClaimScalarFieldEnum | RewardClaimScalarFieldEnum[]
-  }
-
-  /**
    * User.challenges
    */
   export type User$challengesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3006,6 +2982,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RecommendationScalarFieldEnum | RecommendationScalarFieldEnum[]
+  }
+
+  /**
+   * User.rewardClaims
+   */
+  export type User$rewardClaimsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RewardClaim
+     */
+    select?: RewardClaimSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RewardClaim
+     */
+    omit?: RewardClaimOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RewardClaimInclude<ExtArgs> | null
+    where?: RewardClaimWhereInput
+    orderBy?: RewardClaimOrderByWithRelationInput | RewardClaimOrderByWithRelationInput[]
+    cursor?: RewardClaimWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RewardClaimScalarFieldEnum | RewardClaimScalarFieldEnum[]
   }
 
   /**
@@ -3062,6 +3062,9 @@ export namespace Prisma {
     type: $Enums.ChallengeType | null
     completionCount: number | null
     userId: string | null
+    isActive: boolean | null
+    isCompleted: boolean | null
+    lastCompletionDate: Date | null
   }
 
   export type ChallengeMaxAggregateOutputType = {
@@ -3075,6 +3078,9 @@ export namespace Prisma {
     type: $Enums.ChallengeType | null
     completionCount: number | null
     userId: string | null
+    isActive: boolean | null
+    isCompleted: boolean | null
+    lastCompletionDate: Date | null
   }
 
   export type ChallengeCountAggregateOutputType = {
@@ -3088,6 +3094,9 @@ export namespace Prisma {
     type: number
     completionCount: number
     userId: number
+    isActive: number
+    isCompleted: number
+    lastCompletionDate: number
     metadata: number
     _all: number
   }
@@ -3116,6 +3125,9 @@ export namespace Prisma {
     type?: true
     completionCount?: true
     userId?: true
+    isActive?: true
+    isCompleted?: true
+    lastCompletionDate?: true
   }
 
   export type ChallengeMaxAggregateInputType = {
@@ -3129,6 +3141,9 @@ export namespace Prisma {
     type?: true
     completionCount?: true
     userId?: true
+    isActive?: true
+    isCompleted?: true
+    lastCompletionDate?: true
   }
 
   export type ChallengeCountAggregateInputType = {
@@ -3142,6 +3157,9 @@ export namespace Prisma {
     type?: true
     completionCount?: true
     userId?: true
+    isActive?: true
+    isCompleted?: true
+    lastCompletionDate?: true
     metadata?: true
     _all?: true
   }
@@ -3243,6 +3261,9 @@ export namespace Prisma {
     type: $Enums.ChallengeType
     completionCount: number
     userId: string
+    isActive: boolean
+    isCompleted: boolean
+    lastCompletionDate: Date | null
     metadata: JsonValue | null
     _count: ChallengeCountAggregateOutputType | null
     _avg: ChallengeAvgAggregateOutputType | null
@@ -3276,6 +3297,9 @@ export namespace Prisma {
     type?: boolean
     completionCount?: boolean
     userId?: boolean
+    isActive?: boolean
+    isCompleted?: boolean
+    lastCompletionDate?: boolean
     metadata?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["challenge"]>
@@ -3291,6 +3315,9 @@ export namespace Prisma {
     type?: boolean
     completionCount?: boolean
     userId?: boolean
+    isActive?: boolean
+    isCompleted?: boolean
+    lastCompletionDate?: boolean
     metadata?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["challenge"]>
@@ -3306,6 +3333,9 @@ export namespace Prisma {
     type?: boolean
     completionCount?: boolean
     userId?: boolean
+    isActive?: boolean
+    isCompleted?: boolean
+    lastCompletionDate?: boolean
     metadata?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["challenge"]>
@@ -3321,10 +3351,13 @@ export namespace Prisma {
     type?: boolean
     completionCount?: boolean
     userId?: boolean
+    isActive?: boolean
+    isCompleted?: boolean
+    lastCompletionDate?: boolean
     metadata?: boolean
   }
 
-  export type ChallengeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "rewardXp" | "createdAt" | "updatedAt" | "instructions" | "requiredCompletions" | "type" | "completionCount" | "userId" | "metadata", ExtArgs["result"]["challenge"]>
+  export type ChallengeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "rewardXp" | "createdAt" | "updatedAt" | "instructions" | "requiredCompletions" | "type" | "completionCount" | "userId" | "isActive" | "isCompleted" | "lastCompletionDate" | "metadata", ExtArgs["result"]["challenge"]>
   export type ChallengeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3351,6 +3384,9 @@ export namespace Prisma {
       type: $Enums.ChallengeType
       completionCount: number
       userId: string
+      isActive: boolean
+      isCompleted: boolean
+      lastCompletionDate: Date | null
       metadata: Prisma.JsonValue | null
     }, ExtArgs["result"]["challenge"]>
     composites: {}
@@ -3786,6 +3822,9 @@ export namespace Prisma {
     readonly type: FieldRef<"Challenge", 'ChallengeType'>
     readonly completionCount: FieldRef<"Challenge", 'Int'>
     readonly userId: FieldRef<"Challenge", 'String'>
+    readonly isActive: FieldRef<"Challenge", 'Boolean'>
+    readonly isCompleted: FieldRef<"Challenge", 'Boolean'>
+    readonly lastCompletionDate: FieldRef<"Challenge", 'DateTime'>
     readonly metadata: FieldRef<"Challenge", 'Json'>
   }
     
@@ -5359,6 +5398,7 @@ export namespace Prisma {
     completedAt: Date | null
     createdAt: Date | null
     currentCompletions: number | null
+    type: $Enums.ChallengeType | null
   }
 
   export type ChallengeCompletionMaxAggregateOutputType = {
@@ -5369,6 +5409,7 @@ export namespace Prisma {
     completedAt: Date | null
     createdAt: Date | null
     currentCompletions: number | null
+    type: $Enums.ChallengeType | null
   }
 
   export type ChallengeCompletionCountAggregateOutputType = {
@@ -5379,6 +5420,8 @@ export namespace Prisma {
     completedAt: number
     createdAt: number
     currentCompletions: number
+    metadata: number
+    type: number
     _all: number
   }
 
@@ -5399,6 +5442,7 @@ export namespace Prisma {
     completedAt?: true
     createdAt?: true
     currentCompletions?: true
+    type?: true
   }
 
   export type ChallengeCompletionMaxAggregateInputType = {
@@ -5409,6 +5453,7 @@ export namespace Prisma {
     completedAt?: true
     createdAt?: true
     currentCompletions?: true
+    type?: true
   }
 
   export type ChallengeCompletionCountAggregateInputType = {
@@ -5419,6 +5464,8 @@ export namespace Prisma {
     completedAt?: true
     createdAt?: true
     currentCompletions?: true
+    metadata?: true
+    type?: true
     _all?: true
   }
 
@@ -5516,6 +5563,8 @@ export namespace Prisma {
     completedAt: Date | null
     createdAt: Date
     currentCompletions: number
+    metadata: JsonValue[]
+    type: $Enums.ChallengeType | null
     _count: ChallengeCompletionCountAggregateOutputType | null
     _avg: ChallengeCompletionAvgAggregateOutputType | null
     _sum: ChallengeCompletionSumAggregateOutputType | null
@@ -5545,6 +5594,8 @@ export namespace Prisma {
     completedAt?: boolean
     createdAt?: boolean
     currentCompletions?: boolean
+    metadata?: boolean
+    type?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["challengeCompletion"]>
 
@@ -5556,6 +5607,8 @@ export namespace Prisma {
     completedAt?: boolean
     createdAt?: boolean
     currentCompletions?: boolean
+    metadata?: boolean
+    type?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["challengeCompletion"]>
 
@@ -5567,6 +5620,8 @@ export namespace Prisma {
     completedAt?: boolean
     createdAt?: boolean
     currentCompletions?: boolean
+    metadata?: boolean
+    type?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["challengeCompletion"]>
 
@@ -5578,9 +5633,11 @@ export namespace Prisma {
     completedAt?: boolean
     createdAt?: boolean
     currentCompletions?: boolean
+    metadata?: boolean
+    type?: boolean
   }
 
-  export type ChallengeCompletionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "challengeId" | "status" | "completedAt" | "createdAt" | "currentCompletions", ExtArgs["result"]["challengeCompletion"]>
+  export type ChallengeCompletionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "challengeId" | "status" | "completedAt" | "createdAt" | "currentCompletions" | "metadata" | "type", ExtArgs["result"]["challengeCompletion"]>
   export type ChallengeCompletionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5604,6 +5661,8 @@ export namespace Prisma {
       completedAt: Date | null
       createdAt: Date
       currentCompletions: number
+      metadata: Prisma.JsonValue[]
+      type: $Enums.ChallengeType | null
     }, ExtArgs["result"]["challengeCompletion"]>
     composites: {}
   }
@@ -6035,6 +6094,8 @@ export namespace Prisma {
     readonly completedAt: FieldRef<"ChallengeCompletion", 'DateTime'>
     readonly createdAt: FieldRef<"ChallengeCompletion", 'DateTime'>
     readonly currentCompletions: FieldRef<"ChallengeCompletion", 'Int'>
+    readonly metadata: FieldRef<"ChallengeCompletion", 'Json[]'>
+    readonly type: FieldRef<"ChallengeCompletion", 'ChallengeType'>
   }
     
 
@@ -10769,8 +10830,8 @@ export namespace Prisma {
     firstName: 'firstName',
     lastName: 'lastName',
     bio: 'bio',
-    location: 'location',
     birthDate: 'birthDate',
+    location: 'location',
     phoneNumber: 'phoneNumber',
     socialMediaLinks: 'socialMediaLinks'
   };
@@ -10789,6 +10850,9 @@ export namespace Prisma {
     type: 'type',
     completionCount: 'completionCount',
     userId: 'userId',
+    isActive: 'isActive',
+    isCompleted: 'isCompleted',
+    lastCompletionDate: 'lastCompletionDate',
     metadata: 'metadata'
   };
 
@@ -10815,7 +10879,9 @@ export namespace Prisma {
     status: 'status',
     completedAt: 'completedAt',
     createdAt: 'createdAt',
-    currentCompletions: 'currentCompletions'
+    currentCompletions: 'currentCompletions',
+    metadata: 'metadata',
+    type: 'type'
   };
 
   export type ChallengeCompletionScalarFieldEnum = (typeof ChallengeCompletionScalarFieldEnum)[keyof typeof ChallengeCompletionScalarFieldEnum]
@@ -11017,6 +11083,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Json[]'
+   */
+  export type ListJsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -11048,15 +11121,15 @@ export namespace Prisma {
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
     bio?: StringNullableFilter<"User"> | string | null
-    location?: StringNullableFilter<"User"> | string | null
     birthDate?: DateTimeNullableFilter<"User"> | Date | string | null
+    location?: StringNullableFilter<"User"> | string | null
     phoneNumber?: StringNullableFilter<"User"> | string | null
     socialMediaLinks?: JsonNullableFilter<"User">
     badgesEarned?: BadgeEarnedListRelationFilter
     challengeCompletions?: ChallengeCompletionListRelationFilter
-    rewardClaims?: RewardClaimListRelationFilter
     challenges?: ChallengeListRelationFilter
     recommendations?: RecommendationListRelationFilter
+    rewardClaims?: RewardClaimListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11071,15 +11144,15 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     bio?: SortOrderInput | SortOrder
-    location?: SortOrderInput | SortOrder
     birthDate?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
     phoneNumber?: SortOrderInput | SortOrder
     socialMediaLinks?: SortOrderInput | SortOrder
     badgesEarned?: BadgeEarnedOrderByRelationAggregateInput
     challengeCompletions?: ChallengeCompletionOrderByRelationAggregateInput
-    rewardClaims?: RewardClaimOrderByRelationAggregateInput
     challenges?: ChallengeOrderByRelationAggregateInput
     recommendations?: RecommendationOrderByRelationAggregateInput
+    rewardClaims?: RewardClaimOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11097,15 +11170,15 @@ export namespace Prisma {
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
     bio?: StringNullableFilter<"User"> | string | null
-    location?: StringNullableFilter<"User"> | string | null
     birthDate?: DateTimeNullableFilter<"User"> | Date | string | null
+    location?: StringNullableFilter<"User"> | string | null
     phoneNumber?: StringNullableFilter<"User"> | string | null
     socialMediaLinks?: JsonNullableFilter<"User">
     badgesEarned?: BadgeEarnedListRelationFilter
     challengeCompletions?: ChallengeCompletionListRelationFilter
-    rewardClaims?: RewardClaimListRelationFilter
     challenges?: ChallengeListRelationFilter
     recommendations?: RecommendationListRelationFilter
+    rewardClaims?: RewardClaimListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -11120,8 +11193,8 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     bio?: SortOrderInput | SortOrder
-    location?: SortOrderInput | SortOrder
     birthDate?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
     phoneNumber?: SortOrderInput | SortOrder
     socialMediaLinks?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -11146,8 +11219,8 @@ export namespace Prisma {
     firstName?: StringWithAggregatesFilter<"User"> | string
     lastName?: StringWithAggregatesFilter<"User"> | string
     bio?: StringNullableWithAggregatesFilter<"User"> | string | null
-    location?: StringNullableWithAggregatesFilter<"User"> | string | null
     birthDate?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    location?: StringNullableWithAggregatesFilter<"User"> | string | null
     phoneNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
     socialMediaLinks?: JsonNullableWithAggregatesFilter<"User">
   }
@@ -11166,6 +11239,9 @@ export namespace Prisma {
     type?: EnumChallengeTypeFilter<"Challenge"> | $Enums.ChallengeType
     completionCount?: IntFilter<"Challenge"> | number
     userId?: StringFilter<"Challenge"> | string
+    isActive?: BoolFilter<"Challenge"> | boolean
+    isCompleted?: BoolFilter<"Challenge"> | boolean
+    lastCompletionDate?: DateTimeNullableFilter<"Challenge"> | Date | string | null
     metadata?: JsonNullableFilter<"Challenge">
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -11181,6 +11257,9 @@ export namespace Prisma {
     type?: SortOrder
     completionCount?: SortOrder
     userId?: SortOrder
+    isActive?: SortOrder
+    isCompleted?: SortOrder
+    lastCompletionDate?: SortOrderInput | SortOrder
     metadata?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -11199,6 +11278,9 @@ export namespace Prisma {
     type?: EnumChallengeTypeFilter<"Challenge"> | $Enums.ChallengeType
     completionCount?: IntFilter<"Challenge"> | number
     userId?: StringFilter<"Challenge"> | string
+    isActive?: BoolFilter<"Challenge"> | boolean
+    isCompleted?: BoolFilter<"Challenge"> | boolean
+    lastCompletionDate?: DateTimeNullableFilter<"Challenge"> | Date | string | null
     metadata?: JsonNullableFilter<"Challenge">
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -11214,6 +11296,9 @@ export namespace Prisma {
     type?: SortOrder
     completionCount?: SortOrder
     userId?: SortOrder
+    isActive?: SortOrder
+    isCompleted?: SortOrder
+    lastCompletionDate?: SortOrderInput | SortOrder
     metadata?: SortOrderInput | SortOrder
     _count?: ChallengeCountOrderByAggregateInput
     _avg?: ChallengeAvgOrderByAggregateInput
@@ -11236,6 +11321,9 @@ export namespace Prisma {
     type?: EnumChallengeTypeWithAggregatesFilter<"Challenge"> | $Enums.ChallengeType
     completionCount?: IntWithAggregatesFilter<"Challenge"> | number
     userId?: StringWithAggregatesFilter<"Challenge"> | string
+    isActive?: BoolWithAggregatesFilter<"Challenge"> | boolean
+    isCompleted?: BoolWithAggregatesFilter<"Challenge"> | boolean
+    lastCompletionDate?: DateTimeNullableWithAggregatesFilter<"Challenge"> | Date | string | null
     metadata?: JsonNullableWithAggregatesFilter<"Challenge">
   }
 
@@ -11317,6 +11405,8 @@ export namespace Prisma {
     completedAt?: DateTimeNullableFilter<"ChallengeCompletion"> | Date | string | null
     createdAt?: DateTimeFilter<"ChallengeCompletion"> | Date | string
     currentCompletions?: IntFilter<"ChallengeCompletion"> | number
+    metadata?: JsonNullableListFilter<"ChallengeCompletion">
+    type?: EnumChallengeTypeNullableFilter<"ChallengeCompletion"> | $Enums.ChallengeType | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -11328,11 +11418,14 @@ export namespace Prisma {
     completedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     currentCompletions?: SortOrder
+    metadata?: SortOrder
+    type?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
   export type ChallengeCompletionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    userId_challengeId?: ChallengeCompletionUserIdChallengeIdCompoundUniqueInput
     AND?: ChallengeCompletionWhereInput | ChallengeCompletionWhereInput[]
     OR?: ChallengeCompletionWhereInput[]
     NOT?: ChallengeCompletionWhereInput | ChallengeCompletionWhereInput[]
@@ -11342,8 +11435,10 @@ export namespace Prisma {
     completedAt?: DateTimeNullableFilter<"ChallengeCompletion"> | Date | string | null
     createdAt?: DateTimeFilter<"ChallengeCompletion"> | Date | string
     currentCompletions?: IntFilter<"ChallengeCompletion"> | number
+    metadata?: JsonNullableListFilter<"ChallengeCompletion">
+    type?: EnumChallengeTypeNullableFilter<"ChallengeCompletion"> | $Enums.ChallengeType | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "userId_challengeId">
 
   export type ChallengeCompletionOrderByWithAggregationInput = {
     id?: SortOrder
@@ -11353,6 +11448,8 @@ export namespace Prisma {
     completedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     currentCompletions?: SortOrder
+    metadata?: SortOrder
+    type?: SortOrderInput | SortOrder
     _count?: ChallengeCompletionCountOrderByAggregateInput
     _avg?: ChallengeCompletionAvgOrderByAggregateInput
     _max?: ChallengeCompletionMaxOrderByAggregateInput
@@ -11371,6 +11468,8 @@ export namespace Prisma {
     completedAt?: DateTimeNullableWithAggregatesFilter<"ChallengeCompletion"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ChallengeCompletion"> | Date | string
     currentCompletions?: IntWithAggregatesFilter<"ChallengeCompletion"> | number
+    metadata?: JsonNullableListFilter<"ChallengeCompletion">
+    type?: EnumChallengeTypeNullableWithAggregatesFilter<"ChallengeCompletion"> | $Enums.ChallengeType | null
   }
 
   export type BadgeEarnedWhereInput = {
@@ -11613,15 +11712,15 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
-    rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutUserInput
     recommendations?: RecommendationCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11636,15 +11735,15 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
-    rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
     recommendations?: RecommendationUncheckedCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -11659,15 +11758,15 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
-    rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutUserNestedInput
     recommendations?: RecommendationUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -11682,15 +11781,15 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
-    rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
     recommendations?: RecommendationUncheckedUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -11705,8 +11804,8 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
   }
@@ -11723,8 +11822,8 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
   }
@@ -11741,8 +11840,8 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
   }
@@ -11757,6 +11856,9 @@ export namespace Prisma {
     requiredCompletions?: number
     type: $Enums.ChallengeType
     completionCount?: number
+    isActive?: boolean
+    isCompleted?: boolean
+    lastCompletionDate?: Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     user: UserCreateNestedOneWithoutChallengesInput
   }
@@ -11772,6 +11874,9 @@ export namespace Prisma {
     type: $Enums.ChallengeType
     completionCount?: number
     userId: string
+    isActive?: boolean
+    isCompleted?: boolean
+    lastCompletionDate?: Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -11785,6 +11890,9 @@ export namespace Prisma {
     requiredCompletions?: IntFieldUpdateOperationsInput | number
     type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
     completionCount?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    lastCompletionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     user?: UserUpdateOneRequiredWithoutChallengesNestedInput
   }
@@ -11800,6 +11908,9 @@ export namespace Prisma {
     type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
     completionCount?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    lastCompletionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -11814,6 +11925,9 @@ export namespace Prisma {
     type: $Enums.ChallengeType
     completionCount?: number
     userId: string
+    isActive?: boolean
+    isCompleted?: boolean
+    lastCompletionDate?: Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -11827,6 +11941,9 @@ export namespace Prisma {
     requiredCompletions?: IntFieldUpdateOperationsInput | number
     type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
     completionCount?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    lastCompletionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -11841,6 +11958,9 @@ export namespace Prisma {
     type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
     completionCount?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    lastCompletionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -11925,6 +12045,8 @@ export namespace Prisma {
     completedAt?: Date | string | null
     createdAt?: Date | string
     currentCompletions?: number
+    metadata?: ChallengeCompletionCreatemetadataInput | InputJsonValue[]
+    type?: $Enums.ChallengeType | null
     user: UserCreateNestedOneWithoutChallengeCompletionsInput
   }
 
@@ -11936,6 +12058,8 @@ export namespace Prisma {
     completedAt?: Date | string | null
     createdAt?: Date | string
     currentCompletions?: number
+    metadata?: ChallengeCompletionCreatemetadataInput | InputJsonValue[]
+    type?: $Enums.ChallengeType | null
   }
 
   export type ChallengeCompletionUpdateInput = {
@@ -11945,6 +12069,8 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     currentCompletions?: IntFieldUpdateOperationsInput | number
+    metadata?: ChallengeCompletionUpdatemetadataInput | InputJsonValue[]
+    type?: NullableEnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType | null
     user?: UserUpdateOneRequiredWithoutChallengeCompletionsNestedInput
   }
 
@@ -11956,6 +12082,8 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     currentCompletions?: IntFieldUpdateOperationsInput | number
+    metadata?: ChallengeCompletionUpdatemetadataInput | InputJsonValue[]
+    type?: NullableEnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType | null
   }
 
   export type ChallengeCompletionCreateManyInput = {
@@ -11966,6 +12094,8 @@ export namespace Prisma {
     completedAt?: Date | string | null
     createdAt?: Date | string
     currentCompletions?: number
+    metadata?: ChallengeCompletionCreatemetadataInput | InputJsonValue[]
+    type?: $Enums.ChallengeType | null
   }
 
   export type ChallengeCompletionUpdateManyMutationInput = {
@@ -11975,6 +12105,8 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     currentCompletions?: IntFieldUpdateOperationsInput | number
+    metadata?: ChallengeCompletionUpdatemetadataInput | InputJsonValue[]
+    type?: NullableEnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType | null
   }
 
   export type ChallengeCompletionUncheckedUpdateManyInput = {
@@ -11985,6 +12117,8 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     currentCompletions?: IntFieldUpdateOperationsInput | number
+    metadata?: ChallengeCompletionUpdatemetadataInput | InputJsonValue[]
+    type?: NullableEnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType | null
   }
 
   export type BadgeEarnedCreateInput = {
@@ -12315,12 +12449,6 @@ export namespace Prisma {
     none?: ChallengeCompletionWhereInput
   }
 
-  export type RewardClaimListRelationFilter = {
-    every?: RewardClaimWhereInput
-    some?: RewardClaimWhereInput
-    none?: RewardClaimWhereInput
-  }
-
   export type ChallengeListRelationFilter = {
     every?: ChallengeWhereInput
     some?: ChallengeWhereInput
@@ -12331,6 +12459,12 @@ export namespace Prisma {
     every?: RecommendationWhereInput
     some?: RecommendationWhereInput
     none?: RecommendationWhereInput
+  }
+
+  export type RewardClaimListRelationFilter = {
+    every?: RewardClaimWhereInput
+    some?: RewardClaimWhereInput
+    none?: RewardClaimWhereInput
   }
 
   export type SortOrderInput = {
@@ -12346,15 +12480,15 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type RewardClaimOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type ChallengeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type RecommendationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RewardClaimOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12370,8 +12504,8 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     bio?: SortOrder
-    location?: SortOrder
     birthDate?: SortOrder
+    location?: SortOrder
     phoneNumber?: SortOrder
     socialMediaLinks?: SortOrder
   }
@@ -12393,8 +12527,8 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     bio?: SortOrder
-    location?: SortOrder
     birthDate?: SortOrder
+    location?: SortOrder
     phoneNumber?: SortOrder
   }
 
@@ -12410,8 +12544,8 @@ export namespace Prisma {
     firstName?: SortOrder
     lastName?: SortOrder
     bio?: SortOrder
-    location?: SortOrder
     birthDate?: SortOrder
+    location?: SortOrder
     phoneNumber?: SortOrder
   }
 
@@ -12543,6 +12677,11 @@ export namespace Prisma {
     not?: NestedEnumChallengeTypeFilter<$PrismaModel> | $Enums.ChallengeType
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -12559,6 +12698,9 @@ export namespace Prisma {
     type?: SortOrder
     completionCount?: SortOrder
     userId?: SortOrder
+    isActive?: SortOrder
+    isCompleted?: SortOrder
+    lastCompletionDate?: SortOrder
     metadata?: SortOrder
   }
 
@@ -12579,6 +12721,9 @@ export namespace Prisma {
     type?: SortOrder
     completionCount?: SortOrder
     userId?: SortOrder
+    isActive?: SortOrder
+    isCompleted?: SortOrder
+    lastCompletionDate?: SortOrder
   }
 
   export type ChallengeMinOrderByAggregateInput = {
@@ -12592,6 +12737,9 @@ export namespace Prisma {
     type?: SortOrder
     completionCount?: SortOrder
     userId?: SortOrder
+    isActive?: SortOrder
+    isCompleted?: SortOrder
+    lastCompletionDate?: SortOrder
   }
 
   export type ChallengeSumOrderByAggregateInput = {
@@ -12610,9 +12758,12 @@ export namespace Prisma {
     _max?: NestedEnumChallengeTypeFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type BadgeCountOrderByAggregateInput = {
@@ -12653,19 +12804,37 @@ export namespace Prisma {
     xpRequired?: SortOrder
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type EnumProgressStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ProgressStatus | EnumProgressStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ProgressStatus[] | ListEnumProgressStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.ProgressStatus[] | ListEnumProgressStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumProgressStatusFilter<$PrismaModel> | $Enums.ProgressStatus
+  }
+  export type JsonNullableListFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableListFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableListFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableListFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableListFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableListFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue[] | ListJsonFieldRefInput<$PrismaModel> | null
+    has?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    hasEvery?: InputJsonValue[] | ListJsonFieldRefInput<$PrismaModel>
+    hasSome?: InputJsonValue[] | ListJsonFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type EnumChallengeTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ChallengeType | EnumChallengeTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumChallengeTypeNullableFilter<$PrismaModel> | $Enums.ChallengeType | null
+  }
+
+  export type ChallengeCompletionUserIdChallengeIdCompoundUniqueInput = {
+    userId: string
+    challengeId: string
   }
 
   export type ChallengeCompletionCountOrderByAggregateInput = {
@@ -12676,6 +12845,8 @@ export namespace Prisma {
     completedAt?: SortOrder
     createdAt?: SortOrder
     currentCompletions?: SortOrder
+    metadata?: SortOrder
+    type?: SortOrder
   }
 
   export type ChallengeCompletionAvgOrderByAggregateInput = {
@@ -12690,6 +12861,7 @@ export namespace Prisma {
     completedAt?: SortOrder
     createdAt?: SortOrder
     currentCompletions?: SortOrder
+    type?: SortOrder
   }
 
   export type ChallengeCompletionMinOrderByAggregateInput = {
@@ -12700,6 +12872,7 @@ export namespace Prisma {
     completedAt?: SortOrder
     createdAt?: SortOrder
     currentCompletions?: SortOrder
+    type?: SortOrder
   }
 
   export type ChallengeCompletionSumOrderByAggregateInput = {
@@ -12714,6 +12887,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumProgressStatusFilter<$PrismaModel>
     _max?: NestedEnumProgressStatusFilter<$PrismaModel>
+  }
+
+  export type EnumChallengeTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ChallengeType | EnumChallengeTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumChallengeTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.ChallengeType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumChallengeTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumChallengeTypeNullableFilter<$PrismaModel>
   }
 
   export type BadgeScalarRelationFilter = {
@@ -12844,13 +13027,6 @@ export namespace Prisma {
     connect?: ChallengeCompletionWhereUniqueInput | ChallengeCompletionWhereUniqueInput[]
   }
 
-  export type RewardClaimCreateNestedManyWithoutUserInput = {
-    create?: XOR<RewardClaimCreateWithoutUserInput, RewardClaimUncheckedCreateWithoutUserInput> | RewardClaimCreateWithoutUserInput[] | RewardClaimUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RewardClaimCreateOrConnectWithoutUserInput | RewardClaimCreateOrConnectWithoutUserInput[]
-    createMany?: RewardClaimCreateManyUserInputEnvelope
-    connect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
-  }
-
   export type ChallengeCreateNestedManyWithoutUserInput = {
     create?: XOR<ChallengeCreateWithoutUserInput, ChallengeUncheckedCreateWithoutUserInput> | ChallengeCreateWithoutUserInput[] | ChallengeUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChallengeCreateOrConnectWithoutUserInput | ChallengeCreateOrConnectWithoutUserInput[]
@@ -12863,6 +13039,13 @@ export namespace Prisma {
     connectOrCreate?: RecommendationCreateOrConnectWithoutUserInput | RecommendationCreateOrConnectWithoutUserInput[]
     createMany?: RecommendationCreateManyUserInputEnvelope
     connect?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
+  }
+
+  export type RewardClaimCreateNestedManyWithoutUserInput = {
+    create?: XOR<RewardClaimCreateWithoutUserInput, RewardClaimUncheckedCreateWithoutUserInput> | RewardClaimCreateWithoutUserInput[] | RewardClaimUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RewardClaimCreateOrConnectWithoutUserInput | RewardClaimCreateOrConnectWithoutUserInput[]
+    createMany?: RewardClaimCreateManyUserInputEnvelope
+    connect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
   }
 
   export type BadgeEarnedUncheckedCreateNestedManyWithoutUserInput = {
@@ -12879,13 +13062,6 @@ export namespace Prisma {
     connect?: ChallengeCompletionWhereUniqueInput | ChallengeCompletionWhereUniqueInput[]
   }
 
-  export type RewardClaimUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<RewardClaimCreateWithoutUserInput, RewardClaimUncheckedCreateWithoutUserInput> | RewardClaimCreateWithoutUserInput[] | RewardClaimUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RewardClaimCreateOrConnectWithoutUserInput | RewardClaimCreateOrConnectWithoutUserInput[]
-    createMany?: RewardClaimCreateManyUserInputEnvelope
-    connect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
-  }
-
   export type ChallengeUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ChallengeCreateWithoutUserInput, ChallengeUncheckedCreateWithoutUserInput> | ChallengeCreateWithoutUserInput[] | ChallengeUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChallengeCreateOrConnectWithoutUserInput | ChallengeCreateOrConnectWithoutUserInput[]
@@ -12898,6 +13074,13 @@ export namespace Prisma {
     connectOrCreate?: RecommendationCreateOrConnectWithoutUserInput | RecommendationCreateOrConnectWithoutUserInput[]
     createMany?: RecommendationCreateManyUserInputEnvelope
     connect?: RecommendationWhereUniqueInput | RecommendationWhereUniqueInput[]
+  }
+
+  export type RewardClaimUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RewardClaimCreateWithoutUserInput, RewardClaimUncheckedCreateWithoutUserInput> | RewardClaimCreateWithoutUserInput[] | RewardClaimUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RewardClaimCreateOrConnectWithoutUserInput | RewardClaimCreateOrConnectWithoutUserInput[]
+    createMany?: RewardClaimCreateManyUserInputEnvelope
+    connect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -12956,20 +13139,6 @@ export namespace Prisma {
     deleteMany?: ChallengeCompletionScalarWhereInput | ChallengeCompletionScalarWhereInput[]
   }
 
-  export type RewardClaimUpdateManyWithoutUserNestedInput = {
-    create?: XOR<RewardClaimCreateWithoutUserInput, RewardClaimUncheckedCreateWithoutUserInput> | RewardClaimCreateWithoutUserInput[] | RewardClaimUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RewardClaimCreateOrConnectWithoutUserInput | RewardClaimCreateOrConnectWithoutUserInput[]
-    upsert?: RewardClaimUpsertWithWhereUniqueWithoutUserInput | RewardClaimUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: RewardClaimCreateManyUserInputEnvelope
-    set?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
-    disconnect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
-    delete?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
-    connect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
-    update?: RewardClaimUpdateWithWhereUniqueWithoutUserInput | RewardClaimUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: RewardClaimUpdateManyWithWhereWithoutUserInput | RewardClaimUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: RewardClaimScalarWhereInput | RewardClaimScalarWhereInput[]
-  }
-
   export type ChallengeUpdateManyWithoutUserNestedInput = {
     create?: XOR<ChallengeCreateWithoutUserInput, ChallengeUncheckedCreateWithoutUserInput> | ChallengeCreateWithoutUserInput[] | ChallengeUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChallengeCreateOrConnectWithoutUserInput | ChallengeCreateOrConnectWithoutUserInput[]
@@ -12996,6 +13165,20 @@ export namespace Prisma {
     update?: RecommendationUpdateWithWhereUniqueWithoutUserInput | RecommendationUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: RecommendationUpdateManyWithWhereWithoutUserInput | RecommendationUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: RecommendationScalarWhereInput | RecommendationScalarWhereInput[]
+  }
+
+  export type RewardClaimUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RewardClaimCreateWithoutUserInput, RewardClaimUncheckedCreateWithoutUserInput> | RewardClaimCreateWithoutUserInput[] | RewardClaimUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RewardClaimCreateOrConnectWithoutUserInput | RewardClaimCreateOrConnectWithoutUserInput[]
+    upsert?: RewardClaimUpsertWithWhereUniqueWithoutUserInput | RewardClaimUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RewardClaimCreateManyUserInputEnvelope
+    set?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
+    disconnect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
+    delete?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
+    connect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
+    update?: RewardClaimUpdateWithWhereUniqueWithoutUserInput | RewardClaimUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RewardClaimUpdateManyWithWhereWithoutUserInput | RewardClaimUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RewardClaimScalarWhereInput | RewardClaimScalarWhereInput[]
   }
 
   export type BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput = {
@@ -13026,20 +13209,6 @@ export namespace Prisma {
     deleteMany?: ChallengeCompletionScalarWhereInput | ChallengeCompletionScalarWhereInput[]
   }
 
-  export type RewardClaimUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<RewardClaimCreateWithoutUserInput, RewardClaimUncheckedCreateWithoutUserInput> | RewardClaimCreateWithoutUserInput[] | RewardClaimUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RewardClaimCreateOrConnectWithoutUserInput | RewardClaimCreateOrConnectWithoutUserInput[]
-    upsert?: RewardClaimUpsertWithWhereUniqueWithoutUserInput | RewardClaimUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: RewardClaimCreateManyUserInputEnvelope
-    set?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
-    disconnect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
-    delete?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
-    connect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
-    update?: RewardClaimUpdateWithWhereUniqueWithoutUserInput | RewardClaimUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: RewardClaimUpdateManyWithWhereWithoutUserInput | RewardClaimUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: RewardClaimScalarWhereInput | RewardClaimScalarWhereInput[]
-  }
-
   export type ChallengeUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ChallengeCreateWithoutUserInput, ChallengeUncheckedCreateWithoutUserInput> | ChallengeCreateWithoutUserInput[] | ChallengeUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChallengeCreateOrConnectWithoutUserInput | ChallengeCreateOrConnectWithoutUserInput[]
@@ -13068,6 +13237,20 @@ export namespace Prisma {
     deleteMany?: RecommendationScalarWhereInput | RecommendationScalarWhereInput[]
   }
 
+  export type RewardClaimUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RewardClaimCreateWithoutUserInput, RewardClaimUncheckedCreateWithoutUserInput> | RewardClaimCreateWithoutUserInput[] | RewardClaimUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RewardClaimCreateOrConnectWithoutUserInput | RewardClaimCreateOrConnectWithoutUserInput[]
+    upsert?: RewardClaimUpsertWithWhereUniqueWithoutUserInput | RewardClaimUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RewardClaimCreateManyUserInputEnvelope
+    set?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
+    disconnect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
+    delete?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
+    connect?: RewardClaimWhereUniqueInput | RewardClaimWhereUniqueInput[]
+    update?: RewardClaimUpdateWithWhereUniqueWithoutUserInput | RewardClaimUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RewardClaimUpdateManyWithWhereWithoutUserInput | RewardClaimUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RewardClaimScalarWhereInput | RewardClaimScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutChallengesInput = {
     create?: XOR<UserCreateWithoutChallengesInput, UserUncheckedCreateWithoutChallengesInput>
     connectOrCreate?: UserCreateOrConnectWithoutChallengesInput
@@ -13076,6 +13259,10 @@ export namespace Prisma {
 
   export type EnumChallengeTypeFieldUpdateOperationsInput = {
     set?: $Enums.ChallengeType
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type UserUpdateOneRequiredWithoutChallengesNestedInput = {
@@ -13098,10 +13285,6 @@ export namespace Prisma {
     connectOrCreate?: BadgeEarnedCreateOrConnectWithoutBadgeInput | BadgeEarnedCreateOrConnectWithoutBadgeInput[]
     createMany?: BadgeEarnedCreateManyBadgeInputEnvelope
     connect?: BadgeEarnedWhereUniqueInput | BadgeEarnedWhereUniqueInput[]
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type BadgeEarnedUpdateManyWithoutBadgeNestedInput = {
@@ -13132,6 +13315,10 @@ export namespace Prisma {
     deleteMany?: BadgeEarnedScalarWhereInput | BadgeEarnedScalarWhereInput[]
   }
 
+  export type ChallengeCompletionCreatemetadataInput = {
+    set: InputJsonValue[]
+  }
+
   export type UserCreateNestedOneWithoutChallengeCompletionsInput = {
     create?: XOR<UserCreateWithoutChallengeCompletionsInput, UserUncheckedCreateWithoutChallengeCompletionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutChallengeCompletionsInput
@@ -13140,6 +13327,15 @@ export namespace Prisma {
 
   export type EnumProgressStatusFieldUpdateOperationsInput = {
     set?: $Enums.ProgressStatus
+  }
+
+  export type ChallengeCompletionUpdatemetadataInput = {
+    set?: InputJsonValue[]
+    push?: InputJsonValue | InputJsonValue[]
+  }
+
+  export type NullableEnumChallengeTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ChallengeType | null
   }
 
   export type UserUpdateOneRequiredWithoutChallengeCompletionsNestedInput = {
@@ -13470,6 +13666,11 @@ export namespace Prisma {
     not?: NestedEnumChallengeTypeFilter<$PrismaModel> | $Enums.ChallengeType
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedEnumChallengeTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ChallengeType | EnumChallengeTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel>
@@ -13478,11 +13679,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumChallengeTypeFilter<$PrismaModel>
     _max?: NestedEnumChallengeTypeFilter<$PrismaModel>
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -13500,6 +13696,13 @@ export namespace Prisma {
     not?: NestedEnumProgressStatusFilter<$PrismaModel> | $Enums.ProgressStatus
   }
 
+  export type NestedEnumChallengeTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ChallengeType | EnumChallengeTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumChallengeTypeNullableFilter<$PrismaModel> | $Enums.ChallengeType | null
+  }
+
   export type NestedEnumProgressStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ProgressStatus | EnumProgressStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ProgressStatus[] | ListEnumProgressStatusFieldRefInput<$PrismaModel>
@@ -13508,6 +13711,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumProgressStatusFilter<$PrismaModel>
     _max?: NestedEnumProgressStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumChallengeTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ChallengeType | EnumChallengeTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ChallengeType[] | ListEnumChallengeTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumChallengeTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.ChallengeType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumChallengeTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumChallengeTypeNullableFilter<$PrismaModel>
   }
 
   export type BadgeEarnedCreateWithoutUserInput = {
@@ -13539,6 +13752,8 @@ export namespace Prisma {
     completedAt?: Date | string | null
     createdAt?: Date | string
     currentCompletions?: number
+    metadata?: ChallengeCompletionCreatemetadataInput | InputJsonValue[]
+    type?: $Enums.ChallengeType | null
   }
 
   export type ChallengeCompletionUncheckedCreateWithoutUserInput = {
@@ -13548,6 +13763,8 @@ export namespace Prisma {
     completedAt?: Date | string | null
     createdAt?: Date | string
     currentCompletions?: number
+    metadata?: ChallengeCompletionCreatemetadataInput | InputJsonValue[]
+    type?: $Enums.ChallengeType | null
   }
 
   export type ChallengeCompletionCreateOrConnectWithoutUserInput = {
@@ -13557,28 +13774,6 @@ export namespace Prisma {
 
   export type ChallengeCompletionCreateManyUserInputEnvelope = {
     data: ChallengeCompletionCreateManyUserInput | ChallengeCompletionCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type RewardClaimCreateWithoutUserInput = {
-    id?: string
-    claimedAt?: Date | string
-    reward: RewardCreateNestedOneWithoutClaimsInput
-  }
-
-  export type RewardClaimUncheckedCreateWithoutUserInput = {
-    id?: string
-    rewardId: string
-    claimedAt?: Date | string
-  }
-
-  export type RewardClaimCreateOrConnectWithoutUserInput = {
-    where: RewardClaimWhereUniqueInput
-    create: XOR<RewardClaimCreateWithoutUserInput, RewardClaimUncheckedCreateWithoutUserInput>
-  }
-
-  export type RewardClaimCreateManyUserInputEnvelope = {
-    data: RewardClaimCreateManyUserInput | RewardClaimCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -13592,6 +13787,9 @@ export namespace Prisma {
     requiredCompletions?: number
     type: $Enums.ChallengeType
     completionCount?: number
+    isActive?: boolean
+    isCompleted?: boolean
+    lastCompletionDate?: Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -13605,6 +13803,9 @@ export namespace Prisma {
     requiredCompletions?: number
     type: $Enums.ChallengeType
     completionCount?: number
+    isActive?: boolean
+    isCompleted?: boolean
+    lastCompletionDate?: Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -13639,6 +13840,28 @@ export namespace Prisma {
 
   export type RecommendationCreateManyUserInputEnvelope = {
     data: RecommendationCreateManyUserInput | RecommendationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RewardClaimCreateWithoutUserInput = {
+    id?: string
+    claimedAt?: Date | string
+    reward: RewardCreateNestedOneWithoutClaimsInput
+  }
+
+  export type RewardClaimUncheckedCreateWithoutUserInput = {
+    id?: string
+    rewardId: string
+    claimedAt?: Date | string
+  }
+
+  export type RewardClaimCreateOrConnectWithoutUserInput = {
+    where: RewardClaimWhereUniqueInput
+    create: XOR<RewardClaimCreateWithoutUserInput, RewardClaimUncheckedCreateWithoutUserInput>
+  }
+
+  export type RewardClaimCreateManyUserInputEnvelope = {
+    data: RewardClaimCreateManyUserInput | RewardClaimCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -13695,32 +13918,8 @@ export namespace Prisma {
     completedAt?: DateTimeNullableFilter<"ChallengeCompletion"> | Date | string | null
     createdAt?: DateTimeFilter<"ChallengeCompletion"> | Date | string
     currentCompletions?: IntFilter<"ChallengeCompletion"> | number
-  }
-
-  export type RewardClaimUpsertWithWhereUniqueWithoutUserInput = {
-    where: RewardClaimWhereUniqueInput
-    update: XOR<RewardClaimUpdateWithoutUserInput, RewardClaimUncheckedUpdateWithoutUserInput>
-    create: XOR<RewardClaimCreateWithoutUserInput, RewardClaimUncheckedCreateWithoutUserInput>
-  }
-
-  export type RewardClaimUpdateWithWhereUniqueWithoutUserInput = {
-    where: RewardClaimWhereUniqueInput
-    data: XOR<RewardClaimUpdateWithoutUserInput, RewardClaimUncheckedUpdateWithoutUserInput>
-  }
-
-  export type RewardClaimUpdateManyWithWhereWithoutUserInput = {
-    where: RewardClaimScalarWhereInput
-    data: XOR<RewardClaimUpdateManyMutationInput, RewardClaimUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type RewardClaimScalarWhereInput = {
-    AND?: RewardClaimScalarWhereInput | RewardClaimScalarWhereInput[]
-    OR?: RewardClaimScalarWhereInput[]
-    NOT?: RewardClaimScalarWhereInput | RewardClaimScalarWhereInput[]
-    id?: StringFilter<"RewardClaim"> | string
-    userId?: StringFilter<"RewardClaim"> | string
-    rewardId?: StringFilter<"RewardClaim"> | string
-    claimedAt?: DateTimeFilter<"RewardClaim"> | Date | string
+    metadata?: JsonNullableListFilter<"ChallengeCompletion">
+    type?: EnumChallengeTypeNullableFilter<"ChallengeCompletion"> | $Enums.ChallengeType | null
   }
 
   export type ChallengeUpsertWithWhereUniqueWithoutUserInput = {
@@ -13753,6 +13952,9 @@ export namespace Prisma {
     type?: EnumChallengeTypeFilter<"Challenge"> | $Enums.ChallengeType
     completionCount?: IntFilter<"Challenge"> | number
     userId?: StringFilter<"Challenge"> | string
+    isActive?: BoolFilter<"Challenge"> | boolean
+    isCompleted?: BoolFilter<"Challenge"> | boolean
+    lastCompletionDate?: DateTimeNullableFilter<"Challenge"> | Date | string | null
     metadata?: JsonNullableFilter<"Challenge">
   }
 
@@ -13783,6 +13985,32 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Recommendation"> | Date | string
   }
 
+  export type RewardClaimUpsertWithWhereUniqueWithoutUserInput = {
+    where: RewardClaimWhereUniqueInput
+    update: XOR<RewardClaimUpdateWithoutUserInput, RewardClaimUncheckedUpdateWithoutUserInput>
+    create: XOR<RewardClaimCreateWithoutUserInput, RewardClaimUncheckedCreateWithoutUserInput>
+  }
+
+  export type RewardClaimUpdateWithWhereUniqueWithoutUserInput = {
+    where: RewardClaimWhereUniqueInput
+    data: XOR<RewardClaimUpdateWithoutUserInput, RewardClaimUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RewardClaimUpdateManyWithWhereWithoutUserInput = {
+    where: RewardClaimScalarWhereInput
+    data: XOR<RewardClaimUpdateManyMutationInput, RewardClaimUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RewardClaimScalarWhereInput = {
+    AND?: RewardClaimScalarWhereInput | RewardClaimScalarWhereInput[]
+    OR?: RewardClaimScalarWhereInput[]
+    NOT?: RewardClaimScalarWhereInput | RewardClaimScalarWhereInput[]
+    id?: StringFilter<"RewardClaim"> | string
+    userId?: StringFilter<"RewardClaim"> | string
+    rewardId?: StringFilter<"RewardClaim"> | string
+    claimedAt?: DateTimeFilter<"RewardClaim"> | Date | string
+  }
+
   export type UserCreateWithoutChallengesInput = {
     id?: string
     email: string
@@ -13795,14 +14023,14 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
-    rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
     recommendations?: RecommendationCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChallengesInput = {
@@ -13817,14 +14045,14 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
-    rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
     recommendations?: RecommendationUncheckedCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChallengesInput = {
@@ -13855,14 +14083,14 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
-    rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
     recommendations?: RecommendationUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChallengesInput = {
@@ -13877,14 +14105,14 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
-    rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
     recommendations?: RecommendationUncheckedUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BadgeEarnedCreateWithoutBadgeInput = {
@@ -13937,14 +14165,14 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
-    rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutUserInput
     recommendations?: RecommendationCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChallengeCompletionsInput = {
@@ -13959,14 +14187,14 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
-    rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
     recommendations?: RecommendationUncheckedCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChallengeCompletionsInput = {
@@ -13997,14 +14225,14 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
-    rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutUserNestedInput
     recommendations?: RecommendationUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChallengeCompletionsInput = {
@@ -14019,14 +14247,14 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
-    rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
     recommendations?: RecommendationUncheckedUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BadgeCreateWithoutBadgesEarnedInput = {
@@ -14066,14 +14294,14 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
-    rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutUserInput
     recommendations?: RecommendationCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBadgesEarnedInput = {
@@ -14088,14 +14316,14 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
-    rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
     recommendations?: RecommendationUncheckedCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBadgesEarnedInput = {
@@ -14157,14 +14385,14 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
-    rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutUserNestedInput
     recommendations?: RecommendationUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBadgesEarnedInput = {
@@ -14179,14 +14407,14 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
-    rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
     recommendations?: RecommendationUncheckedUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type RewardClaimCreateWithoutRewardInput = {
@@ -14264,8 +14492,8 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
@@ -14286,8 +14514,8 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
@@ -14355,8 +14583,8 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
@@ -14377,8 +14605,8 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
@@ -14399,14 +14627,14 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionCreateNestedManyWithoutUserInput
-    rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
     challenges?: ChallengeCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRecommendationsInput = {
@@ -14421,14 +14649,14 @@ export namespace Prisma {
     firstName: string
     lastName: string
     bio?: string | null
-    location?: string | null
     birthDate?: Date | string | null
+    location?: string | null
     phoneNumber?: string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedCreateNestedManyWithoutUserInput
     challengeCompletions?: ChallengeCompletionUncheckedCreateNestedManyWithoutUserInput
-    rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
     challenges?: ChallengeUncheckedCreateNestedManyWithoutUserInput
+    rewardClaims?: RewardClaimUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRecommendationsInput = {
@@ -14459,14 +14687,14 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUpdateManyWithoutUserNestedInput
-    rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRecommendationsInput = {
@@ -14481,14 +14709,14 @@ export namespace Prisma {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     socialMediaLinks?: NullableJsonNullValueInput | InputJsonValue
     badgesEarned?: BadgeEarnedUncheckedUpdateManyWithoutUserNestedInput
     challengeCompletions?: ChallengeCompletionUncheckedUpdateManyWithoutUserNestedInput
-    rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
     challenges?: ChallengeUncheckedUpdateManyWithoutUserNestedInput
+    rewardClaims?: RewardClaimUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BadgeEarnedCreateManyUserInput = {
@@ -14504,12 +14732,8 @@ export namespace Prisma {
     completedAt?: Date | string | null
     createdAt?: Date | string
     currentCompletions?: number
-  }
-
-  export type RewardClaimCreateManyUserInput = {
-    id?: string
-    rewardId: string
-    claimedAt?: Date | string
+    metadata?: ChallengeCompletionCreatemetadataInput | InputJsonValue[]
+    type?: $Enums.ChallengeType | null
   }
 
   export type ChallengeCreateManyUserInput = {
@@ -14522,6 +14746,9 @@ export namespace Prisma {
     requiredCompletions?: number
     type: $Enums.ChallengeType
     completionCount?: number
+    isActive?: boolean
+    isCompleted?: boolean
+    lastCompletionDate?: Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -14530,6 +14757,12 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type RewardClaimCreateManyUserInput = {
+    id?: string
+    rewardId: string
+    claimedAt?: Date | string
   }
 
   export type BadgeEarnedUpdateWithoutUserInput = {
@@ -14557,6 +14790,8 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     currentCompletions?: IntFieldUpdateOperationsInput | number
+    metadata?: ChallengeCompletionUpdatemetadataInput | InputJsonValue[]
+    type?: NullableEnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType | null
   }
 
   export type ChallengeCompletionUncheckedUpdateWithoutUserInput = {
@@ -14566,6 +14801,8 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     currentCompletions?: IntFieldUpdateOperationsInput | number
+    metadata?: ChallengeCompletionUpdatemetadataInput | InputJsonValue[]
+    type?: NullableEnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType | null
   }
 
   export type ChallengeCompletionUncheckedUpdateManyWithoutUserInput = {
@@ -14575,24 +14812,8 @@ export namespace Prisma {
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     currentCompletions?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type RewardClaimUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    claimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reward?: RewardUpdateOneRequiredWithoutClaimsNestedInput
-  }
-
-  export type RewardClaimUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rewardId?: StringFieldUpdateOperationsInput | string
-    claimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type RewardClaimUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rewardId?: StringFieldUpdateOperationsInput | string
-    claimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: ChallengeCompletionUpdatemetadataInput | InputJsonValue[]
+    type?: NullableEnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType | null
   }
 
   export type ChallengeUpdateWithoutUserInput = {
@@ -14605,6 +14826,9 @@ export namespace Prisma {
     requiredCompletions?: IntFieldUpdateOperationsInput | number
     type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
     completionCount?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    lastCompletionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -14618,6 +14842,9 @@ export namespace Prisma {
     requiredCompletions?: IntFieldUpdateOperationsInput | number
     type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
     completionCount?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    lastCompletionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -14631,6 +14858,9 @@ export namespace Prisma {
     requiredCompletions?: IntFieldUpdateOperationsInput | number
     type?: EnumChallengeTypeFieldUpdateOperationsInput | $Enums.ChallengeType
     completionCount?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isCompleted?: BoolFieldUpdateOperationsInput | boolean
+    lastCompletionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -14653,6 +14883,24 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RewardClaimUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    claimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reward?: RewardUpdateOneRequiredWithoutClaimsNestedInput
+  }
+
+  export type RewardClaimUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rewardId?: StringFieldUpdateOperationsInput | string
+    claimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RewardClaimUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rewardId?: StringFieldUpdateOperationsInput | string
+    claimedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BadgeEarnedCreateManyBadgeInput = {

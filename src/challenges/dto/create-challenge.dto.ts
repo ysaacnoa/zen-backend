@@ -7,5 +7,5 @@ export class CreateChallengeDto {
   type: ChallengeType;
   requiredCompletions: number;
   rewardXp?: number;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, any>[];
 }

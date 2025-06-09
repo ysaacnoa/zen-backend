@@ -132,8 +132,8 @@ exports.Prisma.UserScalarFieldEnum = {
   firstName: 'firstName',
   lastName: 'lastName',
   bio: 'bio',
-  location: 'location',
   birthDate: 'birthDate',
+  location: 'location',
   phoneNumber: 'phoneNumber',
   socialMediaLinks: 'socialMediaLinks'
 };
@@ -149,6 +149,9 @@ exports.Prisma.ChallengeScalarFieldEnum = {
   type: 'type',
   completionCount: 'completionCount',
   userId: 'userId',
+  isActive: 'isActive',
+  isCompleted: 'isCompleted',
+  lastCompletionDate: 'lastCompletionDate',
   metadata: 'metadata'
 };
 
@@ -169,7 +172,9 @@ exports.Prisma.ChallengeCompletionScalarFieldEnum = {
   status: 'status',
   completedAt: 'completedAt',
   createdAt: 'createdAt',
-  currentCompletions: 'currentCompletions'
+  currentCompletions: 'currentCompletions',
+  metadata: 'metadata',
+  type: 'type'
 };
 
 exports.Prisma.BadgeEarnedScalarFieldEnum = {
