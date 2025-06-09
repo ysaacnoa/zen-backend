@@ -21,15 +21,15 @@ model User {
   firstName            String
   lastName             String
   bio                  String?
-  location             String?
   birthDate            DateTime?
+  location             String?
   phoneNumber          String?
   socialMediaLinks     Json?
   badgesEarned         BadgeEarned[]         @relation("BadgesEarned")
   challengeCompletions ChallengeCompletion[] @relation("ChallengeCompletions")
-  rewardClaims         RewardClaim[]         @relation("RewardClaims")
   challenges           Challenge[]           @relation("ChallengeOwner")
   recommendations      Recommendation[]      @relation("Recommendations")
+  rewardClaims         RewardClaim[]         @relation("RewardClaims")
 
   @@map("users")
 }
@@ -45,10 +45,10 @@ model Challenge {
   type                ChallengeType
   completionCount     Int           @default(0)
   userId              String
-  metadata            Json?         @default("{}")
   isActive            Boolean       @default(true)
-  lastCompletionDate  DateTime?
   isCompleted         Boolean       @default(false)
+  lastCompletionDate  DateTime?
+  metadata            Json?         @default("{}")
   user                User          @relation("ChallengeOwner", fields: [userId], references: [id])
 
   @@map("challenges")
@@ -76,9 +76,10 @@ model ChallengeCompletion {
   createdAt          DateTime       @default(now())
   currentCompletions Int            @default(0)
   metadata           Json[]         @default([])
-  completionDate     DateTime?
+  type               ChallengeType?
   user               User           @relation("ChallengeCompletions", fields: [userId], references: [id])
 
+  @@unique([userId, challengeId])
   @@map("challenge_completions")
 }
 
@@ -121,9 +122,9 @@ model Recommendation {
   id        String   @id @default(uuid())
   content   String
   userId    String
-  user      User     @relation(fields: [userId], references: [id], name: "Recommendations")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  user      User     @relation("Recommendations", fields: [userId], references: [id])
 
   @@map("recommendations")
 }

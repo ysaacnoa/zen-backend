@@ -26,4 +26,15 @@ export class ChallengesController {
     }
     return this.challengesService.findByUserId(userId);
   }
+
+  @Post('complete')
+  async completeChallenge(
+    @Body() body: { userId: string; challengeId: string; metadata?: object[] },
+  ) {
+    return this.challengesService.completeChallenge(
+      body.userId,
+      body.challengeId,
+      body.metadata,
+    );
+  }
 }
