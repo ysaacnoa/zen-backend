@@ -45,7 +45,7 @@ model Challenge {
   type                ChallengeType
   completionCount     Int           @default(0)
   userId              String
-  metadata            Json[]        @default([])
+  metadata            Json?         @default("{}")
   isActive            Boolean       @default(true)
   lastCompletionDate  DateTime?
   isCompleted         Boolean       @default(false)
