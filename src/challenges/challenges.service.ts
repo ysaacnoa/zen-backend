@@ -36,9 +36,10 @@ export class ChallengesService {
     current: number,
     required: number,
   ): ProgressStatus {
-    return current >= required
-      ? ProgressStatus.COMPLETED
-      : ProgressStatus.PENDING;
+    if (current >= required) {
+      return ProgressStatus.COMPLETED;
+    }
+    return current > 0 ? ProgressStatus.IN_PROGRESS : ProgressStatus.PENDING;
   }
 
   private buildCompletionData(
