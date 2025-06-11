@@ -4,6 +4,22 @@ import { BadgeId } from '../../shared/types';
 import { Badge, UserBadge } from './dto/badge.dto';
 @Injectable()
 export class BadgeService {
+  async findAll(): Promise<Badge[]> {
+    return await this.prisma.badge.findMany({
+      where: { isActive: true },
+      orderBy: { xpRequired: 'asc' },
+    });
+  }
+
+  async awardBadge(userId: string, badgeId: string): Promise<void> {
+    await this.prisma.badgeEarned.create({
+      data: {
+        userId,
+        badgeId,
+        earnedAt: new Date(),
+      },
+    });
+  }
   constructor(private readonly prisma: PrismaService) {}
   async getAllBadges(): Promise<Badge[]> {
     return this.prisma.badge.findMany({

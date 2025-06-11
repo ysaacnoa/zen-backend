@@ -1,0 +1,15 @@
+export const LEVEL_THRESHOLDS = [
+  { level: 1, xp: 0 },
+  { level: 2, xp: 50 },
+  { level: 3, xp: 120 },
+  { level: 4, xp: 210 },
+  { level: 5, xp: 320 },
+  { level: 6, xp: 450 },
+  { level: 7, xp: 600 },
+  { level: 8, xp: 800 },
+  { level: 9, xp: 1000 },
+  { level: 10, xp: 1250 },
+  { level: 11, xp: 1500 },
+  { level: 12, xp: 1750 },
+  { level: 13, xp: 2000 },
+];

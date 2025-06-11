@@ -16,6 +16,7 @@ export interface UserProfile {
   xp: number;
   level: number;
   authProvider: string;
+  badgesEarned?: string[];
 }
 
 interface SupabaseMutationResponse {
@@ -121,16 +122,45 @@ export class UserService {
   }
 
   async updateUserXp(userId: string, xp: number): Promise<UserProfile> {
+    const user = await this.getUserById(userId);
+    const newLevel = this.calculateLevel(xp);
+
+    const updateData = {
+      xp,
+      updatedAt: new Date().toISOString(),
+      ...(newLevel > user.level && { level: newLevel }),
+    };
+
     const { error: updateError } = await supabase
       .from('users')
-      .update({
-        xp,
-        updatedAt: new Date().toISOString(),
-      })
+      .update(updateData)
       .eq('id', userId)
       .select();
 
     this.handleSupabaseError(updateError, 'Failed to update user XP');
     return this.getUserById(userId);
+  }
+
+  private readonly levelThresholds = [
+    { xp: 0, level: 1 },
+    { xp: 100, level: 2 },
+    { xp: 250, level: 3 },
+    { xp: 500, level: 4 },
+    { xp: 1000, level: 5 },
+    { xp: 2000, level: 6 },
+    { xp: 3500, level: 7 },
+    { xp: 5000, level: 8 },
+    { xp: 7000, level: 9 },
+    { xp: 10000, level: 10 },
+  ];
+
+  private calculateLevel(xp: number): number {
+    // Buscamos el nivel más alto cuyo XP mínimo sea <= al XP actual
+    for (let i = this.levelThresholds.length - 1; i >= 0; i--) {
+      if (xp >= this.levelThresholds[i].xp) {
+        return this.levelThresholds[i].level;
+      }
+    }
+    return 1;
   }
 }
