@@ -59,12 +59,22 @@ export class UserService {
     userId: string,
     updateData: UpdateUserDto,
   ): Promise<UserProfile> {
+    const user = await this.getUserById(userId);
+    const updatePayload = {
+      ...updateData,
+      updatedAt: new Date().toISOString(),
+    };
+
+    if (updateData.xp !== undefined) {
+      const newLevel = this.calculateLevel(updateData.xp);
+      if (newLevel > user.level) {
+        updatePayload.level = newLevel;
+      }
+    }
+
     const { error: updateError } = await supabase
       .from('users')
-      .update({
-        ...updateData,
-        updatedAt: new Date().toISOString(),
-      })
+      .update(updatePayload)
       .eq('id', userId)
       .select();
 
@@ -119,26 +129,6 @@ export class UserService {
         | undefined,
     };
     return userProfile;
-  }
-
-  async updateUserXp(userId: string, xp: number): Promise<UserProfile> {
-    const user = await this.getUserById(userId);
-    const newLevel = this.calculateLevel(xp);
-
-    const updateData = {
-      xp,
-      updatedAt: new Date().toISOString(),
-      ...(newLevel > user.level && { level: newLevel }),
-    };
-
-    const { error: updateError } = await supabase
-      .from('users')
-      .update(updateData)
-      .eq('id', userId)
-      .select();
-
-    this.handleSupabaseError(updateError, 'Failed to update user XP');
-    return this.getUserById(userId);
   }
 
   private readonly levelThresholds = [

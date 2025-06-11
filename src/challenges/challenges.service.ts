@@ -332,7 +332,7 @@ export class ChallengesService {
       0,
     );
 
-    await this.userService.updateUserXp(userId, totalXp);
+    await this.userService.updateUser(userId, { xp: totalXp });
     return totalXp;
   }
 }

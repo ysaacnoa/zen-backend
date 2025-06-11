@@ -7,4 +7,6 @@ export interface UpdateUserDto {
   birthDate?: string;
   phoneNumber?: string;
   socialMediaLinks?: Record<string, string>;
+  xp?: number;
+  level?: number;
 }

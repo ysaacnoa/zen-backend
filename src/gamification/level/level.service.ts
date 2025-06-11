@@ -32,7 +32,7 @@ export class LevelService {
     const currentLevel = this.calculateLevel(user.xp);
 
     if (currentLevel > user.level) {
-      await this.userService.updateUserXp(userId, user.xp); // Esto actualizará XP y nivel
+      await this.userService.updateUser(userId, { xp: user.xp });
       this.notifyLevelUp(userId, currentLevel);
       await this.checkBadgeUnlocks(userId);
       return { level: currentLevel, leveledUp: true };
