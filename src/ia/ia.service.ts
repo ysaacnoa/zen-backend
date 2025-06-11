@@ -1,29 +1,29 @@
 import { Injectable } from '@nestjs/common';
-import { HttpService } from '@nestjs/axios';
 import { GenerateRecommendationDto } from './dto/generate-recomendation.dto';
 import { GenerateChallengeDto } from './dto/generate-challenge.dto';
 import { InferenceClient } from '@huggingface/inference';
 import { PrismaService } from '../prisma/prisma.service';
+import { RECOMMENDATION_FALLBACKS } from './constants/fallbacks.constants';
 
 @Injectable()
 export class IaService {
   readonly hf = new InferenceClient(process.env.HUGGINGFACE_API_KEY);
 
-  constructor(
-    private readonly httpService: HttpService,
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async generateRecommendation(
     input: GenerateRecommendationDto,
   ): Promise<string> {
-    const chatCompletion = await this.hf.chatCompletion({
-      provider: 'novita',
-      model: 'deepseek-ai/DeepSeek-R1-0528',
-      messages: [
-        {
-          role: 'system',
-          content: `
+    const fallbacks = RECOMMENDATION_FALLBACKS;
+
+    try {
+      const chatCompletion = await this.hf.chatCompletion({
+        provider: 'novita',
+        model: 'deepseek-ai/DeepSeek-R1-0528',
+        messages: [
+          {
+            role: 'system',
+            content: `
   Eres un coach de bienestar emocional especializado en técnicas de autoayuda. 🌟 Crea un **informe semanal personalizado** en español usando formato Markdown con estructura de blog, incluyendo:
 
   # Título principal (usa emoji relacionado al estado emocional)
@@ -57,10 +57,10 @@ export class IaService {
   ## 🌈 Mensaje Final
   Cierre motivacional con foco en el progreso
           `.trim(),
-        },
-        {
-          role: 'user',
-          content: `Paciente con PHQ-9=${input.phq9}, GAD-7=${input.gad7}. Comentario: "${input.comment}".  
+          },
+          {
+            role: 'user',
+            content: `Paciente con PHQ-9=${input.phq9}, GAD-7=${input.gad7}. Comentario: "${input.comment}".  
   Genera un plan de bienestar personalizado en formato Markdown con:
   - Emojis motivadores en cada sección 🌟
   - Técnicas de mindfulness y reducción de estrés 🧘
@@ -69,19 +69,30 @@ export class IaService {
   - Tips para productividad remota sin burnout 💻
   - Lenguaje cálido y validante, sin jerga clínica 💖
   - CERO sugerencias de medicamentos o tratamientos médicos 🚫`,
-        },
-      ],
-    });
-    let markdownContent =
-      chatCompletion.choices[0].message.content ?? 'Sin respuesta.';
+          },
+        ],
+      });
+      const responseContent = chatCompletion.choices[0].message.content;
+      let markdownContent = responseContent
+        ? responseContent
+        : 'Sin respuesta.';
 
-    markdownContent = this.cleanAndValidateContent(markdownContent);
+      markdownContent = this.cleanAndValidateContent(markdownContent);
 
-    await this.storeRecommendation(input.userId, markdownContent);
-    return markdownContent;
+      await this.storeRecommendation(input.userId, markdownContent);
+      return markdownContent;
+    } catch (error) {
+      console.error('Error generating recommendation:', error);
+      const randomFallback =
+        fallbacks[Math.floor(Math.random() * fallbacks.length)];
+      const fallbackContent = this.cleanAndValidateContent(randomFallback);
+      await this.storeRecommendation(input.userId, fallbackContent);
+      return fallbackContent;
+    }
   }
 
-  private cleanAndValidateContent(content: string): string {
+  private cleanAndValidateContent(content: string | undefined): string {
+    if (!content) return 'Sin contenido disponible';
     let cleanedContent = content.replace(/<think>[\s\S]*?<\/think>/g, '');
 
     cleanedContent = cleanedContent.replace(/\n{3,}/g, '\n\n');
