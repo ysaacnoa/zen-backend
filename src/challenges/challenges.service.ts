@@ -7,6 +7,7 @@ import { ChallengeType } from '../shared/types/challenge-type.enum';
 import { randomUUID } from 'crypto';
 import { ProgressStatus } from 'prisma/generated/prisma';
 import { CHALLENGES_MOCK } from '../ia/ia.service.constants';
+import { UserService } from '../user/user.service';
 
 interface GeneratedChallenge {
   title: string;
@@ -21,6 +22,7 @@ export class ChallengesService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly iaService: IaService,
+    private readonly userService: UserService,
   ) {}
 
   private async getChallengeRequirements(challengeId: string) {
@@ -162,6 +164,9 @@ export class ChallengesService {
       updatedChallenge.type as ChallengeType,
     );
 
+    // Actualizar XP del usuario después de completar el challenge
+    await this.updateUserXpFromChallenges(userId);
+
     return completion;
   }
 
@@ -274,5 +279,24 @@ export class ChallengesService {
 
   private mapChallengeType(type: string): ChallengeType {
     return this.typeMapper[type];
+  }
+
+  async updateUserXpFromChallenges(userId: string): Promise<number> {
+    const completedChallenges = await this.prisma.challenge.findMany({
+      where: {
+        userId,
+        completionCount: {
+          gte: this.prisma.challenge.fields.requiredCompletions,
+        },
+      },
+    });
+
+    const totalXp = completedChallenges.reduce(
+      (sum, challenge) => sum + (challenge.rewardXp || 0),
+      0,
+    );
+
+    await this.userService.updateUserXp(userId, totalXp);
+    return totalXp;
   }
 }

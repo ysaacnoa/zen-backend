@@ -5,9 +5,10 @@ import { ChallengesService } from './challenges.service';
 import { ChallengesScheduler } from './challenges.scheduler';
 import { IaModule } from '../ia/ia.module';
 import { PrismaModule } from '../prisma/prisma.module';
+import { UserModule } from 'src/user/user.module';
 
 @Module({
-  imports: [ScheduleModule.forRoot(), IaModule, PrismaModule],
+  imports: [ScheduleModule.forRoot(), IaModule, PrismaModule, UserModule],
   controllers: [ChallengesController],
   providers: [ChallengesService, ChallengesScheduler],
   exports: [ChallengesService],

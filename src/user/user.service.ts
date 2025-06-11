@@ -119,4 +119,18 @@ export class UserService {
     };
     return userProfile;
   }
+
+  async updateUserXp(userId: string, xp: number): Promise<UserProfile> {
+    const { error: updateError } = await supabase
+      .from('users')
+      .update({
+        xp,
+        updatedAt: new Date().toISOString(),
+      })
+      .eq('id', userId)
+      .select();
+
+    this.handleSupabaseError(updateError, 'Failed to update user XP');
+    return this.getUserById(userId);
+  }
 }
