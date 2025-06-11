@@ -208,7 +208,43 @@ export class ChallengesService {
     });
   }
 
+  private shouldReactivateChallenge(lastCompletionDate: Date | null): boolean {
+    if (!lastCompletionDate) return false;
+
+    const now = new Date();
+    const nextDay8AM = new Date(
+      lastCompletionDate.getFullYear(),
+      lastCompletionDate.getMonth(),
+      lastCompletionDate.getDate() + 1,
+      8,
+      0,
+      0,
+    );
+
+    return now >= nextDay8AM;
+  }
+
   async findByUserId(userId: string) {
+    // Primero reactivar challenges elegibles
+    const challengesToReactivate = await this.prisma.challenge.findMany({
+      where: {
+        userId,
+        isActive: false,
+        isCompleted: false,
+        lastCompletionDate: { not: null },
+      },
+    });
+
+    for (const challenge of challengesToReactivate) {
+      if (this.shouldReactivateChallenge(challenge.lastCompletionDate)) {
+        await this.prisma.challenge.update({
+          where: { id: challenge.id },
+          data: { isActive: true },
+        });
+      }
+    }
+
+    // Luego devolver todos los challenges del usuario
     return await this.prisma.challenge.findMany({
       where: { userId },
       orderBy: { createdAt: 'desc' },
